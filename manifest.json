@@ -1,0 +1,24 @@
+{
+  "name": "KACIDA BERSATU - Portal Retail",
+  "short_name": "Kacida",
+  "description": "Portal Performa & Operasional Retail Modern Bersama Kita Kuat",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#005C2E",
+  "theme_color": "#008744",
+  "icons": [
+    {
+      "src": "https://drive.google.com/thumbnail?id=1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-&sz=w192",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://drive.google.com/thumbnail?id=1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-&sz=w512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
