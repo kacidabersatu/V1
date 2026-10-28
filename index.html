@@ -3320,6 +3320,292 @@
     }
 
     /**
+     * Listener Notifikasi Lonceng Terpusat Realtime
+     */
+    function initCentralNotificationListener() {
+      if (!APP_STATE.storeConfig || !APP_STATE.user) return;
+      const storeCode = APP_STATE.storeConfig.store_code;
+      const userNik = APP_STATE.user.NIK;
+
+      try {
+        const notifRef = ref(fbDb, `Notifications/${storeCode}/${userNik}`);
+        onValue(notifRef, (snapshot) => {
+          const data = snapshot.val();
+          APP_STATE.notifications = [];
+          if (data) {
+            for (let id in data) {
+              APP_STATE.notifications.push({ id, ...data[id] });
+            }
+          }
+          renderNotificationBadge();
+        });
+      } catch (err) {
+        console.warn("Notification listener dilewati:", err);
+      }
+    }
+
+    function renderNotificationBadge() {
+      const badge = document.getElementById('bellUnreadBadge');
+      if (!badge) return;
+      const unreadList = (APP_STATE.notifications || []).filter(n => n.status === 'UNREAD');
+      const count = unreadList.length;
+
+      if (count > 0) {
+        badge.classList.remove('hidden');
+        badge.innerText = count > 99 ? '99+' : count;
+      } else {
+        badge.classList.add('hidden');
+      }
+    }
+
+    window.toggleNotificationDropdown = function() {
+      const p = document.getElementById('dropdownNotifPanel');
+      if (p) p.classList.toggle('hidden');
+      renderNotifDropdownItems('ALL');
+    };
+
+    window.markAllNotificationsRead = function() {
+      if (!APP_STATE.storeConfig || !APP_STATE.user) return;
+      const storeCode = APP_STATE.storeConfig.store_code;
+      const userNik = APP_STATE.user.NIK;
+
+      (APP_STATE.notifications || []).forEach(n => {
+        n.status = 'READ';
+        try {
+          set(ref(fbDb, `Notifications/${storeCode}/${userNik}/${n.id}/status`), 'READ');
+        } catch(e) {}
+      });
+      renderNotificationBadge();
+      renderNotifDropdownItems('ALL');
+    };
+
+    window.filterNotifTab = function(type) {
+      document.querySelectorAll('#dropdownNotifPanel button[id^="notifTab"]').forEach(b => {
+        b.className = 'flex-1 py-2 hover:text-slate-800 dark:hover:text-white';
+      });
+      if (type === 'ALL') document.getElementById('notifTabAll').className = 'flex-1 py-2 text-alfa-emerald border-b-2 border-alfa-emerald font-black';
+      if (type === 'UNREAD') document.getElementById('notifTabUnread').className = 'flex-1 py-2 text-alfa-emerald border-b-2 border-alfa-emerald font-black';
+      if (type === 'ACTION') document.getElementById('notifTabAction').className = 'flex-1 py-2 text-alfa-emerald border-b-2 border-alfa-emerald font-black';
+      renderNotifDropdownItems(type);
+    };
+
+    function renderNotifDropdownItems(filter) {
+      const container = document.getElementById('notifItemsContainer');
+      if (!container) return;
+
+      let list = APP_STATE.notifications || [];
+      if (filter === 'UNREAD') list = list.filter(n => n.status === 'UNREAD');
+      if (filter === 'ACTION') list = list.filter(n => n.priority === 'HIGH' || n.priority === 'URGENT');
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-400">
+            <i class="bi bi-bell-slash text-2xl"></i>
+            <p class="mt-1 font-semibold">Tidak ada pemberitahuan baru</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map(n => `
+        <div class="p-3 hover:bg-slate-50 dark:hover:bg-slate-800 flex justify-between items-start gap-2">
+          <div>
+            <b class="text-slate-800 dark:text-white block font-bold">${n.title || 'Pemberitahuan'}</b>
+            <p class="text-slate-500 text-[11px] mt-0.5">${n.message || ''}</p>
+            <span class="text-[10px] text-slate-400 font-mono">${n.createdAt || ''}</span>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[9px] font-black ${n.priority === 'HIGH' ? 'bg-rose-100 text-rose-700' : 'bg-slate-100 text-slate-700'}">${n.priority || 'NORMAL'}</span>
+        </div>
+      `).join('');
+    }
+
+    /**
+     * Memuat Metrik Sales H-1 di Hero Card
+     */
+    async function loadSalesH1Metric() {
+      if (!APP_STATE.storeConfig) return;
+      const storeCode = APP_STATE.storeConfig.store_code;
+
+      try {
+        if (typeof GAS_WEBAPP_URL !== 'undefined' && !GAS_WEBAPP_URL.includes('_sample')) {
+          const res = await fetch(`${GAS_WEBAPP_URL}?action=getSalesHarian&storeCode=${storeCode}`);
+          const json = await res.json();
+          if (json && json.status === 'success' && json.data && json.data.length > 0) {
+            const rows = json.data.filter(r => String(r.KODE || '').trim().toUpperCase() === storeCode.toUpperCase());
+            if (rows.length > 0) {
+              const lastRow = rows[rows.length - 1];
+              const salesH1 = Number(lastRow.ACTUAL || lastRow.SALES || 0);
+              const targetH1 = Number(lastRow.TARGET || 0);
+              const growth = targetH1 > 0 ? (((salesH1 - targetH1) / targetH1) * 100).toFixed(1) : '0';
+
+              document.getElementById('heroSalesH1Nominal').innerText = 'Rp ' + salesH1.toLocaleString('id-ID');
+              const growthBadge = document.getElementById('heroSalesH1Growth');
+              if (Number(growth) >= 0) {
+                growthBadge.innerHTML = `<i class="bi bi-arrow-up-right"></i> +${growth}% vs Target`;
+                growthBadge.className = 'inline-flex items-center gap-1 text-xs font-black px-2 py-0.5 rounded-md bg-emerald-400/20 text-emerald-200';
+              } else {
+                growthBadge.innerHTML = `<i class="bi bi-arrow-down-right"></i> ${growth}% vs Target`;
+                growthBadge.className = 'inline-flex items-center gap-1 text-xs font-black px-2 py-0.5 rounded-md bg-rose-400/20 text-rose-200';
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn("Gagal memuat metrik Sales H-1:", e);
+      }
+    }
+
+    /**
+     * Menggambar Grafik Tren Sales Harian & GM% di Dasbor (Chart.js)
+     */
+    function initSalesHarianDashboardChart() {
+      const ctx = document.getElementById('chartSalesHarianDashboard');
+      if (ctx) {
+        if (window._dashSalesChart) window._dashSalesChart.destroy();
+
+        window._dashSalesChart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: ['Tgl 1', 'Tgl 2', 'Tgl 3', 'Tgl 4', 'Tgl 5', 'Tgl 6', 'Tgl 7'],
+            datasets: [
+              {
+                label: 'Target Sales',
+                data: [12000000, 12000000, 13000000, 13000000, 12500000, 14000000, 14500000],
+                borderColor: '#94A3B8',
+                borderDash: [5, 5],
+                fill: false,
+                tension: 0.3
+              },
+              {
+                label: 'Aktual Sales',
+                data: [12500000, 11800000, 13500000, 14200000, 12900000, 15100000, 14800000],
+                borderColor: '#008744',
+                backgroundColor: 'rgba(0, 135, 68, 0.1)',
+                fill: true,
+                tension: 0.3
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'top', labels: { boxWidth: 12, font: { weight: 'bold', size: 10 } } }
+            },
+            scales: {
+              y: {
+                ticks: {
+                  callback: (val) => (val / 1000000).toFixed(0) + ' Jt',
+                  font: { size: 10 }
+                }
+              },
+              x: { ticks: { font: { size: 10 } } }
+            }
+          }
+        });
+      }
+
+      // Grafik Widget GM%
+      const ctxGm = document.getElementById('chartWidgetGm');
+      if (ctxGm) {
+        if (window._dashGmChart) window._dashGmChart.destroy();
+        window._dashGmChart = new Chart(ctxGm, {
+          type: 'line',
+          data: {
+            labels: ['M1', 'M2', 'M3', 'M4'],
+            datasets: [{
+              label: 'GM %',
+              data: [18.2, 18.9, 19.1, 18.55],
+              borderColor: '#008744',
+              backgroundColor: 'rgba(0, 135, 68, 0.15)',
+              fill: true,
+              tension: 0.4
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+              y: { ticks: { callback: v => v + '%', font: { size: 9 } } },
+              x: { ticks: { font: { size: 9 } } }
+            }
+          }
+        });
+      }
+    }
+
+    window.filterHarianChartDays = function(days) {
+      document.querySelectorAll('button[id^="btnChart"]').forEach(b => {
+        b.className = 'px-2.5 py-1 rounded-lg text-slate-500 hover:text-slate-800 dark:hover:text-white';
+      });
+      const activeBtn = document.getElementById(`btnChart${days}Days`);
+      if (activeBtn) activeBtn.className = 'px-2.5 py-1 rounded-lg bg-white dark:bg-slate-700 shadow-sm text-alfa-emerald font-black';
+    };
+
+    window.refreshActivityLog = function() {
+      loadActivityLogDashboard();
+    };
+
+    window.loadActivityLogDashboard = async function() {
+      const container = document.getElementById('dashActivityLogList');
+      if (!container) return;
+
+      container.innerHTML = `
+        <div class="flex items-center gap-3 p-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl">
+          <div class="w-8 h-8 rounded-lg bg-emerald-100 text-alfa-emerald flex items-center justify-center font-bold text-xs"><i class="bi bi-person-check-fill"></i></div>
+          <div class="flex-1">
+            <b class="text-slate-800 dark:text-white block font-bold">${APP_STATE.user.NAMA}</b>
+            <span class="text-slate-500 text-[10px]">Login Berhasil ke Portal Retail Toko</span>
+          </div>
+          <span class="text-[10px] text-slate-400 font-mono">Baru Saja</span>
+        </div>
+      `;
+    };
+
+    window.openSyncManualModal = function() {
+      document.getElementById('modalSyncManual').classList.remove('hidden');
+      triggerManualSyncProcess();
+    };
+
+    window.closeSyncManualModal = function() {
+      document.getElementById('modalSyncManual').classList.add('hidden');
+    };
+
+    async function triggerManualSyncProcess() {
+      const bar = document.getElementById('syncProgressBar');
+      const pct = document.getElementById('syncProgressPercent');
+      const lbl = document.getElementById('syncProgressLabel');
+      const btn = document.getElementById('btnSyncModalClose');
+
+      btn.disabled = true;
+
+      const steps = [
+        { id: 'syncStep1', text: 'Memeriksa koneksi...', w: '25%' },
+        { id: 'syncStep2', text: 'Membaca Master & Analitik...', w: '50%' },
+        { id: 'syncStep3', text: 'Memperbarui Cache Memori Lokal...', w: '75%' },
+        { id: 'syncStep4', text: 'Menghitung Ulang KPI & Badge Menu...', w: '90%' },
+        { id: 'syncStep5', text: 'Finalisasi & Render Ulang Dasbor...', w: '100%' }
+      ];
+
+      for (let s of steps) {
+        lbl.innerText = s.text;
+        pct.innerText = s.w;
+        bar.style.width = s.w;
+        const el = document.getElementById(s.id);
+        if (el) {
+          el.className = 'flex items-center gap-2.5 text-alfa-emerald font-bold';
+          el.querySelector('i').className = 'bi bi-check-circle-fill text-alfa-emerald text-xs';
+        }
+        await new Promise(r => setTimeout(r, 400));
+      }
+
+      document.getElementById('syncSummaryBox').classList.remove('hidden');
+      btn.disabled = false;
+      lbl.innerText = 'Sinkronisasi Selesai Sukses!';
+    }
+
+    /**
      * Render Grid 15 Menu Utama (Sistem Geser Sesuai Frekuensi Klik)
      */
     function renderMainMenuGrid() {
