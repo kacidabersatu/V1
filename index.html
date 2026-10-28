@@ -3196,14 +3196,183 @@
         }
 
         // Login Berhasil
+      window.verifyStoreCodeFromMaster = async function() {
+      const code = document.getElementById('cfgStoreCodeInput').value.trim().toUpperCase();
+      if (!code) {
+        Swal.fire('Input Kosong', 'Harap masukkan Kode Toko atau AC.', 'info');
+        return;
+      }
+
+      Swal.showLoading();
+      try {
+        let foundStore = null;
+
+        // 1. CARI DI FIREBASE REALTIME DATABASE TERLEBIH DAHULU
+        try {
+          const snap = await get(child(ref(fbDb), 'Master_User'));
+          if (snap.exists()) {
+            const users = snap.val();
+            for (let k in users) {
+              const u = users[k];
+              const c = String(u.KODE || u.kode || u.Kode || u['KODE TOKO'] || '').trim().toUpperCase();
+              if (c === code) {
+                foundStore = u;
+                break;
+              }
+            }
+          }
+        } catch (errFb) {
+          console.warn("Pencarian Firebase dilewati:", errFb);
+        }
+
+        // 2. JIKA DI FIREBASE TIDAK DITEMUKAN, LANGSUNG CARI KE SPREADSHEET (APPS SCRIPT)
+        if (!foundStore && typeof GAS_WEBAPP_URL !== 'undefined' && !GAS_WEBAPP_URL.includes('_sample')) {
+          try {
+            const res = await fetch(`${GAS_WEBAPP_URL}?action=getMasterUsers`);
+            const json = await res.json();
+            if (json && json.status === 'success' && json.data) {
+              for (let u of json.data) {
+                const c = String(u.KODE || u.kode || u.Kode || u['KODE TOKO'] || '').trim().toUpperCase();
+                if (c === code) {
+                  foundStore = u;
+                  break;
+                }
+              }
+            }
+          } catch (errGas) {
+            console.warn("Pencarian Spreadsheet via GAS gagal:", errGas);
+          }
+        }
+
+        // 3. TAMPILKAN HASIL JIKA DITEMUKAN
+        if (foundStore) {
+          const kodeToko = String(foundStore.KODE || foundStore.kode || code).trim().toUpperCase();
+          const namaToko = foundStore['NAMA TOKO'] || foundStore.NAMA_TOKO || foundStore.nama_toko || 'Toko Retail';
+          const statusToko = foundStore.STATUS || foundStore.status || 'REGULER';
+          const wilayahToko = foundStore.WILAYAH || foundStore.wilayah || 'KAB. SUKABUMI';
+          const typeToko = foundStore.TYPE || foundStore.type || '45 L';
+          const lokasiToko = foundStore['LOKASI/AREA'] || foundStore.lokasi || 'RESIDENTIAL';
+          const jamOpr = foundStore['JAM OPR'] || foundStore.jam_opr || '24 JAM';
+
+          document.getElementById('cfgPrevStoreCode').innerText = kodeToko;
+          document.getElementById('cfgPrevStoreName').innerText = namaToko;
+          document.getElementById('cfgPrevStatus').innerText = statusToko;
+          document.getElementById('cfgPrevWilayah').innerText = wilayahToko;
+          document.getElementById('cfgPrevType').innerText = typeToko;
+          document.getElementById('cfgPrevLokasi').innerText = lokasiToko;
+          document.getElementById('cfgPrevJam').innerText = jamOpr;
+          
+          document.getElementById('cfgStorePreviewBox').classList.remove('hidden');
+          document.getElementById('btnSaveConfig').disabled = false;
+          
+          window._tempStoreVerified = {
+            store_code: kodeToko,
+            store_name: namaToko,
+            wilayah: wilayahToko,
+            status: statusToko,
+            jam_opr: jamOpr
+          };
+          Swal.close();
+        } else {
+          Swal.fire('Tidak Ditemukan', `Kode Toko ${code} belum ditemukan di Firebase maupun Spreadsheet. Pastikan kolom KODE di sheet Master_User tertulis "${code}".`, 'error');
+        }
+      } catch (err) {
+        Swal.fire('Gagal Memverifikasi', err.message, 'error');
+      }
+    };
+
+    window.saveStoreConfigToLocalStorage = function() {
+      if (window._tempStoreVerified) {
+        localStorage.setItem('kacida_toko_config', JSON.stringify(window._tempStoreVerified));
+        APP_STATE.storeConfig = window._tempStoreVerified;
+        updateAuthStoreLabel();
+        closeConfigTokoModal();
+        Swal.fire({
+          icon: 'success',
+          title: 'Tersimpan',
+          text: `Kode Toko berhasil disetel ke ${APP_STATE.storeConfig.store_code} (${APP_STATE.storeConfig.store_name})`,
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    };
+
+    window.executeLoginWorkflow = async function() {
+      const nik = document.getElementById('loginNikInput').value.trim();
+      if (!APP_STATE.storeConfig) {
+        Swal.fire('Konfigurasi Diperlukan', 'Harap atur Kode Toko via ikon gerigi terlebih dahulu.', 'warning');
+        return;
+      }
+      if (!nik) {
+        Swal.fire('Form Kosong', 'Harap isi Nomor Induk Karyawan Anda.', 'info');
+        return;
+      }
+
+      Swal.showLoading();
+      try {
+        let matchedUser = null;
+
+        // 1. CARI USER DI FIREBASE TERLEBIH DAHULU
+        try {
+          const snap = await get(child(ref(fbDb), 'Master_User'));
+          if (snap.exists()) {
+            const list = snap.val();
+            for (let k in list) {
+              const u = list[k];
+              if (String(u.NIK || u.nik || '').trim() === nik) {
+                matchedUser = u;
+                break;
+              }
+            }
+          }
+        } catch (errFb) {
+          console.warn("Firebase User search dilewati:", errFb);
+        }
+
+        // 2. JIKA DI FIREBASE BELUM ADA, CARI KE GOOGLE SPREADSHEET
+        if (!matchedUser && typeof GAS_WEBAPP_URL !== 'undefined' && !GAS_WEBAPP_URL.includes('_sample')) {
+          try {
+            const res = await fetch(`${GAS_WEBAPP_URL}?action=getMasterUsers`);
+            const json = await res.json();
+            if (json && json.status === 'success' && json.data) {
+              for (let u of json.data) {
+                if (String(u.NIK || u.nik || '').trim() === nik) {
+                  matchedUser = u;
+                  break;
+                }
+              }
+            }
+          } catch (errGas) {
+            console.warn("GAS fetch user gagal:", errGas);
+          }
+        }
+
+        if (!matchedUser) {
+          Swal.fire('Akses Ditolak', `NIK ${nik} tidak terdaftar di Master_User.`, 'error');
+          return;
+        }
+
+        // Validasi Penempatan Toko
+        const userStoreCode = String(matchedUser.KODE || matchedUser.kode || '').trim().toUpperCase();
+        const activeStoreCode = String(APP_STATE.storeConfig.store_code || '').trim().toUpperCase();
+        const isAc = String(matchedUser.JABATAN || matchedUser.jabatan || '').trim().toUpperCase() === 'AREA COORDINATOR';
+
+        if (!isAc && userStoreCode !== activeStoreCode) {
+          Swal.fire('Toko Berbeda', `NIK ini terdaftar di Toko ${userStoreCode}, bukan ${activeStoreCode}. Silakan ubah konfigurasi toko melalui ikon gerigi.`, 'warning');
+          return;
+        }
+
+        // Login Berhasil
         APP_STATE.user = matchedUser;
         localStorage.setItem('user_login', JSON.stringify(matchedUser));
 
-        // Increment Login Counter & Rekam Log
-        fetch(GAS_WEBAPP_URL, {
-          method: 'POST',
-          body: JSON.stringify({ action: 'incrementLoginCount', nik: matchedUser.NIK })
-        }).catch(() => {});
+        // Increment Login Counter di Spreadsheet secara background
+        if (typeof GAS_WEBAPP_URL !== 'undefined' && !GAS_WEBAPP_URL.includes('_sample')) {
+          fetch(GAS_WEBAPP_URL, {
+            method: 'POST',
+            body: JSON.stringify({ action: 'incrementLoginCount', nik: matchedUser.NIK || matchedUser.nik })
+          }).catch(() => {});
+        }
 
         recordAuditTrailLog('Login Berhasil ke Portal Retail');
 
@@ -3213,7 +3382,7 @@
         Swal.fire('Kesalahan Jaringan', err.message, 'error');
       }
     };
-
+        
     /**
      * Render Dasbor & Menghidupkan Listener Realtime
      */
