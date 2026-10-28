@@ -3023,10 +3023,11 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getDatabase, ref, set, get, onValue, push, child, remove } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // Inisialisasi Firebase Realtime Database
+    // Konfigurasi Firebase Client (Tambahkan databaseURL asia-southeast1)
     const firebaseConfig = {
       apiKey: "AIzaSyD9ckmJ-6ONWFHoMu55tw-BQcqjXrDNOgY",
       authDomain: "kacidabersatu-e787a.firebaseapp.com",
+      databaseURL: "https://kacidabersatu-e787a-default-rtdb.asia-southeast1.firebasedatabase.app", // <--- WAJIB ADA INI!
       projectId: "kacidabersatu-e787a",
       storageBucket: "kacidabersatu-e787a.firebasestorage.app",
       messagingSenderId: "306706403263",
@@ -3035,7 +3036,8 @@
     };
 
     const fbApp = initializeApp(firebaseConfig);
-    const fbDb = getDatabase(fbApp);
+    // Masukkan databaseURL ke parameter getDatabase
+    const fbDb = getDatabase(fbApp, "https://kacidabersatu-e787a-default-rtdb.asia-southeast1.firebasedatabase.app");
 
     // Endpoint Kunci & Environment
     const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbzdkTvfa7BMUcTY-OHQ1vniyc66hUo_DMaKWEpQbLYQ4sqFRhvAISxEkyg665j5zhaDZg/exec";
