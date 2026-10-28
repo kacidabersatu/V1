@@ -3107,104 +3107,6 @@
 
       Swal.showLoading();
       try {
-        const snap = await get(child(ref(fbDb), 'Master_User'));
-        let foundStore = null;
-
-        if (snap.exists()) {
-          const users = snap.val();
-          for (let k in users) {
-            if (users[k].KODE === code) {
-              foundStore = users[k];
-              break;
-            }
-          }
-        }
-
-        if (foundStore) {
-          document.getElementById('cfgPrevStoreCode').innerText = foundStore.KODE;
-          document.getElementById('cfgPrevStoreName').innerText = foundStore['NAMA TOKO'] || foundStore.NAMA_TOKO || 'Toko Retail';
-          document.getElementById('cfgPrevStatus').innerText = foundStore.STATUS || 'REGULER';
-          document.getElementById('cfgPrevWilayah').innerText = foundStore.WILAYAH || 'KAB. SUKABUMI';
-          document.getElementById('cfgPrevType').innerText = foundStore.TYPE || '45 L';
-          document.getElementById('cfgPrevLokasi').innerText = foundStore['LOKASI/AREA'] || 'RESIDENTIAL';
-          document.getElementById('cfgPrevJam').innerText = foundStore['JAM OPR'] || '24 JAM';
-          
-          document.getElementById('cfgStorePreviewBox').classList.remove('hidden');
-          document.getElementById('btnSaveConfig').disabled = false;
-          
-          window._tempStoreVerified = {
-            store_code: foundStore.KODE,
-            store_name: foundStore['NAMA TOKO'] || foundStore.NAMA_TOKO || 'Toko Retail',
-            wilayah: foundStore.WILAYAH,
-            status: foundStore.STATUS,
-            jam_opr: foundStore['JAM OPR']
-          };
-          Swal.close();
-        } else {
-          Swal.fire('Tidak Ditemukan', `Kode Toko ${code} tidak terdaftar di Master_User.`, 'error');
-        }
-      } catch (err) {
-        Swal.fire('Gagal Memverifikasi', err.message, 'error');
-      }
-    };
-
-    window.saveStoreConfigToLocalStorage = function() {
-      if (window._tempStoreVerified) {
-        localStorage.setItem('kacida_toko_config', JSON.stringify(window._tempStoreVerified));
-        APP_STATE.storeConfig = window._tempStoreVerified;
-        updateAuthStoreLabel();
-        closeConfigTokoModal();
-        Swal.fire('Tersimpan', `Kode Toko berhasil disetel ke ${APP_STATE.storeConfig.store_code}`, 'success');
-      }
-    };
-
-    window.executeLoginWorkflow = async function() {
-      const nik = document.getElementById('loginNikInput').value.trim();
-      if (!APP_STATE.storeConfig) {
-        Swal.fire('Konfigurasi Diperlukan', 'Harap atur Kode Toko via ikon gerigi terlebih dahulu.', 'warning');
-        return;
-      }
-      if (!nik) {
-        Swal.fire('Form Kosong', 'Harap isi Nomor Induk Karyawan Anda.', 'info');
-        return;
-      }
-
-      Swal.showLoading();
-      try {
-        const snap = await get(child(ref(fbDb), 'Master_User'));
-        let matchedUser = null;
-
-        if (snap.exists()) {
-          const list = snap.val();
-          for (let k in list) {
-            if (String(list[k].NIK).trim() === nik) {
-              matchedUser = list[k];
-              break;
-            }
-          }
-        }
-
-        if (!matchedUser) {
-          Swal.fire('Akses Ditolak', 'NIK Tidak Terdaftar di Master_User.', 'error');
-          return;
-        }
-
-        const isAc = String(matchedUser.JABATAN).toUpperCase() === 'AREA COORDINATOR';
-        if (!isAc && matchedUser.KODE !== APP_STATE.storeConfig.store_code) {
-          Swal.fire('Toko Berbeda', `NIK ini terdaftar di Toko ${matchedUser.KODE}, bukan ${APP_STATE.storeConfig.store_code}. Silakan sesuaikan konfigurasi toko.`, 'warning');
-          return;
-        }
-
-        // Login Berhasil
-      window.verifyStoreCodeFromMaster = async function() {
-      const code = document.getElementById('cfgStoreCodeInput').value.trim().toUpperCase();
-      if (!code) {
-        Swal.fire('Input Kosong', 'Harap masukkan Kode Toko atau AC.', 'info');
-        return;
-      }
-
-      Swal.showLoading();
-      try {
         let foundStore = null;
 
         // 1. CARI DI FIREBASE REALTIME DATABASE TERLEBIH DAHULU
@@ -3225,7 +3127,7 @@
           console.warn("Pencarian Firebase dilewati:", errFb);
         }
 
-        // 2. JIKA DI FIREBASE TIDAK DITEMUKAN, LANGSUNG CARI KE SPREADSHEET (APPS SCRIPT)
+        // 2. JIKA DI FIREBASE TIDAK DITEMUKAN, CARI KE SPREADSHEET (APPS SCRIPT)
         if (!foundStore && typeof GAS_WEBAPP_URL !== 'undefined' && !GAS_WEBAPP_URL.includes('_sample')) {
           try {
             const res = await fetch(`${GAS_WEBAPP_URL}?action=getMasterUsers`);
