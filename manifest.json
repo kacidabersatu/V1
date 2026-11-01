@@ -1,24 +1,114 @@
 {
-  "name": "KACIDA BERSATU - Portal Retail",
-  "short_name": "Kacida",
-  "description": "Portal Performa & Operasional Retail Modern Bersama Kita Kuat",
+  "name": "KACIDA BERSATU - Portal Performa & Operasional Retail",
+  "short_name": "KACIDA BERSATU",
+  "description": "Portal Performa & Operasional Retail Terpadu untuk Toko dan Area Coordinator",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#005C2E",
-  "theme_color": "#008744",
+  "theme_color": "#059669",
+  "background_color": "#064e3b",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "categories": ["business", "productivity", "utilities"],
   "icons": [
     {
-      "src": "https://drive.google.com/thumbnail?id=1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-&sz=w192",
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://drive.google.com/thumbnail?id=1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-&sz=w512",
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ceklis EXP",
+      "short_name": "Ceklis EXP",
+      "description": "Periksa rak dan masa kadaluarsa produk",
+      "url": "./index.html?menu=CEKLIS_EXP",
+      "icons": [
+        {
+          "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Serah Terima",
+      "short_name": "Serah Terima",
+      "description": "Pencatatan serah terima shift operasional",
+      "url": "./index.html?menu=SERAH_TERIMA",
+      "icons": [
+        {
+          "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Sales Harian",
+      "short_name": "Sales Harian",
+      "description": "Pantau penjualan harian toko dan toleransi NSB",
+      "url": "./index.html?menu=SALES_HARIAN",
+      "icons": [
+        {
+          "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Scanner Barcode",
+      "short_name": "Scanner",
+      "description": "Pindai barcode barang toko secara instan",
+      "url": "./index.html?menu=SCANNER",
+      "icons": [
+        {
+          "src": "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 }
