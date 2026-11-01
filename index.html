@@ -503,20 +503,23 @@
       <!-- KONTEN AREA BERANDA (DASHBOARD) -->
       <main id="tab-content-beranda" class="p-4 md:p-6 space-y-6">
 
-        <!-- HERO CARD (Sapaan, Nama, Sales H-1 berlatar Google Drive 16LWQVS2khktL1miWFSAzMnHU_tf0blDa) -->
+        <!-- HERO CARD (Sales Kemarin H-1 Bersih) -->
         <div class="relative overflow-hidden rounded-3xl p-6 text-white shadow-xl bg-cover bg-center border border-white/10" 
              style="background-image: url('https://lh3.googleusercontent.com/d/16LWQVS2khktL1miWFSAzMnHU_tf0blDa');">
           <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-brand-900/80 to-emerald-900/70 backdrop-blur-[2px]"></div>
 
           <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div class="flex items-center gap-4">
-              <img id="hero-user-photo" src="https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-" alt="Avatar" class="w-16 h-16 rounded-2xl object-cover border-2 border-white/30 shadow-lg" />
+              <div id="hero-user-photo-box" class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-white/30 shadow-lg flex items-center justify-center bg-brand-700 font-extrabold text-xl text-white">
+                <img id="hero-user-photo" src="" alt="Avatar" class="w-full h-full object-cover hidden" />
+                <span id="hero-user-initial">WS</span>
+              </div>
               <div>
                 <span class="text-xs font-semibold text-emerald-300 uppercase tracking-widest" id="hero-greeting">Selamat Pagi,</span>
-                <h1 class="text-xl md:text-2xl font-extrabold tracking-tight mt-0.5" id="hero-user-fullname">Budi Santoso</h1>
+                <h1 class="text-xl md:text-2xl font-extrabold tracking-tight mt-0.5" id="hero-user-fullname">Wildan Supandi</h1>
                 <p class="text-xs text-white/80 mt-1 flex items-center gap-1.5 font-medium">
                   <span id="hero-user-role-badge" class="px-2 py-0.5 rounded-md bg-white/20 text-[10px] font-bold">Chief of Store</span>
-                  <span id="hero-store-info">Toko Cibolang (X052)</span>
+                  <span id="hero-store-info">GUNUNG JAYA (2J7K)</span>
                 </p>
               </div>
             </div>
@@ -535,64 +538,64 @@
           </div>
         </div>
 
-        <!-- CAROUSEL KPI (Auto Slide: IKT, Sales MTD, Penawaran Langsung, Sales Harian) -->
+        <!-- CAROUSEL KPI (Gradien Warna Berbeda Tiap Kotak) -->
         <div class="relative">
           <div id="kpi-carousel-track" class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <!-- Kartu 1: IKT -->
-            <div onclick="openMenuModal('MONITORING_IKT')" class="cursor-pointer glass-card p-4 rounded-2xl shadow-sm hover:shadow-card-3d transition border border-slate-200/60 dark:border-slate-800">
+            <!-- Kartu 1: IKT (Aksen Hijau / Mint) -->
+            <div onclick="openMenuModal('MONITORING_IKT')" class="cursor-pointer p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-emerald-200 bg-gradient-to-br from-emerald-50/90 to-teal-50/60 dark:from-emerald-950/40 dark:to-teal-950/30">
               <div class="flex items-center justify-between text-xs mb-2">
-                <span class="font-bold text-slate-500">Pencapaian IKT</span>
-                <i class="fa-solid fa-bullseye text-brand-600"></i>
+                <span class="font-bold text-emerald-800 dark:text-emerald-300">Pencapaian IKT</span>
+                <i class="fa-solid fa-bullseye text-emerald-600"></i>
               </div>
               <h3 id="car-ikt-acv" class="text-xl font-black text-slate-800 dark:text-white">0,0%</h3>
               <p class="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
                 <span>Target: 100%</span>
-                <span id="car-ikt-status" class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-slate-100 text-slate-600">CEK</span>
+                <span id="car-ikt-status" class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-emerald-100 text-emerald-800">CEK</span>
               </p>
             </div>
 
-            <!-- Kartu 2: Sales MTD -->
-            <div onclick="openMenuModal('SALES_MTD')" class="cursor-pointer glass-card p-4 rounded-2xl shadow-sm hover:shadow-card-3d transition border border-slate-200/60 dark:border-slate-800">
+            <!-- Kartu 2: Sales MTD (Aksen Biru / Langit) -->
+            <div onclick="openMenuModal('SALES_MTD')" class="cursor-pointer p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-blue-200 bg-gradient-to-br from-blue-50/90 to-indigo-50/60 dark:from-blue-950/40 dark:to-indigo-950/30">
               <div class="flex items-center justify-between text-xs mb-2">
-                <span class="font-bold text-slate-500">Sales MTD</span>
+                <span class="font-bold text-blue-800 dark:text-blue-300">Sales MTD</span>
                 <i class="fa-solid fa-chart-line text-blue-600"></i>
               </div>
               <h3 id="car-mtd-sales" class="text-xl font-black text-slate-800 dark:text-white">Rp 0</h3>
               <p class="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
-                <span id="car-mtd-growth">Growth: 0%</span>
-                <span id="car-mtd-status" class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-blue-100 text-blue-700">MTD</span>
+                <span id="car-mtd-growth">Growth: +0,0%</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-blue-100 text-blue-800">MTD</span>
               </p>
             </div>
 
-            <!-- Kartu 3: Penawaran Langsung -->
-            <div onclick="openMenuModal('PENAWARAN_LANGSUNG')" class="cursor-pointer glass-card p-4 rounded-2xl shadow-sm hover:shadow-card-3d transition border border-slate-200/60 dark:border-slate-800">
+            <!-- Kartu 3: Penawaran Langsung (Aksen Oranye / Amber) -->
+            <div onclick="openMenuModal('PENAWARAN_LANGSUNG')" class="cursor-pointer p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-amber-200 bg-gradient-to-br from-amber-50/90 to-orange-50/60 dark:from-amber-950/40 dark:to-orange-950/30">
               <div class="flex items-center justify-between text-xs mb-2">
-                <span class="font-bold text-slate-500">Poin Dashboard</span>
-                <i class="fa-solid fa-gift text-retail-orange"></i>
+                <span class="font-bold text-amber-800 dark:text-amber-300">Poin Dashboard</span>
+                <i class="fa-solid fa-gift text-amber-600"></i>
               </div>
               <h3 id="car-penawaran-point" class="text-xl font-black text-slate-800 dark:text-white">0,0%</h3>
               <p class="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
                 <span id="car-penawaran-rank">Rank: #-</span>
-                <span id="car-penawaran-badge" class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-orange-100 text-orange-700">PENAWARAN</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-amber-100 text-amber-800">PENAWARAN</span>
               </p>
             </div>
 
-            <!-- Kartu 4: Sales Harian -->
-            <div onclick="openMenuModal('SALES_HARIAN')" class="cursor-pointer glass-card p-4 rounded-2xl shadow-sm hover:shadow-card-3d transition border border-slate-200/60 dark:border-slate-800">
+            <!-- Kartu 4: Sales Harian (Aksen Ungu / Violet) -->
+            <div onclick="openMenuModal('SALES_HARIAN')" class="cursor-pointer p-4 rounded-2xl shadow-sm hover:shadow-md transition border border-purple-200 bg-gradient-to-br from-purple-50/90 to-fuchsia-50/60 dark:from-purple-950/40 dark:to-fuchsia-950/30">
               <div class="flex items-center justify-between text-xs mb-2">
-                <span class="font-bold text-slate-500">Sales Harian</span>
+                <span class="font-bold text-purple-800 dark:text-purple-300">Sales Harian</span>
                 <i class="fa-solid fa-receipt text-purple-600"></i>
               </div>
               <h3 id="car-harian-actual" class="text-xl font-black text-slate-800 dark:text-white">Rp 0</h3>
               <p class="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
                 <span id="car-harian-gap">Gap: Rp 0</span>
-                <span id="car-harian-status" class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-100 text-purple-700">SPD</span>
+                <span class="px-1.5 py-0.5 rounded text-[9px] font-extrabold bg-purple-100 text-purple-800">SPD</span>
               </p>
             </div>
           </div>
         </div>
 
-        <!-- GRID MENU UTAMA (12 Menu Favorit + Kartu "Lihat Semua") -->
+        <!-- GRID MENU UTAMA BERDASARKAN FREKUENSI KLIK -->
         <div>
           <div class="flex items-center justify-between mb-3.5">
             <h3 class="font-extrabold text-sm text-slate-800 dark:text-white flex items-center gap-2">
@@ -605,21 +608,21 @@
           </div>
 
           <div class="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-6 gap-3 select-none" id="dashboard-menu-grid">
-            <!-- 12 Tombol Menu Utama di-render dinamis oleh Engine JS -->
+            <!-- 12 Menu dinamis diurutkan berdasarkan frekuensi klik -->
           </div>
         </div>
 
-        <!-- 4 KARTU ANALITIK & GRAFIK BISNIS RETAIL -->
+        <!-- 4 KARTU ANALITIK & INFORMASI STRUKTUR TOKO -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
-          <!-- Kartu 1: Pencapaian GM% (IKT) -->
+          <!-- Kartu 1: Pencapaian GM% -->
           <div class="glass-card p-5 rounded-3xl shadow-sm border border-slate-200/80 dark:border-slate-800">
             <div class="flex items-center justify-between mb-4">
               <div>
                 <h4 class="font-extrabold text-sm text-slate-800 dark:text-white">Pencapaian Gross Margin (GM%)</h4>
                 <p class="text-[11px] text-slate-400">Parameter utama Insentif Kinerja Toko (IKT)</p>
               </div>
-              <span id="card-gm-badge" class="px-2 py-1 rounded-lg text-xs font-black bg-brand-100 text-brand-700">ACV 0,0%</span>
+              <span id="card-gm-badge" class="px-2 py-1 rounded-lg text-xs font-black bg-brand-100 text-brand-700">ACV 0,00%</span>
             </div>
             <div class="grid grid-cols-3 gap-3 mb-4 text-center">
               <div class="p-2.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl">
@@ -640,7 +643,7 @@
             </div>
           </div>
 
-          <!-- Kartu 2: Tren Sales Harian (Chart.js) -->
+          <!-- Kartu 2: Tren Sales Harian -->
           <div class="glass-card p-5 rounded-3xl shadow-sm border border-slate-200/80 dark:border-slate-800">
             <div class="flex items-center justify-between mb-4">
               <div>
@@ -657,28 +660,28 @@
             </div>
           </div>
 
-          <!-- Kartu 3: Profil & Struktur Personil Toko (Aset Google Drive 1T-e5lMua-WeSj7VhHy7BE1m8-ukONs4J) -->
+          <!-- Kartu 3: Informasi Struktur Toko (Dinamis dari Master_User) -->
           <div class="glass-card p-5 rounded-3xl shadow-sm border border-slate-200/80 dark:border-slate-800">
             <div class="flex items-center gap-4 mb-4 pb-4 border-b border-slate-100 dark:border-slate-800">
               <img src="https://lh3.googleusercontent.com/d/1T-e5lMua-WeSj7VhHy7BE1m8-ukONs4J" alt="Toko" class="w-16 h-16 rounded-2xl object-cover shadow border border-slate-200" />
               <div>
-                <h4 id="dash-prof-toko-name" class="font-extrabold text-base text-slate-800 dark:text-white">Toko Cibolang (X052)</h4>
-                <p id="dash-prof-toko-area" class="text-xs text-slate-400 font-medium">Kab. Sukabumi - Main Road</p>
-                <span id="dash-prof-toko-jam" class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Jam Opr: 24 Jam</span>
+                <h4 id="dash-prof-toko-name" class="font-extrabold text-base text-slate-800 dark:text-white">GUNUNG JAYA (2J7K)</h4>
+                <p id="dash-prof-toko-area" class="text-xs text-slate-400 font-medium">Kab. Sukabumi - Perumahan</p>
+                <span id="dash-prof-toko-jam" class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Jam Opr: 07:00-22:00</span>
               </div>
             </div>
             <div class="space-y-2 text-xs">
               <div class="flex items-center justify-between text-slate-600 dark:text-slate-300">
                 <span class="text-slate-400">Chief of Store (COS):</span>
-                <span id="dash-prof-cos-name" class="font-bold">Budi Santoso</span>
+                <span id="dash-prof-cos-name" class="font-bold">WILDAN SUPANDI</span>
               </div>
               <div class="flex items-center justify-between text-slate-600 dark:text-slate-300">
                 <span class="text-slate-400">Area Coordinator (AC):</span>
-                <span id="dash-prof-ac-name" class="font-bold">Amed Supriadi</span>
+                <span id="dash-prof-ac-name" class="font-bold">AMED SUPRIADI</span>
               </div>
               <div class="flex items-center justify-between text-slate-600 dark:text-slate-300">
                 <span class="text-slate-400">Jumlah Personil Toko:</span>
-                <span id="dash-prof-total-personil" class="font-bold">8 Orang</span>
+                <span id="dash-prof-total-personil" class="font-bold text-brand-600">0 Orang</span>
               </div>
             </div>
             <button onclick="switchBottomTab('PROFIL')" class="w-full mt-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 transition">
@@ -686,7 +689,7 @@
             </button>
           </div>
 
-          <!-- Kartu 4: Ringkasan Program Penawaran Langsung & Ranking Toko -->
+          <!-- Kartu 4: Peringkat & Penawaran Langsung -->
           <div class="glass-card p-5 rounded-3xl shadow-sm border border-slate-200/80 dark:border-slate-800">
             <div class="flex items-center justify-between mb-4">
               <div>
@@ -694,35 +697,35 @@
                 <p class="text-[11px] text-slate-400">Realisasi PSM, PWP, Serba Gratis, dan APC</p>
               </div>
               <div id="dash-penawaran-rank-box" class="px-3 py-1 bg-emerald-600 text-white rounded-xl text-xs font-extrabold shadow">
-                RANK #1
+                RANK #2
               </div>
             </div>
             <div class="space-y-3">
               <div>
                 <div class="flex justify-between text-xs font-bold mb-1">
                   <span class="text-slate-600 dark:text-slate-300">Poin Dashboard Total</span>
-                  <span id="dash-point-val" class="text-brand-600 font-black">89,8%</span>
+                  <span id="dash-point-val" class="text-brand-600 font-black">71,5%</span>
                 </div>
                 <div class="w-full bg-slate-100 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden">
-                  <div id="dash-point-bar" class="bg-brand-600 h-full rounded-full transition-all duration-500" style="width: 89.8%;"></div>
+                  <div id="dash-point-bar" class="bg-brand-600 h-full rounded-full transition-all duration-500" style="width: 71.5%;"></div>
                 </div>
               </div>
               <div class="grid grid-cols-4 gap-2 text-center pt-2">
                 <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <span class="text-[9px] text-slate-400 block font-bold">PSM</span>
-                  <span id="dash-psm-acv" class="text-xs font-black text-slate-700 dark:text-slate-200">89,5%</span>
+                  <span id="dash-psm-acv" class="text-xs font-black text-slate-700 dark:text-slate-200">57,9%</span>
                 </div>
                 <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <span class="text-[9px] text-slate-400 block font-bold">PWP</span>
-                  <span id="dash-pwp-acv" class="text-xs font-black text-slate-700 dark:text-slate-200">32,8%</span>
+                  <span id="dash-pwp-acv" class="text-xs font-black text-slate-700 dark:text-slate-200">42,3%</span>
                 </div>
                 <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <span class="text-[9px] text-slate-400 block font-bold">GRATIS</span>
-                  <span id="dash-gratis-acv" class="text-xs font-black text-emerald-600">141,3%</span>
+                  <span id="dash-gratis-acv" class="text-xs font-black text-slate-700 dark:text-slate-200">41,2%</span>
                 </div>
                 <div class="p-2 bg-slate-50 dark:bg-slate-800 rounded-xl">
                   <span class="text-[9px] text-slate-400 block font-bold">APC</span>
-                  <span id="dash-apc-acv" class="text-xs font-black text-slate-700 dark:text-slate-200">85,1%</span>
+                  <span id="dash-apc-acv" class="text-xs font-black text-emerald-600">148,0%</span>
                 </div>
               </div>
               <button onclick="openMenuModal('PENAWARAN_LANGSUNG')" class="w-full mt-2 py-2.5 bg-brand-50 hover:bg-brand-100 dark:bg-brand-950/40 text-brand-700 dark:text-brand-300 text-xs font-bold rounded-xl transition">
@@ -735,31 +738,26 @@
 
       </main>
 
-      <!-- DOCK NAVBAR BAWAH (MOBILE VIEW ONLY) -->
-      <nav class="md:hidden fixed bottom-0 inset-x-0 h-16 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-4 items-center z-40 px-2 select-none">
-        <button onclick="switchBottomTab('BERANDA')" id="bnav-beranda" class="flex flex-col items-center justify-center gap-1 text-brand-600 font-bold transition">
-          <i class="fa-solid fa-house text-lg"></i>
-          <span class="text-[10px]">Beranda</span>
-        </button>
-
-        <button onclick="switchBottomTab('CHAT_AI')" id="bnav-chat" class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-brand-600 font-bold transition">
-          <i class="fa-solid fa-robot text-lg"></i>
-          <span class="text-[10px]">Chat AI</span>
-        </button>
-
-        <button onclick="switchBottomTab('KALENDER')" id="bnav-kalender" class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-brand-600 font-bold transition">
-          <i class="fa-regular fa-calendar-days text-lg"></i>
-          <span class="text-[10px]">Kalender</span>
-        </button>
-
-        <button onclick="switchBottomTab('PROFIL')" id="bnav-profil" class="flex flex-col items-center justify-center gap-1 text-slate-400 hover:text-brand-600 font-bold transition">
-          <i class="fa-regular fa-user text-lg"></i>
-          <span class="text-[10px]">Profil</span>
-        </button>
-      </nav>
-
-    </div>
-  </div>
+      <!-- MODAL LIHAT SEMUA (VIEW ALL) -->
+      <div id="modal-all-menus" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl p-6 shadow-2xl border border-slate-100 dark:border-slate-800 max-h-[85vh] overflow-y-auto space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+            <div>
+              <h3 class="text-sm font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-grip text-brand-600"></i>
+                <span>Semua Fitur & Navigasi Portal</span>
+              </h3>
+              <p class="text-[10px] text-slate-400">16 Menu Sistem + Menu Dinamis Sheet Menu_Navigasi</p>
+            </div>
+            <button onclick="closeCurrentModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 hover:text-slate-800">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 select-none" id="grid-all-16-menus">
+            <!-- Dirender secara dinamis -->
+          </div>
+        </div>
+      </div>
 
   <!-- Modal Manual Sync Progress Indicator -->
   <div id="modal-sync-progress" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
@@ -2608,16 +2606,16 @@
     </div>
   </div>
 
-  <script>
+ <script>
     /**
      * ============================================================================
-     * KACIDA BERSATU - Client Engine Core (Error-Shielded & Multi-Store Fixed)
+     * KACIDA BERSATU - Client Engine Core (Fix Total 11 Kendala)
      * ============================================================================
      */
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdkTvfa7BMUcTY-OHQ1vniyc66hUo_DMaKWEpQbLYQ4sqFRhvAISxEkyg665j5zhaDZg/exec";
     const CIPHER_BON = { 0: 'M', 1: 'O', 2: 'Y', 3: 'D', 4: 'T', 5: 'U', 6: 'H', 7: 'C', 8: 'I', 9: 'K' };
 
-    // State Global
+    // State Global Aplikasi
     let currentUser = null;
     let currentStore = null;
     let masterUsersCache = [];
@@ -2631,7 +2629,7 @@
     let chartHarianFullInstance = null;
     let chartIktBarInstance = null;
 
-    // FUNGSI PENGAMAN ANTI-NULL (Mencegah Crash "Cannot set properties of null")
+    // FUNGSI PENGAMAN DOM (Mencegah Crash "Cannot set properties of null")
     function setSafeText(id, val) {
       const el = document.getElementById(id);
       if (el) el.innerText = (val !== null && val !== undefined) ? val : "";
@@ -2649,14 +2647,71 @@
       if (el) el.style.width = pct;
     }
 
-    // Inisialisasi Saat Buka Halaman
-    document.addEventListener("DOMContentLoaded", function () {
-      initNavigationEngine();
-      loadCachedSession();
-      fetchIndonesianHolidays();
-    });
+    // 1. PERBAIKAN PERSENTASE: OTOMATIS KALI 100 JIKA FORMAT DESIMAL DARI SPREADSHEET
+    function formatPct(val, digits = 1) {
+      if (val === null || val === undefined || val === "") return "0,0%";
+      let str = String(val).trim();
+      let hasPctSign = str.includes('%');
+      let num = parseFloat(str.replace('%', '').replace(',', '.'));
+      if (isNaN(num)) return "0,0%";
 
-    // 1. SISTEM NAVIGASI BACK (TOMBOL LAYAR & GESTURE BACK HP)
+      // Jika dari spreadsheet berupa desimal murni (0.579 atau 0.715) dan belum berpersen
+      if (Math.abs(num) <= 1.0 && num !== 0 && !hasPctSign) {
+        num = num * 100;
+      }
+      return num.toFixed(digits).replace('.', ',') + "%";
+    }
+
+    function formatRp(num) {
+      if (isNaN(num) || num === null || num === undefined) return "Rp 0";
+      return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(num);
+    }
+
+    // 2. PERBAIKAN FORMAT TANGGAL: MEMBUANG JAM 14:00:00 / 15:00:00
+    function formatTglIndo(rawDate, short = false) {
+      if (!rawDate) return "-";
+      let dStr = String(rawDate).trim();
+      if (dStr.includes('T')) dStr = dStr.split('T')[0];
+      if (dStr.includes(' ')) dStr = dStr.split(' ')[0];
+
+      const parts = dStr.split(/[-/]/);
+      if (parts.length === 3) {
+        if (parts[0].length === 4) { // YYYY-MM-DD
+          return short ? `${parts[2]}/${parts[1]}` : `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+        return short ? `${parts[0]}/${parts[1]}` : `${parts[0]}/${parts[1]}/${parts[2]}`; // DD/MM/YYYY
+      }
+      return dStr;
+    }
+
+    // 3. PERBAIKAN FOTO PROFIL & FALLBACK AVATAR INISIAL NAMA
+    function applyUserAvatar(imgUrl, fullName, imgElId, initialElId) {
+      const imgEl = document.getElementById(imgElId);
+      const initialEl = document.getElementById(initialElId);
+
+      let cleanUrl = (imgUrl || "").trim();
+      if (cleanUrl.includes("drive.google.com")) {
+        const fileId = cleanUrl.match(/\/d\/([a-zA-Z0-9_-]+)/)?.[1] || cleanUrl.match(/id=([a-zA-Z0-9_-]+)/)?.[1];
+        if (fileId) cleanUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+      }
+
+      if (cleanUrl && cleanUrl.startsWith("http")) {
+        if (imgEl) {
+          imgEl.src = cleanUrl;
+          imgEl.classList.remove("hidden");
+        }
+        if (initialEl) initialEl.classList.add("hidden");
+      } else {
+        const initials = (fullName || "User").split(" ").map(n => n[0]).slice(0, 2).join("").toUpperCase();
+        if (imgEl) imgEl.classList.add("hidden");
+        if (initialEl) {
+          initialEl.innerText = initials;
+          initialEl.classList.remove("hidden");
+        }
+      }
+    }
+
+    // 4. NAVIGASI MODAL & POPSTATE BACK HP ANDROID
     function initNavigationEngine() {
       window.history.replaceState({ modalOpen: null, depth: 0 }, "");
       window.addEventListener("popstate", function () {
@@ -2682,20 +2737,64 @@
       }
     }
 
-    // 2. FORMAT MATA UANG & PERSEN
-    function formatRp(num) {
-      if (isNaN(num) || num === null || num === undefined) return "Rp 0";
-      return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(num);
+    // Buka menu dari View All tanpa tertutup kembali
+    function selectMenuFromViewAll(menuKey) {
+      const viewAllModal = document.getElementById("modal-all-menus");
+      if (viewAllModal) viewAllModal.classList.add("hidden");
+
+      const idx = modalStack.indexOf("modal-all-menus");
+      if (idx !== -1) modalStack.splice(idx, 1);
+
+      openMenuModal(menuKey);
     }
 
-    function formatPct(num, digits = 1) {
-      if (isNaN(num) || num === null || num === undefined) return "0,0%";
-      let val = typeof num === 'string' ? parseFloat(num.replace('%', '').replace(',', '.')) : num;
-      if (isNaN(val)) return "0,0%";
-      return val.toFixed(digits).replace('.', ',') + "%";
+    // 5. PERBAIKAN: MENU YANG SERING DIKLIK PINDAH KE ATAS
+    function recordMenuClick(menuKey) {
+      let clicks = JSON.parse(localStorage.getItem("kacida_menu_clicks") || "{}");
+      clicks[menuKey] = (clicks[menuKey] || 0) + 1;
+      localStorage.setItem("kacida_menu_clicks", JSON.stringify(clicks));
+      render12ShortcutMenus();
     }
 
-    // 3. PEMUATAN SESI & DATA AWAL (0,1 DETIK)
+    function render12ShortcutMenus() {
+      const container = document.getElementById("dashboard-menu-grid");
+      if (!container) return;
+
+      const baseMenus = [
+        { key: 'CEKLIS_EXP', name: 'Ceklis EXP', icon: 'fa-calendar-check', color: 'text-brand-600' },
+        { key: 'SERAH_TERIMA', name: 'Serah Terima', icon: 'fa-handshake-simple', color: 'text-emerald-600' },
+        { key: 'TABUNGANKU', name: 'Tabunganku', icon: 'fa-piggy-bank', color: 'text-pink-600' },
+        { key: 'KAS_AREA', name: 'Kas Area', icon: 'fa-vault', color: 'text-amber-600' },
+        { key: 'DONASI', name: 'Donasi Area', icon: 'fa-hand-holding-heart', color: 'text-teal-600' },
+        { key: 'SIMULASI_IKT', name: 'Simulasi IKT', icon: 'fa-calculator', color: 'text-indigo-600' },
+        { key: 'SALES_MTD', name: 'Sales MTD', icon: 'fa-chart-line', color: 'text-blue-600' },
+        { key: 'SALES_HARIAN', name: 'Sales Harian', icon: 'fa-receipt', color: 'text-purple-600' },
+        { key: 'MONITORING_IKT', name: 'Monitoring IKT', icon: 'fa-bullseye', color: 'text-rose-600' },
+        { key: 'KONVERSI_BON', name: 'Konversi Bon', icon: 'fa-barcode', color: 'text-cyan-600' },
+        { key: 'PENAWARAN_LANGSUNG', name: 'Penawaran', icon: 'fa-gift', color: 'text-orange-600' },
+        { key: 'REKAP_PSM', name: 'Rekap PSM', icon: 'fa-cart-shopping', color: 'text-emerald-700' }
+      ];
+
+      const clicks = JSON.parse(localStorage.getItem("kacida_menu_clicks") || "{}");
+      baseMenus.sort((a, b) => (clicks[b.key] || 0) - (clicks[a.key] || 0));
+
+      container.innerHTML = baseMenus.map(m => `
+        <div onclick="openMenuModal('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
+          <div class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-base ${m.color}">
+            <i class="fa-solid ${m.icon}"></i>
+          </div>
+          <span class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 leading-tight">${m.name}</span>
+        </div>
+      `).join('');
+    }
+
+    // 6. INISIALISASI HALAMAN
+    document.addEventListener("DOMContentLoaded", function () {
+      initNavigationEngine();
+      loadCachedSession();
+      fetchIndonesianHolidays();
+    });
+
     function loadCachedSession() {
       const savedConfig = localStorage.getItem("kacida_toko_config");
       if (savedConfig) {
@@ -2730,7 +2829,7 @@
       setSafeText("login-store-code", store.KODE || "-");
     }
 
-    // 4. KONFIGURASI KODE TOKO (BISA GONTA-GANTI BERSIH)
+    // 7. PENGATURAN TOKO (BISA GONTA-GANTI BERSIH)
     function openConfigModal() { openModalWithHistory("modal-config-store"); }
     function closeConfigModal() { closeCurrentModal(); }
 
@@ -2768,31 +2867,29 @@
 
     function saveStoreConfig() {
       if (!currentStore) return;
-
-      // SIMPAN KONFIGURASI BARU & BERSIHKAN SESI PENGGUNA LAMA
       localStorage.setItem("kacida_toko_config", JSON.stringify(currentStore));
-      localStorage.removeItem("user_login"); // Hapus login lama agar tidak bentrok
+      localStorage.removeItem("user_login");
       currentUser = null;
 
       updateLoginStoreBadge(currentStore);
-      setSafeVal("login-nik-input", ""); // Kosongkan input NIK di form login
+      setSafeVal("login-nik-input", "");
       closeConfigModal();
 
       Swal.fire({
         icon: 'success',
         title: 'Toko Berhasil Diubah!',
-        text: `Sekarang aktif di Toko [${currentStore.KODE}] ${currentStore["NAMA TOKO"] || ''}. Silakan masukkan NIK Anda.`,
+        text: `Sekarang aktif di Toko [${currentStore.KODE}]. Silakan masukkan NIK Anda.`,
         confirmButtonColor: '#059669'
       });
     }
 
-    // 5. VALIDASI LOGIN NIK & PENGECEKAN KESESUAIAN TOKO AKTIF
+    // 8. LOGIN USER & PENGECEKAN KESESUAIAN NIK TOKO
     async function handleLoginSubmit(e) {
       e.preventDefault();
       const inputNik = (document.getElementById("login-nik-input")?.value || "").trim();
 
       if (!currentStore) {
-        Swal.fire("Konfigurasi Diperlukan", "Silakan klik ikon gerigi (⚙️) di pojok kanan atas untuk memilih toko terlebih dahulu.", "warning");
+        Swal.fire("Pilih Toko", "Klik ikon gerigi (⚙️) untuk memilih toko terlebih dahulu.", "warning");
         return;
       }
 
@@ -2804,14 +2901,9 @@
         }
 
         const userFound = masterUsersCache.find(u => String(u.NIK || '').trim() === inputNik);
-
         if (!userFound) {
           Swal.close();
-          Swal.fire({
-            icon: 'error',
-            title: 'NIK Tidak Terdaftar',
-            text: `NIK [${inputNik}] tidak ditemukan di sheet Master_User. Pastikan NIK Anda benar.`
-          });
+          Swal.fire("NIK Tidak Terdaftar", `NIK [${inputNik}] tidak ditemukan di Master_User.`, "error");
           return;
         }
 
@@ -2820,7 +2912,6 @@
         const userJabatan = String(userFound.JABATAN || '').toUpperCase();
         const isBypass = userJabatan.includes("AREA COORDINATOR") || ["14125034", "22050361"].includes(inputNik);
 
-        // VALIDASI KESESUAIAN TOKO & MUNCULKAN SWALFIRE JIKA BUKAN TOKONYA
         if (!isBypass && userKode !== configKode) {
           Swal.close();
           Swal.fire({
@@ -2829,7 +2920,6 @@
             html: `NIK <b>${inputNik} (${userFound.NAMA})</b> terdaftar di Toko <b>[${userKode}]</b>, bukan di Toko <b>[${configKode}]</b>.<br><br>Apakah Anda ingin otomatis berganti ke Toko <b>[${userKode}]</b>?`,
             showCancelButton: true,
             confirmButtonColor: '#059669',
-            cancelButtonColor: '#94a3b8',
             confirmButtonText: 'Ya, Ganti Toko',
             cancelButtonText: 'Batal'
           }).then((res) => {
@@ -2840,24 +2930,20 @@
                 localStorage.setItem("kacida_toko_config", JSON.stringify(matchedStore));
                 updateLoginStoreBadge(matchedStore);
                 setSafeVal("login-nik-input", inputNik);
-                Swal.fire("Toko Diganti", `Konfigurasi diubah ke [${userKode}]. Silakan tekan tombol Masuk.`, "success");
               }
             }
           });
           return;
         }
 
-        // LOGIN BERHASIL
         currentUser = userFound;
         localStorage.setItem("user_login", JSON.stringify(userFound));
 
-        // Catat hitungan login ke backend
         fetch(APPS_SCRIPT_URL, {
           method: "POST",
           body: JSON.stringify({ action: "INCREMENT_LOGIN", nik: inputNik })
         });
 
-        // Ambil data toko secara aman
         await autoFetchAllStoreData(currentStore.KODE);
         Swal.close();
 
@@ -2872,7 +2958,7 @@
       }
     }
 
-    // 6. PENARIKAN DATA SPREADSHEET SESUAI KODE TOKO
+    // 9. TARIK DATA DARI SPREADSHEET
     async function autoFetchAllStoreData(storeCode) {
       try {
         const [resHarian, resIkt, resYtd, resPenawaran, resNav] = await Promise.all([
@@ -2898,11 +2984,11 @@
         refreshDashboardKPI();
         render12ShortcutMenus();
       } catch (err) {
-        console.warn("Gagal auto-fetch data:", err);
+        console.warn("Gagal auto-fetch:", err);
       }
     }
 
-    // 7. RENDER DASHBOARD AMAN (TIDAK ADA ERROR SETTING PROPERTY OF NULL)
+    // 10. RENDER DASHBOARD & PROFIL TOKO DINAMIS
     function renderDashboardWithUser(user) {
       if (!user) return;
       const storeName = currentStore ? (currentStore["NAMA TOKO"] || currentStore.STORE_NAME || currentStore.KODE) : "Retail";
@@ -2922,22 +3008,29 @@
       setSafeText("dash-prof-toko-jam", `Jam Opr: ${currentStore ? (currentStore["JAM OPR"] || '24 Jam') : '24 Jam'}`);
       setSafeText("dash-prof-cos-name", String(user.JABATAN || '').includes("Chief") ? user.NAMA : "Chief Toko");
 
+      const acUser = masterUsersCache.find(u => String(u.JABATAN || '').toUpperCase().includes("AREA COORDINATOR"));
+      setSafeText("dash-prof-ac-name", acUser ? acUser.NAMA : "AMED SUPRIADI");
+
+      // Hitung personil toko asli dari Master_User
+      const storePersonnel = masterUsersCache.filter(u => String(u.KODE || '').trim().toUpperCase() === storeCode.toUpperCase());
+      setSafeText("dash-prof-total-personil", `${storePersonnel.length || 8} Orang`);
+
+      // Terapkan Avatar Gambar atau Inisial
+      applyUserAvatar(user["FOTO PROFIL (Url)"], user.NAMA, "hero-user-photo", "hero-user-initial");
+      applyUserAvatar(user["FOTO PROFIL (Url)"], user.NAMA, "hdr-user-avatar", null);
+      applyUserAvatar(user["FOTO PROFIL (Url)"], user.NAMA, "prof-photo-big", null);
+
+      // Tab Profil Navbar
       setSafeText("prof-user-name", user.NAMA || "");
       setSafeText("prof-user-nik", `NIK: ${user.NIK || '-'}`);
       setSafeText("prof-user-jabatan", user.JABATAN || "");
       setSafeText("prof-store-name", `${storeName} (${storeCode})`);
 
-      if (user["FOTO PROFIL (Url)"]) {
-        const a1 = document.getElementById("hdr-user-avatar"); if (a1) a1.src = user["FOTO PROFIL (Url)"];
-        const a2 = document.getElementById("hero-user-photo"); if (a2) a2.src = user["FOTO PROFIL (Url)"];
-        const a3 = document.getElementById("prof-photo-big"); if (a3) a3.src = user["FOTO PROFIL (Url)"];
-      }
-
       render12ShortcutMenus();
       refreshDashboardKPI();
     }
 
-    // 8. PEMBARUAN METRIK RINGKASAN
+    // 11. PEMBARUAN ANGKA METRIK DASHBOARD (SALES H-1 TEPAT)
     function refreshDashboardKPI() {
       const storeCode = currentStore?.KODE || "";
       const harianData = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
@@ -2945,24 +3038,35 @@
       const ytdData = JSON.parse(localStorage.getItem("kacida_cache_ytd") || "[]");
       const penawaranData = JSON.parse(localStorage.getItem("kacida_cache_penawaran") || "[]");
 
+      // Logika Sales H-1: Ambil data hari terakhir yang ACTUAL-nya sudah terisi (bukan baris kosong akhir bulan)
       if (Array.isArray(harianData) && harianData.length > 0) {
-        const lastRow = harianData[harianData.length - 1];
+        const rowsFilled = harianData.filter(r => (Number(r.ACTUAL) || 0) > 0);
+        const lastRow = rowsFilled.length > 0 ? rowsFilled[rowsFilled.length - 1] : harianData[0];
         const actualSales = Number(lastRow.ACTUAL) || 0;
+
         setSafeText("hero-sales-h1", formatRp(actualSales));
         setSafeText("car-harian-actual", formatRp(actualSales));
         setSafeText("car-harian-gap", `Gap: ${formatRp(lastRow["GAP TARGET"])}`);
+
+        if (rowsFilled.length >= 2) {
+          const prevSales = Number(rowsFilled[rowsFilled.length - 2].ACTUAL) || 1;
+          const h1Growth = ((actualSales - prevSales) / prevSales) * 100;
+          setSafeText("hero-sales-growth-val", `${h1Growth >= 0 ? '+' : ''}${formatPct(h1Growth)}`);
+        }
       }
 
+      // IKT
       if (Array.isArray(iktData) && iktData.length > 0) {
         const myIkt = iktData.find(i => String(i.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase()) || iktData[0];
         if (myIkt) {
           setSafeText("car-ikt-acv", formatPct(myIkt["ACV SALES"]));
-          setSafeText("dash-gm-target", formatPct(myIkt["TARGET GM %"]));
-          setSafeText("dash-gm-actual", formatPct(myIkt["ACTUAL GM %"]));
+          setSafeText("dash-gm-target", formatPct(myIkt["TARGET GM %"], 2)); // 2 digit di belakang koma
+          setSafeText("dash-gm-actual", formatPct(myIkt["ACTUAL GM %"], 2)); // 2 digit di belakang koma
           setSafeText("card-gm-badge", `ACV ${formatPct(myIkt["ACV GM"])}`);
         }
       }
 
+      // Sales MTD
       if (Array.isArray(ytdData) && ytdData.length > 0) {
         let sum2025 = 0, sum2026 = 0;
         ytdData.forEach(r => {
@@ -2974,14 +3078,16 @@
         setSafeText("car-mtd-growth", `Growth: ${growth >= 0 ? '+' : ''}${formatPct(growth)}`);
       }
 
+      // Penawaran Langsung (Perbaikan Persentase)
       if (Array.isArray(penawaranData) && penawaranData.length > 0) {
         const myPenawaran = penawaranData.find(p => String(p.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase()) || penawaranData[0];
         if (myPenawaran) {
-          setSafeText("car-penawaran-point", formatPct(myPenawaran["POINT DASHBOARD"]));
+          const ptVal = formatPct(myPenawaran["POINT DASHBOARD"]);
+          setSafeText("car-penawaran-point", ptVal);
           setSafeText("car-penawaran-rank", `Rank: #${myPenawaran.RANK || '-'}`);
           setSafeText("dash-penawaran-rank-box", `RANK #${myPenawaran.RANK || '-'}`);
-          setSafeText("dash-point-val", formatPct(myPenawaran["POINT DASHBOARD"]));
-          setSafeWidth("dash-point-bar", `${parseFloat(myPenawaran["POINT DASHBOARD"]) || 0}%`);
+          setSafeText("dash-point-val", ptVal);
+          setSafeWidth("dash-point-bar", ptVal);
           setSafeText("dash-psm-acv", formatPct(myPenawaran["ACV PSM"]));
           setSafeText("dash-pwp-acv", formatPct(myPenawaran["ACV PWP"]));
           setSafeText("dash-gratis-acv", formatPct(myPenawaran["ACV SERBA GRATIS"]));
@@ -2992,14 +3098,17 @@
       renderDashboardCharts();
     }
 
-    // 9. RENDER GRAFIK BERANDA
+    // 12. GRAFIK BERANDA
     function renderDashboardCharts() {
       const harianData = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
       const ctxSales = document.getElementById("chart-sales-daily");
       if (ctxSales && Array.isArray(harianData) && harianData.length > 0) {
-        const labels = harianData.slice(-7).map(r => String(r.TANGGAL).slice(0, 5));
-        const targetData = harianData.slice(-7).map(r => (Number(r.TARGET) || 0) / 1000000);
-        const actualData = harianData.slice(-7).map(r => (Number(r.ACTUAL) || 0) / 1000000);
+        const rowsFilled = harianData.filter(r => (Number(r.ACTUAL) || 0) > 0);
+        const displayData = rowsFilled.length >= 7 ? rowsFilled.slice(-7) : harianData.slice(0, 7);
+
+        const labels = displayData.map(r => formatTglIndo(r.TANGGAL, true));
+        const targetData = displayData.map(r => (Number(r.TARGET) || 0) / 1000000);
+        const actualData = displayData.map(r => (Number(r.ACTUAL) || 0) / 1000000);
 
         if (chartSalesDailyInstance) chartSalesDailyInstance.destroy();
         chartSalesDailyInstance = new Chart(ctxSales, {
@@ -3016,36 +3125,318 @@
       }
     }
 
-    // 10. GRID MENU UTAMA & VIEW ALL DENGAN BENTUK KOTAK
-    function render12ShortcutMenus() {
-      const container = document.getElementById("dashboard-menu-grid");
-      if (!container) return;
+    // 13. ROUTER MODAL DENGAN TRACKING FREKUENSI KLIK
+    function openMenuModal(menuKey) {
+      recordMenuClick(menuKey);
 
-      const baseMenus = [
-        { key: 'CEKLIS_EXP', name: 'Ceklis EXP', icon: 'fa-calendar-check', color: 'text-brand-600' },
-        { key: 'SERAH_TERIMA', name: 'Serah Terima', icon: 'fa-handshake-simple', color: 'text-emerald-600' },
-        { key: 'TABUNGANKU', name: 'Tabunganku', icon: 'fa-piggy-bank', color: 'text-pink-600' },
-        { key: 'KAS_AREA', name: 'Kas Area', icon: 'fa-vault', color: 'text-amber-600' },
-        { key: 'DONASI', name: 'Donasi Area', icon: 'fa-hand-holding-heart', color: 'text-teal-600' },
-        { key: 'SIMULASI_IKT', name: 'Simulasi IKT', icon: 'fa-calculator', color: 'text-indigo-600' },
-        { key: 'SALES_MTD', name: 'Sales MTD', icon: 'fa-chart-line', color: 'text-blue-600' },
-        { key: 'SALES_HARIAN', name: 'Sales Harian', icon: 'fa-receipt', color: 'text-purple-600' },
-        { key: 'MONITORING_IKT', name: 'Monitoring IKT', icon: 'fa-bullseye', color: 'text-rose-600' },
-        { key: 'KONVERSI_BON', name: 'Konversi Bon', icon: 'fa-barcode', color: 'text-cyan-600' },
-        { key: 'PENAWARAN_LANGSUNG', name: 'Penawaran', icon: 'fa-gift', color: 'text-orange-600' },
-        { key: 'REKAP_PSM', name: 'Rekap PSM', icon: 'fa-cart-shopping', color: 'text-emerald-700' }
-      ];
+      const modalMap = {
+        'CEKLIS_EXP': 'modal-ceklis-exp',
+        'SERAH_TERIMA': 'modal-serah-terima',
+        'TABUNGANKU': 'modal-tabunganku',
+        'KAS_AREA': 'modal-kas-area',
+        'DONASI': 'modal-donasi',
+        'SIMULASI_IKT': 'modal-simulasi-ikt',
+        'SALES_MTD': 'modal-sales-mtd',
+        'SALES_HARIAN': 'modal-sales-harian',
+        'MONITORING_IKT': 'modal-monitoring-ikt',
+        'KONVERSI_BON': 'modal-konversi-bon',
+        'PENAWARAN_LANGSUNG': 'modal-penawaran-langsung',
+        'REKAP_PSM': 'modal-rekap-psm',
+        'SALES_OPR': 'modal-sales-opr',
+        'MONITORING_KWH': 'modal-monitoring-kwh',
+        'SCANNER': 'modal-scanner',
+        'PENGUMUMAN': 'modal-pengumuman'
+      };
 
-      container.innerHTML = baseMenus.map(m => `
-        <div onclick="openMenuModal('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
-          <div class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-base ${m.color}">
-            <i class="fa-solid ${m.icon}"></i>
-          </div>
-          <span class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 leading-tight">${m.name}</span>
-        </div>
-      `).join('');
+      if (menuKey === 'KAS_AREA') {
+        const jabatan = String(currentUser?.JABATAN || '').toUpperCase();
+        const allow = jabatan.includes("CHIEF") || jabatan.includes("AREA COORDINATOR") || ["14125034", "22050361"].includes(String(currentUser?.NIK));
+        if (!allow) {
+          Swal.fire({ icon: 'error', title: 'Akses Dibatasi', text: 'Menu Kas Area khusus untuk Jabatan Chief Of Store dan Area Coordinator.' });
+          return;
+        }
+      }
+
+      const targetModalId = modalMap[menuKey];
+      if (targetModalId) {
+        openModalWithHistory(targetModalId);
+        loadMenuInitialData(menuKey);
+      }
     }
 
+    function loadMenuInitialData(menuKey) {
+      if (menuKey === 'SALES_HARIAN') loadSalesHarianData();
+      if (menuKey === 'SALES_MTD') loadSalesMtdData();
+      if (menuKey === 'MONITORING_IKT') loadMonitoringIktData();
+      if (menuKey === 'PENAWARAN_LANGSUNG') loadPenawaranLangsungData();
+    }
+
+    // 14. SALES HARIAN OPERASIONAL
+    function loadSalesHarianData() {
+      const data = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
+      const tbody = document.getElementById("table-body-sales-harian");
+      if (!tbody) return;
+
+      if (!Array.isArray(data) || data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-400">Tidak ada data Sales Harian untuk toko ini.</td></tr>`;
+        return;
+      }
+
+      let sumBulanLalu = 0, sumTarget = 0, sumActual = 0, sumGap = 0, sumNsb = 0, sumNsbPct = 0, sumOos = 0, sumGm = 0;
+
+      tbody.innerHTML = data.map(r => {
+        const tglClean = formatTglIndo(r.TANGGAL);
+        const blnLalu = Number(r["BULAN LALU"]) || 0;
+        const tgt = Number(r.TARGET) || 0;
+        const act = Number(r.ACTUAL) || 0;
+        const gap = Number(r["GAP TARGET"]) || 0;
+        const nsb = Number(r.NSB) || 0;
+        const nsbPct = parseFloat(String(r["% NSB"]).replace('%','').replace(',','.')) || 0;
+        const oosPct = parseFloat(String(r["OOS %"]).replace('%','').replace(',','.')) || 0;
+        const gmPct = parseFloat(String(r["GROSS MARGIN"]).replace('%','').replace(',','.')) || 0;
+
+        sumBulanLalu += blnLalu; sumTarget += tgt; sumActual += act; sumGap += gap; sumNsb += nsb;
+        sumNsbPct += nsbPct; sumOos += oosPct; sumGm += gmPct;
+
+        return `
+          <tr class="hover:bg-slate-50 border-b">
+            <td class="p-3 font-bold sticky left-0 bg-white z-10">${tglClean}</td>
+            <td class="p-3">${formatRp(blnLalu)}</td>
+            <td class="p-3">${formatRp(tgt)}</td>
+            <td class="p-3 font-bold text-emerald-600">${formatRp(act)}</td>
+            <td class="p-3">${r["ACTUAL STD"] || r.STD || 0}</td>
+            <td class="p-3">${formatRp(r["ACTUAL APC"] || r.APC || 0)}</td>
+            <td class="p-3 font-bold ${gap >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${formatRp(gap)}</td>
+            <td class="p-3">${formatRp(nsb)}</td>
+            <td class="p-3 font-bold ${nsbPct > 0.14 ? 'text-rose-600' : 'text-emerald-600'}">${formatPct(nsbPct, 2)}</td>
+            <td class="p-3 font-bold ${oosPct >= 1.0 ? 'text-rose-600' : 'text-emerald-600'}">${formatPct(oosPct, 2)}</td>
+            <td class="p-3 font-bold">${formatPct(gmPct, 2)}</td>
+          </tr>
+        `;
+      }).join('');
+
+      setSafeText("harian-sum-bulan-lalu", formatRp(sumBulanLalu));
+      setSafeText("harian-sum-target", formatRp(sumTarget));
+      setSafeText("harian-sum-actual", formatRp(sumActual));
+      setSafeText("harian-sum-gap", formatRp(sumGap));
+      setSafeText("harian-sum-nsb", formatRp(sumNsb));
+      setSafeText("harian-sum-nsb-pct", formatPct(sumNsbPct / data.length, 2));
+      setSafeText("harian-sum-oos-pct", formatPct(sumOos / data.length, 2));
+      setSafeText("harian-sum-gm", formatPct(sumGm / data.length, 2));
+
+      setTimeout(() => {
+        const ctx = document.getElementById("chart-sales-harian-full");
+        if (ctx) {
+          if (chartHarianFullInstance) chartHarianFullInstance.destroy();
+          chartHarianFullInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: data.map(r => formatTglIndo(r.TANGGAL, true)),
+              datasets: [
+                { label: 'Target', data: data.map(r => Number(r.TARGET) || 0), borderColor: '#3b82f6', tension: 0.2 },
+                { label: 'Aktual', data: data.map(r => Number(r.ACTUAL) || 0), borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.2 }
+              ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+          });
+        }
+      }, 150);
+    }
+
+    // 15. SALES MTD LENGKAP (DEFAULT BULAN AKTIF & FILTER BERJALAN)
+    let mtdCurrentTab = "ALL";
+    function loadSalesMtdData() {
+      const monthsIndo = ["JANUARI","FEBRUARI","MARET","APRIL","MEI","JUNI","JULI","AGUSTUS","SEPTEMBER","OKTOBER","NOVEMBER","DESEMBER"];
+      const currMonthName = monthsIndo[new Date().getMonth()];
+      const selectMonth = document.getElementById("mtd-filter-bulan");
+      if (selectMonth && !selectMonth.value) {
+        selectMonth.value = currMonthName;
+      }
+      applyMtdFilter();
+    }
+
+    function setMtdTabFilter(type) {
+      mtdCurrentTab = type;
+      ['all', 'growth', 'disgrowth'].forEach(t => {
+        const btn = document.getElementById(`mtd-tab-${t}`);
+        if (btn) {
+          btn.className = (t === type.toLowerCase())
+            ? "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-brand-600 text-white shadow-sm"
+            : "px-3 py-1.5 rounded-xl text-xs font-extrabold bg-slate-100 text-slate-600 hover:bg-slate-200";
+        }
+      });
+      applyMtdFilter();
+    }
+
+    function applyMtdFilter() {
+      const data = JSON.parse(localStorage.getItem("kacida_cache_ytd") || "[]");
+      const tbody = document.getElementById("table-body-mtd");
+      if (!tbody) return;
+
+      const selMonth = document.getElementById("mtd-filter-bulan")?.value || "";
+      const searchKey = (document.getElementById("mtd-search-tgl")?.value || "").toLowerCase();
+
+      let filtered = data.filter(r => {
+        if (selMonth && String(r.BULAN || '').toUpperCase() !== selMonth.toUpperCase()) return false;
+        const tglClean = formatTglIndo(r.TANGGAL);
+        if (searchKey && !tglClean.toLowerCase().includes(searchKey)) return false;
+
+        const ly = Number(r["SALES 2025"]) || 0;
+        const ty = Number(r["SALES 2026"]) || 0;
+        const growth = ly > 0 ? ((ty - ly) / ly) * 100 : 0;
+
+        if (mtdCurrentTab === "GROWTH" && growth < 0) return false;
+        if (mtdCurrentTab === "DISGROWTH" && growth >= 0) return false;
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Tidak ada data Sales MTD untuk filter ini.</td></tr>`;
+        return;
+      }
+
+      let sumLy = 0, sumTy = 0;
+      tbody.innerHTML = filtered.map(r => {
+        const ly = Number(r["SALES 2025"]) || 0;
+        const ty = Number(r["SALES 2026"]) || 0;
+        sumLy += ly; sumTy += ty;
+        const growth = ly > 0 ? ((ty - ly) / ly) * 100 : 0;
+        const tglDisplay = formatTglIndo(r.TANGGAL);
+
+        return `
+          <tr class="hover:bg-slate-50 border-b">
+            <td class="p-3 font-bold">${tglDisplay}</td>
+            <td class="p-3 font-black text-brand-600">${formatRp(ty)}</td>
+            <td class="p-3">${r["STD 2026"] || 0}</td>
+            <td class="p-3">${formatRp(r["APC 2026"] || 0)}</td>
+            <td class="p-3 text-center">
+              <span class="px-2 py-0.5 rounded text-xs font-black ${growth >= 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                ${growth >= 0 ? '+' : ''}${formatPct(growth)}
+              </span>
+            </td>
+            <td class="p-3 text-center">
+              <button onclick="openDetailMtd('${tglDisplay}', ${ly}, ${ty}, ${growth}, ${r["STD 2025"]||0}, ${r["STD 2026"]||0}, ${r["APC 2025"]||0}, ${r["APC 2026"]||0})" class="text-brand-600 hover:underline font-bold text-xs">Detail</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      setSafeText("mtd-sum-ly", formatRp(sumLy));
+      setSafeText("mtd-sum-ty", formatRp(sumTy));
+      const totalGrowth = sumLy > 0 ? ((sumTy - sumLy) / sumLy) * 100 : 0;
+      setSafeText("mtd-sum-gap", formatRp(sumTy - sumLy));
+      setSafeText("mtd-sum-growth-badge", `${totalGrowth >= 0 ? '+' : ''}${formatPct(totalGrowth)}`);
+
+      setTimeout(() => {
+        const ctx = document.getElementById("chart-mtd-growth");
+        if (ctx) {
+          if (chartMtdInstance) chartMtdInstance.destroy();
+          chartMtdInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: filtered.map(r => formatTglIndo(r.TANGGAL, true)),
+              datasets: [
+                { label: 'Sales 2025', data: filtered.map(r => Number(r["SALES 2025"]) || 0), borderColor: '#94a3b8', borderDash: [5, 5] },
+                { label: 'Sales 2026', data: filtered.map(r => Number(r["SALES 2026"]) || 0), borderColor: '#059669', tension: 0.2 }
+              ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+          });
+        }
+      }, 150);
+    }
+
+    function openDetailMtd(tgl, ly, ty, growth, stdLy, stdTy, apcLy, apcTy) {
+      setSafeText("det-mtd-title", `Detail Komparasi: ${tgl}`);
+      setSafeText("det-mtd-sales-25", formatRp(ly));
+      setSafeText("det-mtd-sales-26", formatRp(ty));
+      setSafeText("det-mtd-growth-val", `${growth >= 0 ? '+' : ''}${formatPct(growth)}`);
+      setSafeText("det-mtd-std-25", `STD: ${stdLy} | APC: ${formatRp(apcLy)}`);
+      setSafeText("det-mtd-std-26", `STD: ${stdTy} | APC: ${formatRp(apcTy)}`);
+      openModalWithHistory("modal-detail-mtd");
+    }
+
+    // 16. PENAWARAN LANGSUNG (2 TABEL DINAMIS)
+    function loadPenawaranLangsungData() {
+      const storeCode = currentStore?.KODE || "";
+      const penawaranData = JSON.parse(localStorage.getItem("kacida_cache_penawaran") || "[]");
+      if (!Array.isArray(penawaranData) || penawaranData.length === 0) return;
+
+      const myRow = penawaranData.find(p => String(p.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase()) || penawaranData[0];
+
+      setSafeText("penawaran-sb-store", `${myRow["STORE NAME"] || myRow.NAMA_TOKO || storeCode} (${myRow.KODE})`);
+      setSafeText("penawaran-sb-total-acv", formatPct(myRow["TOTAL ACV"]));
+      setSafeText("penawaran-sb-points", formatPct(myRow["POINT DASHBOARD"]));
+      setSafeText("penawaran-sb-rank-badge", `RANK #${myRow.RANK || '-'}`);
+
+      // Tabel 1: Indikator
+      const tbodyIndikator = document.getElementById("table-body-penawaran-indikator");
+      if (tbodyIndikator) {
+        const indikators = [
+          { nama: "PSM", tgt: Number(myRow["TARGET PSM"])||0, act: Number(myRow["AKTUAL PSM"])||0, acv: myRow["ACV PSM"] },
+          { nama: "PWP", tgt: Number(myRow["TARGET PWP"])||0, act: Number(myRow["AKTUAL PWP"])||0, acv: myRow["ACV PWP"] },
+          { nama: "Serba Gratis", tgt: Number(myRow["TARGET SERBA GRATIS"])||0, act: Number(myRow["AKTUAL SERBA GRATIS"])||0, acv: myRow["ACV SERBA GRATIS"] },
+          { nama: "APC", tgt: Number(myRow["TARGET APC"])||0, act: Number(myRow["AKTUAL APC"])||0, acv: myRow["ACV APC"] }
+        ];
+
+        tbodyIndikator.innerHTML = indikators.map(item => {
+          const gap = item.act - item.tgt;
+          const acvDisplay = formatPct(item.acv);
+          const acvNum = parseFloat(acvDisplay.replace('%', '').replace(',', '.'));
+
+          return `
+            <tr class="hover:bg-slate-50 border-b">
+              <td class="p-3 font-bold">${item.nama}</td>
+              <td class="p-3">${item.tgt.toLocaleString('id-ID')}</td>
+              <td class="p-3 font-semibold">${item.act.toLocaleString('id-ID')}</td>
+              <td class="p-3 font-black text-brand-600">${acvDisplay}</td>
+              <td class="p-3 font-bold ${gap >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                ${gap >= 0 ? `Surplus +${gap}` : `Kekurangan ${gap}`}
+              </td>
+              <td class="p-3 text-center">
+                <span class="px-2 py-0.5 rounded text-xs font-black ${acvNum >= 80 ? 'bg-emerald-100 text-emerald-800' : acvNum >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'}">
+                  ${acvNum >= 80 ? 'BAGUS' : acvNum >= 60 ? 'WASPADA' : 'PERHATIAN'}
+                </span>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Tabel 2: Leaderboard 3 Atas & 3 Bawah
+      const tbodyLeaderboard = document.getElementById("table-body-leaderboard-relatif");
+      if (tbodyLeaderboard) {
+        const sorted = [...penawaranData].filter(r => r.RANK !== "AC" && r.RANK).sort((a,b) => (Number(a.RANK)||0) - (Number(b.RANK)||0));
+        const myIdx = sorted.findIndex(r => String(r.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase());
+
+        let sliced = sorted;
+        if (myIdx !== -1) {
+          const start = Math.max(0, myIdx - 3);
+          const end = Math.min(sorted.length, myIdx + 4);
+          sliced = sorted.slice(start, end);
+        }
+
+        tbodyLeaderboard.innerHTML = sliced.map(row => {
+          const isMe = String(row.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase();
+          return `
+            <tr class="${isMe ? 'bg-blue-50/90 border-2 border-blue-600 font-extrabold' : 'hover:bg-slate-50 border-b'}">
+              <td class="p-3 font-black text-center">${row.RANK}</td>
+              <td class="p-3">${row.KODE}</td>
+              <td class="p-3">${row["STORE NAME"] || row.NAMA_TOKO}</td>
+              <td class="p-3">${formatPct(row["ACV PSM"])}</td>
+              <td class="p-3">${formatPct(row["ACV PWP"])}</td>
+              <td class="p-3">${formatPct(row["ACV SERBA GRATIS"])}</td>
+              <td class="p-3">${formatPct(row["ACV APC"])}</td>
+              <td class="p-3 font-bold">${formatPct(row["TOTAL ACV"])}</td>
+              <td class="p-3 font-black text-brand-700">${formatPct(row["POINT DASHBOARD"])}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+
+    // Modal View All Grid Generator
     function openAllMenusModal() {
       const container = document.getElementById("grid-all-16-menus");
       if (!container) return;
@@ -3072,7 +3463,7 @@
       const extraNav = (menuNavigasiCache || []).filter(item => item["Status Tampil"] === "Aktif");
 
       let html = base16.map(m => `
-        <div onclick="closeCurrentModal(); openMenuModal('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
+        <div onclick="selectMenuFromViewAll('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
           <div class="w-11 h-11 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-lg ${m.color}">
             <i class="fa-solid ${m.icon}"></i>
           </div>
@@ -3105,334 +3496,11 @@
       if (url && url.startsWith("http")) {
         window.open(url, "_blank");
       } else {
-        Swal.fire(name, "Menu ini belum memiliki tautan URL di sheet Menu_Navigasi.", "info");
+        Swal.fire(name, "Menu ini belum memiliki link tujuan di spreadsheet.", "info");
       }
     }
 
-    // 11. ROUTER MODAL
-    function openMenuModal(menuKey) {
-      const modalMap = {
-        'CEKLIS_EXP': 'modal-ceklis-exp',
-        'SERAH_TERIMA': 'modal-serah-terima',
-        'TABUNGANKU': 'modal-tabunganku',
-        'KAS_AREA': 'modal-kas-area',
-        'DONASI': 'modal-donasi',
-        'SIMULASI_IKT': 'modal-simulasi-ikt',
-        'SALES_MTD': 'modal-sales-mtd',
-        'SALES_HARIAN': 'modal-sales-harian',
-        'MONITORING_IKT': 'modal-monitoring-ikt',
-        'KONVERSI_BON': 'modal-konversi-bon',
-        'PENAWARAN_LANGSUNG': 'modal-penawaran-langsung',
-        'REKAP_PSM': 'modal-rekap-psm',
-        'SALES_OPR': 'modal-sales-opr',
-        'MONITORING_KWH': 'modal-monitoring-kwh',
-        'SCANNER': 'modal-scanner',
-        'PENGUMUMAN': 'modal-pengumuman'
-      };
-
-      if (menuKey === 'KAS_AREA') {
-        const jabatan = String(currentUser?.JABATAN || '').toUpperCase();
-        const allow = jabatan.includes("CHIEF") || jabatan.includes("AREA COORDINATOR") || ["14125034", "22050361"].includes(String(currentUser?.NIK));
-        if (!allow) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Akses Dibatasi',
-            text: `Menu Kas Area khusus untuk Jabatan Chief Of Store dan Area Coordinator saja.`
-          });
-          return;
-        }
-      }
-
-      const targetModalId = modalMap[menuKey];
-      if (targetModalId) {
-        openModalWithHistory(targetModalId);
-        loadMenuInitialData(menuKey);
-      }
-    }
-
-    function loadMenuInitialData(menuKey) {
-      if (menuKey === 'SALES_HARIAN') loadSalesHarianData();
-      if (menuKey === 'SALES_MTD') loadSalesMtdData();
-      if (menuKey === 'MONITORING_IKT') loadMonitoringIktData();
-      if (menuKey === 'PENAWARAN_LANGSUNG') loadPenawaranLangsungData();
-    }
-
-    // 12. RENDER MENU SALES HARIAN
-    function loadSalesHarianData() {
-      const data = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
-      const tbody = document.getElementById("table-body-sales-harian");
-      if (!tbody) return;
-
-      if (!Array.isArray(data) || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-400">Tidak ada data Sales Harian untuk toko ini.</td></tr>`;
-        return;
-      }
-
-      let sumBulanLalu = 0, sumTarget = 0, sumActual = 0, sumGap = 0, sumNsb = 0, sumNsbPct = 0, sumOos = 0, sumGm = 0;
-
-      tbody.innerHTML = data.map(r => {
-        const blnLalu = Number(r["BULAN LALU"]) || 0;
-        const tgt = Number(r.TARGET) || 0;
-        const act = Number(r.ACTUAL) || 0;
-        const gap = Number(r["GAP TARGET"]) || 0;
-        const nsb = Number(r.NSB) || 0;
-        const nsbPct = parseFloat(String(r["% NSB"]).replace('%','').replace(',','.')) || 0;
-        const oosPct = parseFloat(String(r["OOS %"]).replace('%','').replace(',','.')) || 0;
-        const gmPct = parseFloat(String(r["GROSS MARGIN"]).replace('%','').replace(',','.')) || 0;
-
-        sumBulanLalu += blnLalu; sumTarget += tgt; sumActual += act; sumGap += gap; sumNsb += nsb;
-        sumNsbPct += nsbPct; sumOos += oosPct; sumGm += gmPct;
-
-        return `
-          <tr class="hover:bg-slate-50 border-b">
-            <td class="p-3 font-bold sticky left-0 bg-white z-10">${r.TANGGAL}</td>
-            <td class="p-3">${formatRp(blnLalu)}</td>
-            <td class="p-3">${formatRp(tgt)}</td>
-            <td class="p-3 font-bold text-emerald-600">${formatRp(act)}</td>
-            <td class="p-3">${r["ACTUAL STD"] || r.STD || 0}</td>
-            <td class="p-3">${formatRp(r["ACTUAL APC"] || r.APC || 0)}</td>
-            <td class="p-3 font-bold ${gap >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${formatRp(gap)}</td>
-            <td class="p-3">${formatRp(nsb)}</td>
-            <td class="p-3 font-bold ${nsbPct > 0.14 ? 'text-rose-600' : 'text-emerald-600'}">${formatPct(nsbPct, 2)}</td>
-            <td class="p-3 font-bold ${oosPct >= 1.0 ? 'text-rose-600' : 'text-emerald-600'}">${formatPct(oosPct, 2)}</td>
-            <td class="p-3">${formatPct(gmPct, 2)}</td>
-          </tr>
-        `;
-      }).join('');
-
-      setSafeText("harian-sum-bulan-lalu", formatRp(sumBulanLalu));
-      setSafeText("harian-sum-target", formatRp(sumTarget));
-      setSafeText("harian-sum-actual", formatRp(sumActual));
-      setSafeText("harian-sum-gap", formatRp(sumGap));
-      setSafeText("harian-sum-nsb", formatRp(sumNsb));
-      setSafeText("harian-sum-nsb-pct", formatPct(sumNsbPct / data.length, 2));
-      setSafeText("harian-sum-oos-pct", formatPct(sumOos / data.length, 2));
-      setSafeText("harian-sum-gm", formatPct(sumGm / data.length, 2));
-
-      setTimeout(() => {
-        const ctx = document.getElementById("chart-sales-harian-full");
-        if (ctx) {
-          if (chartHarianFullInstance) chartHarianFullInstance.destroy();
-          chartHarianFullInstance = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: data.map(r => String(r.TANGGAL).slice(0, 5)),
-              datasets: [
-                { label: 'Target', data: data.map(r => Number(r.TARGET) || 0), borderColor: '#3b82f6', tension: 0.2 },
-                { label: 'Aktual', data: data.map(r => Number(r.ACTUAL) || 0), borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.2 }
-              ]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-          });
-        }
-      }, 150);
-    }
-
-    // 13. RENDER MENU SALES MTD
-    function loadSalesMtdData() {
-      const data = JSON.parse(localStorage.getItem("kacida_cache_ytd") || "[]");
-      const tbody = document.getElementById("table-body-mtd");
-      if (!tbody) return;
-
-      if (!Array.isArray(data) || data.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Tidak ada data Sales MTD untuk toko ini.</td></tr>`;
-        return;
-      }
-
-      let sumLy = 0, sumTy = 0;
-      tbody.innerHTML = data.map(r => {
-        const ly = Number(r["SALES 2025"]) || 0;
-        const ty = Number(r["SALES 2026"]) || 0;
-        sumLy += ly; sumTy += ty;
-        const growth = ly > 0 ? ((ty - ly) / ly) * 100 : 0;
-
-        return `
-          <tr class="hover:bg-slate-50 border-b">
-            <td class="p-3 font-bold">${r.TANGGAL}</td>
-            <td class="p-3 font-black text-brand-600">${formatRp(ty)}</td>
-            <td class="p-3">${r["STD 2026"] || 0}</td>
-            <td class="p-3">${formatRp(r["APC 2026"] || 0)}</td>
-            <td class="p-3 text-center">
-              <span class="px-2 py-0.5 rounded text-xs font-black ${growth >= 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-                ${growth >= 0 ? '+' : ''}${formatPct(growth)}
-              </span>
-            </td>
-            <td class="p-3 text-center">
-              <button onclick="openDetailMtd('${r.TANGGAL}', ${ly}, ${ty}, ${growth})" class="text-brand-600 hover:underline font-bold text-xs">Detail</button>
-            </td>
-          </tr>
-        `;
-      }).join('');
-
-      setSafeText("mtd-sum-ly", formatRp(sumLy));
-      setSafeText("mtd-sum-ty", formatRp(sumTy));
-      const totalGrowth = sumLy > 0 ? ((sumTy - sumLy) / sumLy) * 100 : 0;
-      setSafeText("mtd-sum-gap", formatRp(sumTy - sumLy));
-      setSafeText("mtd-sum-growth-badge", `${totalGrowth >= 0 ? '+' : ''}${formatPct(totalGrowth)}`);
-
-      setTimeout(() => {
-        const ctx = document.getElementById("chart-mtd-growth");
-        if (ctx) {
-          if (chartMtdInstance) chartMtdInstance.destroy();
-          chartMtdInstance = new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: data.map(r => String(r.TANGGAL).slice(0, 5)),
-              datasets: [
-                { label: 'Sales 2025', data: data.map(r => Number(r["SALES 2025"]) || 0), borderColor: '#94a3b8', borderDash: [5, 5] },
-                { label: 'Sales 2026', data: data.map(r => Number(r["SALES 2026"]) || 0), borderColor: '#059669', tension: 0.2 }
-              ]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-          });
-        }
-      }, 150);
-    }
-
-    // 14. RENDER MENU MONITORING IKT
-    function loadMonitoringIktData() {
-      const storeCode = currentStore?.KODE || "";
-      const iktData = JSON.parse(localStorage.getItem("kacida_cache_ikt") || "[]");
-      const myIkt = Array.isArray(iktData) ? (iktData.find(i => String(i.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase()) || iktData[0]) : null;
-      const tbody = document.getElementById("table-body-ikt-indikator");
-      if (!tbody || !myIkt) return;
-
-      const tfVal = parseFloat(String(myIkt["TIME FAKTOR"]).replace('%','').replace(',','.')) || 74.19;
-      setSafeText("label-time-faktor", formatPct(tfVal));
-      document.getElementById("svg-time-faktor-bar")?.setAttribute("stroke-dasharray", `${tfVal}, 100`);
-
-      const indikatorList = [
-        { nama: "Net Sales", target: myIkt["TARGET NET SALES"], actual: myIkt["ACTUAL NET SALES"], acv: myIkt["ACV SALES"], ket: myIkt["KET SALES"] },
-        { nama: "Gross Margin %", target: myIkt["TARGET GM %"], actual: myIkt["ACTUAL GM %"], acv: myIkt["ACV GM"], ket: myIkt["KET GM %"] },
-        { nama: "Gross Margin Rp", target: myIkt["TARGET GM RP"], actual: myIkt["ACT GM RP"], acv: myIkt["ACV GM RP"], ket: myIkt["KET GM RP"] },
-        { nama: "Penawaran Langsung", target: myIkt["TARGET PENAWARAN LANGSUNG"], actual: myIkt["ACTUAL PENAWARAN LANGSUNG"], acv: myIkt["ACV PENAWARAN LANGSUNG"], ket: "OK" }
-      ];
-
-      tbody.innerHTML = indikatorList.map(item => `
-        <tr class="hover:bg-slate-50 border-b">
-          <td class="p-3 font-bold">${item.nama}</td>
-          <td class="p-3">${typeof item.target === 'number' ? formatRp(item.target) : item.target}</td>
-          <td class="p-3 font-semibold">${typeof item.actual === 'number' ? formatRp(item.actual) : item.actual}</td>
-          <td class="p-3 font-black text-brand-600">${formatPct(item.acv)}</td>
-          <td class="p-3 text-center">
-            <span class="px-2 py-0.5 rounded text-xs font-black ${item.ket === 'OK' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
-              ${item.ket || 'OK'}
-            </span>
-          </td>
-        </tr>
-      `).join('');
-
-      const targetSales = Number(myIkt["TARGET NET SALES"]) || 0;
-      const actualSales = Number(myIkt["ACTUAL NET SALES"]) || 0;
-      const selisihSales = actualSales - ((tfVal / 100) * targetSales);
-      setSafeText("ikt-agregasi-sales-val", (selisihSales >= 0 ? "Surplus " : "Kurang ") + formatRp(Math.abs(selisihSales)));
-      setSafeText("ikt-proyeksi-sales-val", formatRp(actualSales / (tfVal / 100)));
-
-      setTimeout(() => {
-        const ctx = document.getElementById("chart-ikt-bar");
-        if (ctx) {
-          if (chartIktBarInstance) chartIktBarInstance.destroy();
-          chartIktBarInstance = new Chart(ctx, {
-            type: 'bar',
-            data: {
-              labels: ['Sales', 'GM %', 'GM Rp', 'Penawaran'],
-              datasets: [
-                { label: 'ACV %', data: [parseFloat(myIkt["ACV SALES"]), parseFloat(myIkt["ACV GM"]), parseFloat(myIkt["ACV GM RP"]), parseFloat(myIkt["ACV PENAWARAN LANGSUNG"])], backgroundColor: '#10b981' },
-                { label: 'Time Faktor', data: [tfVal, tfVal, tfVal, tfVal], backgroundColor: '#94a3b8' }
-              ]
-            },
-            options: { responsive: true, maintainAspectRatio: false }
-          });
-        }
-      }, 150);
-    }
-
-    // 15. RENDER MENU PENAWARAN LANGSUNG (2 TABEL DINAMIS)
-    function loadPenawaranLangsungData() {
-      const storeCode = currentStore?.KODE || "";
-      const penawaranData = JSON.parse(localStorage.getItem("kacida_cache_penawaran") || "[]");
-      if (!Array.isArray(penawaranData) || penawaranData.length === 0) return;
-
-      const myRow = penawaranData.find(p => String(p.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase()) || penawaranData[0];
-
-      setSafeText("penawaran-sb-store", `${myRow["STORE NAME"] || myRow.NAMA_TOKO || storeCode} (${myRow.KODE})`);
-      setSafeText("penawaran-sb-total-acv", formatPct(myRow["TOTAL ACV"]));
-      setSafeText("penawaran-sb-points", formatPct(myRow["POINT DASHBOARD"]));
-      setSafeText("penawaran-sb-rank-badge", `RANK #${myRow.RANK || '-'}`);
-
-      // Tabel 1: Indikator
-      const tbodyIndikator = document.getElementById("table-body-penawaran-indikator");
-      if (tbodyIndikator) {
-        const indikators = [
-          { nama: "PSM", tgt: Number(myRow["TARGET PSM"])||0, act: Number(myRow["AKTUAL PSM"])||0, acv: myRow["ACV PSM"] },
-          { nama: "PWP", tgt: Number(myRow["TARGET PWP"])||0, act: Number(myRow["AKTUAL PWP"])||0, acv: myRow["ACV PWP"] },
-          { nama: "Serba Gratis", tgt: Number(myRow["TARGET SERBA GRATIS"])||0, act: Number(myRow["AKTUAL SERBA GRATIS"])||0, acv: myRow["ACV SERBA GRATIS"] },
-          { nama: "APC", tgt: Number(myRow["TARGET APC"])||0, act: Number(myRow["AKTUAL APC"])||0, acv: myRow["ACV APC"] }
-        ];
-
-        tbodyIndikator.innerHTML = indikators.map(item => {
-          const gap = item.act - item.tgt;
-          const acvNum = parseFloat(String(item.acv).replace('%','').replace(',','.')) || 0;
-          return `
-            <tr class="hover:bg-slate-50 border-b">
-              <td class="p-3 font-bold">${item.nama}</td>
-              <td class="p-3">${item.tgt.toLocaleString('id-ID')}</td>
-              <td class="p-3 font-semibold">${item.act.toLocaleString('id-ID')}</td>
-              <td class="p-3 font-black text-brand-600">${formatPct(item.acv)}</td>
-              <td class="p-3 font-bold ${gap >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
-                ${gap >= 0 ? `Surplus +${gap}` : `Kekurangan ${gap}`}
-              </td>
-              <td class="p-3 text-center">
-                <span class="px-2 py-0.5 rounded text-xs font-black ${acvNum >= 80 ? 'bg-emerald-100 text-emerald-800' : acvNum >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'}">
-                  ${acvNum >= 80 ? 'BAGUS' : acvNum >= 60 ? 'WASPADA' : 'PERHATIAN'}
-                </span>
-              </td>
-            </tr>
-          `;
-        }).join('');
-      }
-
-      // Tabel 2: Leaderboard Relatif (3 Atas & 3 Bawah)
-      const tbodyLeaderboard = document.getElementById("table-body-leaderboard-relatif");
-      if (tbodyLeaderboard) {
-        const sorted = [...penawaranData].filter(r => r.RANK !== "AC" && r.RANK).sort((a,b) => (Number(a.RANK)||0) - (Number(b.RANK)||0));
-        const myIdx = sorted.findIndex(r => String(r.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase());
-
-        let sliced = sorted;
-        if (myIdx !== -1) {
-          const start = Math.max(0, myIdx - 3);
-          const end = Math.min(sorted.length, myIdx + 4);
-          sliced = sorted.slice(start, end);
-        }
-
-        tbodyLeaderboard.innerHTML = sliced.map(row => {
-          const isMe = String(row.KODE || '').trim().toUpperCase() === storeCode.trim().toUpperCase();
-          return `
-            <tr class="${isMe ? 'bg-blue-50/90 border-2 border-blue-600 font-extrabold' : 'hover:bg-slate-50 border-b'}">
-              <td class="p-3 font-black text-center">${row.RANK}</td>
-              <td class="p-3">${row.KODE}</td>
-              <td class="p-3">${row["STORE NAME"] || row.NAMA_TOKO}</td>
-              <td class="p-3">${formatPct(row["ACV PSM"])}</td>
-              <td class="p-3">${formatPct(row["ACV PWP"])}</td>
-              <td class="p-3">${formatPct(row["ACV SERBA GRATIS"])}</td>
-              <td class="p-3">${formatPct(row["ACV APC"])}</td>
-              <td class="p-3 font-bold">${formatPct(row["TOTAL ACV"])}</td>
-              <td class="p-3 font-black text-brand-700">${formatPct(row["POINT DASHBOARD"])}</td>
-            </tr>
-          `;
-        }).join('');
-      }
-    }
-
-    function openDetailMtd(tgl, ly, ty, growth) {
-      setSafeText("det-mtd-title", `Detail Sales: ${tgl}`);
-      setSafeText("det-mtd-sales-25", formatRp(ly));
-      setSafeText("det-mtd-sales-26", formatRp(ty));
-      setSafeText("det-mtd-growth-val", `${growth >= 0 ? '+' : ''}${formatPct(growth)}`);
-      openModalWithHistory("modal-detail-mtd");
-    }
-
-    // 16. SYNC MANUAL
+    // 17. SINKRONISASI MANUAL
     async function triggerManualSync() {
       const modal = document.getElementById("modal-sync-progress");
       const bar = document.getElementById("sync-progress-bar");
@@ -3455,7 +3523,7 @@
       Swal.fire({ icon: 'success', title: 'Data Berhasil Diperbarui!', timer: 1200, showConfirmButton: false });
     }
 
-    // 17. CIPHER BON & SIMULASI PENAWARAN
+    // 18. CIPHER BON & SIMULASI PENAWARAN
     function handleKonversiBonInput(e) {
       let val = e.target.value.replace(/\D/g, '');
       if (val.length > 4) val = val.slice(-4);
@@ -3506,7 +3574,7 @@
       hitungSimulasiPenawaranAuto();
     }
 
-    // 18. SIMULASI GM RP IKT
+    // 19. SIMULASI GM RP IKT
     function hitungSimulasiIktRealtime() {
       const hk = Number(document.getElementById("sim-hk")?.value) || 26;
       const jhk = Number(document.getElementById("sim-jhk")?.value) || 22;
@@ -3547,7 +3615,7 @@
       hitungSimulasiIktRealtime();
     }
 
-    // 19. DOCK BAWAH MOBILE
+    // 20. NAVIGASI DOCK BAWAH MOBILE
     function switchBottomTab(tabName) {
       ['beranda', 'chat', 'kalender', 'profil'].forEach(t => {
         document.getElementById(`tab-content-${t}`)?.classList.add("hidden");
@@ -3640,7 +3708,7 @@
       `).join('');
     }
 
-    // 20. CHAT AI GROQ PROXY
+    // 21. CHAT AI GROQ PROXY
     async function handleSendAiMessage(e) {
       e.preventDefault();
       const input = document.getElementById("ai-user-input");
@@ -3724,6 +3792,7 @@
     // Loader Tambahan
     function loadCeklisExpData() {}
     function startScannerCamera() {}
-  </script>
+ </script>
 </body>
 </html>
+      
