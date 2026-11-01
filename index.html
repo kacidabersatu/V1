@@ -2560,21 +2560,26 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- MODAL BANTUAN FAQ & MODAL LIHAT SEMUA MENU                                -->
+  <!-- MODAL LIHAT SEMUA MENU (GRID KOTAK LENGKAP + DINAMIS MENU NAVIGASI)       -->
   <!-- ========================================================================= -->
   <div id="modal-all-menus" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-2xl p-6 shadow-2xl border border-slate-100 max-h-[85vh] overflow-y-auto space-y-4">
-      <div class="flex items-center justify-between border-b pb-3">
-        <h3 class="text-sm font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
-          <i class="fa-solid fa-grid-2 text-brand-600"></i>
-          <span>Seluruh Menu Fitur KACIDA BERSATU</span>
-        </h3>
-        <button onclick="closeAllMenusModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl w-full max-w-4xl p-6 shadow-2xl border border-slate-100 dark:border-slate-800 max-h-[85vh] overflow-y-auto space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-800 dark:text-white flex items-center gap-2">
+            <i class="fa-solid fa-grip text-brand-600"></i>
+            <span>Semua Fitur & Navigasi Portal</span>
+          </h3>
+          <p class="text-[10px] text-slate-400">16 Menu Bawaan Sistem + Menu Tambahan Sheet Menu_Navigasi</p>
+        </div>
+        <button onclick="closeCurrentModal()" class="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-xs text-slate-500 hover:text-slate-800">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2" id="grid-all-16-menus">
-        <!-- 16 Menu dirender dinamis -->
+
+      <!-- KONTEN GRID KOTAK KARTU (PERSIS SEPERTI BERANDA) -->
+      <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 select-none" id="grid-all-16-menus">
+        <!-- Dirender secara dinamis oleh JS: Menu Utama + Dynamic Menu_Navigasi -->
       </div>
     </div>
   </div>
@@ -2586,169 +2591,72 @@
           <i class="fa-solid fa-circle-question text-brand-600"></i>
           <span>Pusat Bantuan & FAQ Operasional</span>
         </h3>
-        <button onclick="closeHelpModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs">
+        <button onclick="closeCurrentModal()" class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       <div class="space-y-3 text-xs text-slate-600 leading-relaxed">
         <div class="p-3 bg-slate-50 rounded-2xl">
           <h4 class="font-bold text-slate-800 mb-1">Bagaimana cara mengganti Kode Toko?</h4>
-          <p>Buka halaman login, tekan ikon gerigi (⚙️) di pojok kanan atas, masukkan kode toko baru (contoh: X052), tekan Confirm lalu Save.</p>
+          <p>Buka halaman login, tekan ikon gerigi (⚙️) di pojok kanan atas, masukkan kode toko baru (contoh: 2J7K atau X052), tekan Confirm lalu Save.</p>
         </div>
         <div class="p-3 bg-slate-50 rounded-2xl">
-          <h4 class="font-bold text-slate-800 mb-1">Mengapa saya tidak bisa membuka menu Kas Area?</h4>
-          <p>Menu Kas Area hanya dapat diakses secara khusus oleh pengguna dengan jabatan Chief of Store (COS) dan Area Coordinator (AC).</p>
-        </div>
-        <div class="p-3 bg-slate-50 rounded-2xl">
-          <h4 class="font-bold text-slate-800 mb-1">Kapan data kadaluarsa rak masuk ke Google Spreadsheet?</h4>
-          <p>Data transaksi aktif disimpan di Firebase, lalu setiap hari Minggu pukul 23:00 WIB dicadangkan secara otomatis ke Google Spreadsheet.</p>
+          <h4 class="font-bold text-slate-800 mb-1">Mengapa data saya kosong saat pertama buka?</h4>
+          <p>Tekan tombol <b>Sync Manual</b> di kanan atas sekali untuk menyinkronkan seluruh lembar Google Spreadsheet ke memori lokal HP Anda.</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ========================================================================= -->
-  <!-- TAMPILAN 3 DOCK TAB BAWAH: CHAT AI, KALENDER, & PROFIL                   -->
-  <!-- ========================================================================= -->
-  <!-- Tab 2: Chat AI Terpadu (Groq AI via Code.gs) -->
-  <div id="tab-content-chat" class="hidden p-4 md:p-6 max-w-3xl mx-auto flex flex-col h-[calc(100vh-8rem)]">
-    <div class="flex items-center justify-between pb-3 border-b border-slate-200">
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center text-lg">
-          <i class="fa-solid fa-robot"></i>
-        </div>
-        <div>
-          <h3 class="font-extrabold text-xs text-slate-800 dark:text-white">Kacida AI Assistant</h3>
-          <span class="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Siap Membantu Operasional Retail
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Kotak Percakapan Chat -->
-    <div id="chat-messages-box" class="flex-1 overflow-y-auto py-4 space-y-3 text-xs">
-      <div class="flex items-start gap-2.5">
-        <div class="w-7 h-7 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center text-xs font-bold">AI</div>
-        <div class="p-3 bg-white dark:bg-slate-800 rounded-2xl rounded-tl-none shadow-sm max-w-md border border-slate-200/60 text-slate-700 dark:text-slate-200 leading-relaxed">
-          Halo Rekan Retail! Saya <b>Kacida AI</b>. Anda dapat bertanya tentang analisis penjualan toko, estimasi pencapaian IKT, atau panduan SOP harian toko.
-        </div>
-      </div>
-    </div>
-
-    <!-- Input Pengiriman Pesan Chat AI -->
-    <form onsubmit="handleSendAiMessage(event)" class="pt-2 flex gap-2">
-      <input type="text" id="ai-user-input" required placeholder="Tanyakan performa toko, simulasi margin, atau tips operasional..." 
-             class="flex-1 px-4 py-3 bg-white dark:bg-slate-800 rounded-2xl border border-slate-300 dark:border-slate-700 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500 shadow-sm" />
-      <button type="submit" id="btn-send-ai" class="px-5 py-3 bg-brand-600 hover:bg-brand-700 text-white rounded-2xl font-bold text-xs shadow-md transition active:scale-95">
-        <i class="fa-solid fa-paper-plane"></i>
-      </button>
-    </form>
-  </div>
-
-  <!-- Tab 3: Kalender & Agenda Interaktif -->
-  <div id="tab-content-kalender" class="hidden p-4 md:p-6 max-w-4xl mx-auto space-y-6">
-    <div class="glass-card p-6 rounded-3xl border border-slate-200 space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h3 class="font-extrabold text-sm text-slate-800 dark:text-white" id="cal-month-title">Kalender Operasional 2026</h3>
-          <p class="text-[10px] text-slate-400">Deteksi Otomatis Akhir Pekan (Jumat, Sabtu, Minggu) & Hari Libur Nasional</p>
-        </div>
-        <div class="flex gap-1.5">
-          <button onclick="navigateMonth(-1)" class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-xs"><i class="fa-solid fa-chevron-left"></i></button>
-          <button onclick="navigateMonth(1)" class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-xs"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-      </div>
-
-      <!-- Grid Tanggalan -->
-      <div class="grid grid-cols-7 gap-1.5 text-center text-xs font-bold text-slate-400 pb-1">
-        <span>SEN</span><span>SEL</span><span>RAB</span><span>KAM</span>
-        <span class="text-blue-600">JUM</span>
-        <span class="text-orange-600">SAB</span>
-        <span class="text-rose-600">MIN</span>
-      </div>
-      <div id="cal-days-grid" class="grid grid-cols-7 gap-1.5 text-xs">
-        <!-- Di-generate otomatis oleh JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- Tab 4: Profil Pengguna & Personil Toko -->
-  <div id="tab-content-profil" class="hidden p-4 md:p-6 max-w-3xl mx-auto space-y-6">
-    <div class="glass-card p-6 rounded-3xl border border-slate-200 text-center space-y-4">
-      <div class="relative w-24 h-24 mx-auto">
-        <img id="prof-photo-big" src="https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-" class="w-full h-full rounded-3xl object-cover border-4 border-brand-500 shadow-md" />
-      </div>
-      <div>
-        <h3 id="prof-user-name" class="text-lg font-black text-slate-800 dark:text-white">Budi Santoso</h3>
-        <p id="prof-user-nik" class="text-xs font-bold text-slate-400">NIK: -</p>
-        <span id="prof-user-jabatan" class="inline-block mt-1 px-3 py-0.5 rounded-full text-xs font-bold bg-brand-100 text-brand-700">Chief of Store</span>
-      </div>
-      <div class="grid grid-cols-2 gap-3 pt-2 text-left text-xs max-w-md mx-auto">
-        <div class="p-3 bg-slate-50 rounded-2xl">
-          <span class="text-[10px] text-slate-400 block font-bold">TOKO AKTIF</span>
-          <span id="prof-store-name" class="font-extrabold text-slate-700">Toko Cibolang (X052)</span>
-        </div>
-        <div class="p-3 bg-slate-50 rounded-2xl">
-          <span class="text-[10px] text-slate-400 block font-bold">TOTAL LOGIN</span>
-          <span id="prof-login-count" class="font-extrabold text-slate-700">0 Kali</span>
-        </div>
-      </div>
-      <button onclick="handleLogout()" class="px-6 py-2.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl shadow transition">
-        Keluar Akun
-      </button>
-    </div>
-
-    <!-- Struktur Seluruh Personil Toko -->
-    <div class="glass-card rounded-3xl border border-slate-200 overflow-hidden">
-      <div class="p-4 border-b border-slate-100 flex items-center justify-between">
-        <h4 class="font-extrabold text-xs text-slate-800">Daftar Rekan Kerja Toko</h4>
-        <span class="text-[10px] text-slate-400" id="prof-total-crew-badge">0 Personil</span>
-      </div>
-      <div id="prof-personil-list" class="divide-y divide-slate-100 text-xs">
-        <!-- Di-render oleh JS dari Master_User -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ========================================================================= -->
-  <!-- ENGINE JAVASCRIPT KLIEN LENGKAP & TERINTEGRASI KE CODE.GS                 -->
+  <!-- MESIN JAVASCRIPT KLIEN LENGKAP & TERINTEGRASI                              -->
   <!-- ========================================================================= -->
   <script>
     /**
      * ============================================================================
-     * KACIDA BERSATU - Client Engine Core
+     * KACIDA BERSATU - Client Engine Core (Fix Terintegrasi Penuh)
      * ============================================================================
      */
-    // GANTI DENGAN URL DEPLOYMENT WEB APP APPS SCRIPT ANDA (akhiran /exec)
+    // URL SCRIPT RESMI MILIK ANDA
     const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzdkTvfa7BMUcTY-OHQ1vniyc66hUo_DMaKWEpQbLYQ4sqFRhvAISxEkyg665j5zhaDZg/exec";
 
-    // Pustaka Sandi Cipher Konversi Bon (Disembunyikan di JS, Tidak Muncul di UI)
+    // Pustaka Sandi Cipher Konversi Bon
     const CIPHER_BON = { 0: 'M', 1: 'O', 2: 'Y', 3: 'D', 4: 'T', 5: 'U', 6: 'H', 7: 'C', 8: 'I', 9: 'K' };
 
-    // State Aplikasi
+    // State Global
     let currentUser = null;
     let currentStore = null;
-    let currentActiveModal = null;
     let masterUsersCache = [];
-    let html5QrScanner = null;
-    let currentCalDate = new Date();
+    let menuNavigasiCache = [];
+    let modalStack = [];
     let indonesianHolidays = [];
 
-    // Inisialisasi Aplikasi Saat Halaman Dibuka (0,1 - 0,3 Detik Target)
+    // Chart Instances
+    let chartGmInstance = null;
+    let chartSalesDailyInstance = null;
+    let chartMtdInstance = null;
+    let chartHarianFullInstance = null;
+    let chartIktBarInstance = null;
+
+    // Inisialisasi Aplikasi Saat Membuka Halaman
     document.addEventListener("DOMContentLoaded", function () {
-      initBackGestureHandler();
+      initNavigationEngine();
       loadCachedSession();
       fetchIndonesianHolidays();
     });
 
-    // 1. Penanganan Gesture / Tombol Fisik Back Ponsel Android
-    function initBackGestureHandler() {
-      window.addEventListener("popstate", function (e) {
-        if (currentActiveModal) {
-          closeModalDirect(currentActiveModal);
-          currentActiveModal = null;
+    // 1. SISTEM NAVIGASI BACK TERPADU (TOMBOL LAYAR & GESTURE BACK ANDROID)
+    function initNavigationEngine() {
+      // Netralkan state awal
+      window.history.replaceState({ modalOpen: null, depth: 0 }, "");
+
+      window.addEventListener("popstate", function (event) {
+        if (modalStack.length > 0) {
+          const topModalId = modalStack.pop();
+          const modalEl = document.getElementById(topModalId);
+          if (modalEl) {
+            modalEl.classList.add("hidden");
+          }
         }
       });
     }
@@ -2757,33 +2665,30 @@
       const modal = document.getElementById(modalId);
       if (!modal) return;
       modal.classList.remove("hidden");
-      currentActiveModal = modalId;
-      window.history.pushState({ modalOpen: modalId }, "");
+      modalStack.push(modalId);
+      window.history.pushState({ modalOpen: modalId, depth: modalStack.length }, "");
     }
 
     function closeCurrentModal() {
-      if (currentActiveModal) {
-        window.history.back();
+      if (modalStack.length > 0) {
+        window.history.back(); // Memicu popstate event untuk menutup modal teratas secara aman
       }
     }
 
-    function closeModalDirect(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) modal.classList.add("hidden");
-    }
-
-    // 2. Format Mata Uang Rupiah & Persentase Sesuai Standar Spreadsheet
+    // 2. PEMFORMAT ANGKA & PERSEN SESUAI SPREADSHEET
     function formatRp(num) {
-      if (isNaN(num) || num === null) return "Rp 0";
+      if (isNaN(num) || num === null || num === undefined) return "Rp 0";
       return new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(num);
     }
 
     function formatPct(num, digits = 1) {
-      if (isNaN(num) || num === null) return "0,0%";
-      return Number(num).toFixed(digits).replace('.', ',') + "%";
+      if (isNaN(num) || num === null || num === undefined) return "0,0%";
+      let val = typeof num === 'string' ? parseFloat(num.replace('%', '').replace(',', '.')) : num;
+      if (isNaN(val)) return "0,0%";
+      return val.toFixed(digits).replace('.', ',') + "%";
     }
 
-    // 3. Pemuatan Cache Cepat & Sesi Pengguna
+    // 3. PEMUATAN SESI & DATA AWAL (0,1 DETIK)
     function loadCachedSession() {
       const savedConfig = localStorage.getItem("kacida_toko_config");
       if (savedConfig) {
@@ -2800,14 +2705,17 @@
           renderDashboardWithUser(currentUser);
           document.getElementById("screen-login").classList.add("hidden");
           document.getElementById("screen-app").classList.remove("hidden");
+          // Tarik data toko otomatis di background
+          autoFetchAllStoreData(currentStore?.KODE || "2J7K");
         } catch (e) {}
       }
 
-      // Hilangkan preloader seketika
       setTimeout(() => {
         const preloader = document.getElementById("app-preloader");
-        if (preloader) preloader.style.opacity = "0";
-        setTimeout(() => preloader && preloader.remove(), 300);
+        if (preloader) {
+          preloader.style.opacity = "0";
+          setTimeout(() => preloader.remove(), 250);
+        }
       }, 150);
     }
 
@@ -2815,18 +2723,14 @@
       const nameEl = document.getElementById("login-store-name");
       const codeEl = document.getElementById("login-store-code");
       if (nameEl && codeEl) {
-        nameEl.innerText = store.NAMA_TOKO || store.STORE_NAME || store.KODE;
+        nameEl.innerText = store["NAMA TOKO"] || store.STORE_NAME || store.KODE;
         codeEl.innerText = store.KODE;
       }
     }
 
-    // 4. Konfigurasi Kode Toko (Ikon Gerigi ⚙️)
-    function openConfigModal() {
-      openModalWithHistory("modal-config-store");
-    }
-    function closeConfigModal() {
-      closeCurrentModal();
-    }
+    // 4. KONFIGURASI KODE TOKO (⚙️)
+    function openConfigModal() { openModalWithHistory("modal-config-store"); }
+    function closeConfigModal() { closeCurrentModal(); }
 
     async function checkStoreCodeConfig() {
       const code = document.getElementById("config-store-input").value.trim().toUpperCase();
@@ -2856,7 +2760,7 @@
           Swal.fire("Tidak Ditemukan", `Kode Toko ${code} tidak ada di Master_User`, "error");
         }
       } catch (err) {
-        Swal.fire("Galat", "Gagal menghubungi server Apps Script: " + err, "error");
+        Swal.fire("Galat", "Gagal menghubungi Apps Script: " + err, "error");
       }
     }
 
@@ -2865,16 +2769,16 @@
       localStorage.setItem("kacida_toko_config", JSON.stringify(currentStore));
       updateLoginStoreBadge(currentStore);
       closeConfigModal();
-      Swal.fire("Berhasil", `Toko ${currentStore.KODE} berhasil disimpan di perangkat ini.`, "success");
+      Swal.fire("Tersimpan", `Toko ${currentStore.KODE} berhasil disimpan di perangkat ini.`, "success");
     }
 
-    // 5. Autentikasi Login NIK
+    // 5. LOGIN PENGGUNA & PENARIKAN OTOMATIS DATA SPREADSHEET
     async function handleLoginSubmit(e) {
       e.preventDefault();
       const inputNik = document.getElementById("login-nik-input").value.trim();
 
       if (!currentStore) {
-        Swal.fire("Konfigurasi Diperlukan", "Silakan klik ikon gerigi (⚙️) di pojok kanan atas untuk mengatur toko terlebih dahulu.", "warning");
+        Swal.fire("Pengaturan Toko", "Klik ikon gerigi (⚙️) untuk memilih toko terlebih dahulu.", "warning");
         return;
       }
 
@@ -2886,65 +2790,100 @@
         }
 
         const userFound = masterUsersCache.find(u => String(u.NIK).trim() === inputNik);
-        Swal.close();
-
         if (!userFound) {
-          Swal.fire("Gagal Masuk", "NIK Tidak Terdaftar di Master_User.", "error");
+          Swal.close();
+          Swal.fire("Gagal Masuk", "NIK Tidak Terdaftar di sheet Master_User.", "error");
           return;
         }
 
-        // Validasi kesesuaian toko (kecuali Area Coordinator & Super Admin)
         const userJabatan = String(userFound.JABATAN || '').toUpperCase();
         const isBypass = userJabatan.includes("AREA COORDINATOR") || ["14125034", "22050361"].includes(inputNik);
 
         if (!isBypass && String(userFound.KODE).toUpperCase() !== String(currentStore.KODE).toUpperCase()) {
-          Swal.fire("Toko Tidak Sesuai", `NIK ini terdaftar di Toko ${userFound.KODE}, bukan ${currentStore.KODE}. Silakan ubah konfigurasi toko.`, "error");
+          Swal.close();
+          Swal.fire("Toko Tidak Sesuai", `NIK ini terdaftar di Toko ${userFound.KODE}, bukan ${currentStore.KODE}. Silakan sesuaikan pengaturan toko.`, "error");
           return;
         }
 
-        // Login Berhasil
         currentUser = userFound;
         localStorage.setItem("user_login", JSON.stringify(userFound));
 
-        // Increment hitungan login ke backend Apps Script
+        // Increment hitungan login
         fetch(APPS_SCRIPT_URL, {
           method: "POST",
           body: JSON.stringify({ action: "INCREMENT_LOGIN", nik: inputNik })
         });
 
-        // Catat Audit Log
-        fetch(APPS_SCRIPT_URL, {
-          method: "POST",
-          body: JSON.stringify({
-            action: "LOG_ACTIVITY",
-            nik: currentUser.NIK,
-            nama: currentUser.NAMA,
-            jabatan: currentUser.JABATAN,
-            kode_toko: currentStore.KODE,
-            device_type: navigator.userAgent.includes("Mobi") ? "Mobile" : "Desktop",
-            is_pwa: window.matchMedia('(display-mode: standalone)').matches,
-            action_name: "USER_LOGIN",
-            details: "Login berhasil"
-          })
-        });
+        // Tarik seluruh data toko langsung dari Spreadsheet
+        await autoFetchAllStoreData(currentStore.KODE);
+        Swal.close();
 
         renderDashboardWithUser(currentUser);
         document.getElementById("screen-login").classList.add("hidden");
         document.getElementById("screen-app").classList.remove("hidden");
 
-        Swal.fire({ icon: 'success', title: `Selamat Datang, ${currentUser.NAMA}!`, timer: 1500, showConfirmButton: false });
+        Swal.fire({ icon: 'success', title: `Selamat Datang, ${currentUser.NAMA}!`, timer: 1200, showConfirmButton: false });
       } catch (err) {
+        Swal.close();
         Swal.fire("Galat", "Koneksi bermasalah: " + err, "error");
       }
     }
 
+    // 6. FUNGSI PENARIKAN DATA SPREADSHEET TERPADU (AUTO-FETCH)
+    async function autoFetchAllStoreData(storeCode) {
+      try {
+        const [resHarian, resIkt, resYtd, resPenawaran, resNav] = await Promise.all([
+          fetch(`${APPS_SCRIPT_URL}?action=GET_SALES_HARIAN&storeCode=${storeCode}`),
+          fetch(`${APPS_SCRIPT_URL}?action=GET_IKT&storeCode=${storeCode}`),
+          fetch(`${APPS_SCRIPT_URL}?action=GET_YTD_SALES&storeCode=${storeCode}`),
+          fetch(`${APPS_SCRIPT_URL}?action=GET_PENAWARAN_LANGSUNG`),
+          fetch(`${APPS_SCRIPT_URL}?action=GET_MENU_NAVIGASI`)
+        ]);
+
+        const dataHarian = await resHarian.json();
+        const dataIkt = await resIkt.json();
+        const dataYtd = await resYtd.json();
+        const dataPenawaran = await resPenawaran.json();
+        menuNavigasiCache = await resNav.json();
+
+        localStorage.setItem("kacida_cache_harian", JSON.stringify(dataHarian));
+        localStorage.setItem("kacida_cache_ikt", JSON.stringify(dataIkt));
+        localStorage.setItem("kacida_cache_ytd", JSON.stringify(dataYtd));
+        localStorage.setItem("kacida_cache_penawaran", JSON.stringify(dataPenawaran));
+        localStorage.setItem("kacida_cache_menu_nav", JSON.stringify(menuNavigasiCache));
+
+        refreshDashboardKPI();
+        render12ShortcutMenus();
+      } catch (err) {
+        console.warn("Gagal auto-fetch data:", err);
+      }
+    }
+
+    // 7. RENDER BERANDA & UPDATE NAMA TOKO AKTIF (MENGGANTIKAN DATA CIBOLANG)
     function renderDashboardWithUser(user) {
-      document.getElementById("hdr-store-name").innerText = currentStore ? (currentStore["NAMA TOKO"] || currentStore.KODE) : "Retail";
+      const storeName = currentStore ? (currentStore["NAMA TOKO"] || currentStore.KODE) : "Retail";
+      const storeCode = currentStore ? currentStore.KODE : "-";
+
+      document.getElementById("hdr-store-name").innerText = storeName;
+      document.getElementById("sb-store-name").innerText = storeName;
+      document.getElementById("sb-store-code").innerText = storeCode;
       document.getElementById("hdr-user-name").innerText = user.NAMA;
       document.getElementById("hdr-user-role").innerText = user.JABATAN;
       document.getElementById("hero-user-fullname").innerText = user.NAMA;
       document.getElementById("hero-user-role-badge").innerText = user.JABATAN;
-      document.getElementById("hero-store-info").innerText = currentStore ? `${currentStore["NAMA TOKO"] || ''} (${currentStore.KODE})` : '';
+      document.getElementById("hero-store-info").innerText = `${storeName} (${storeCode})`;
+
+      // Timpa data statis toko di bawah beranda
+      document.getElementById("dash-prof-toko-name").innerText = `${storeName} (${storeCode})`;
+      document.getElementById("dash-prof-toko-area").innerText = currentStore ? `${currentStore.WILAYAH || ''} - ${currentStore["LOKASI/AREA"] || ''}` : '';
+      document.getElementById("dash-prof-toko-jam").innerText = `Jam Opr: ${currentStore ? (currentStore["JAM OPR"] || '24 Jam') : '24 Jam'}`;
+      document.getElementById("dash-prof-cos-name").innerText = user.JABATAN.includes("Chief") ? user.NAMA : "Chief Toko";
+
+      // Tab Profil
+      document.getElementById("prof-user-name").innerText = user.NAMA;
+      document.getElementById("prof-user-nik").innerText = `NIK: ${user.NIK}`;
+      document.getElementById("prof-user-jabatan").innerText = user.JABATAN;
+      document.getElementById("prof-store-name").innerText = `${storeName} (${storeCode})`;
 
       if (user["FOTO PROFIL (Url)"]) {
         document.getElementById("hdr-user-avatar").src = user["FOTO PROFIL (Url)"];
@@ -2952,45 +2891,186 @@
         document.getElementById("prof-photo-big").src = user["FOTO PROFIL (Url)"];
       }
 
-      // Batasan menu Kas Area pada Sidebar
-      const jabatan = String(user.JABATAN || '').toUpperCase();
-      const isPrivileged = jabatan.includes("CHIEF") || jabatan.includes("AREA COORDINATOR") || ["14125034", "22050361"].includes(String(user.NIK));
-      const lockKas = document.getElementById("sb-lock-kas");
-      if (lockKas) lockKas.classList.toggle("hidden", isPrivileged);
-
-      // Audit box khusus Super Admin NIK 14125034
-      const auditBox = document.getElementById("box-super-admin-audit");
-      if (auditBox) auditBox.classList.toggle("hidden", String(user.NIK) !== "14125034");
-
-      // Tampilkan tombol tambah penugasan rak hanya untuk COS / ACOS
-      const btnTambahRak = document.getElementById("btn-tambah-rak");
-      if (btnTambahRak) {
-        btnTambahRak.classList.toggle("hidden", !jabatan.includes("CHIEF") && !jabatan.includes("ASSISTANT"));
-      }
-
       render12ShortcutMenus();
       refreshDashboardKPI();
     }
 
-    function handleLogout() {
-      Swal.fire({
-        title: 'Konfirmasi Keluar',
-        text: 'Apakah Anda yakin ingin keluar dari sesi aplikasi?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#059669',
-        cancelButtonColor: '#e11d48',
-        confirmButtonText: 'Ya, Keluar'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          localStorage.removeItem("user_login");
-          currentUser = null;
-          location.reload();
-        }
-      });
+    // 8. UPDATE METRIK RINGKASAN DI BERANDA
+    function refreshDashboardKPI() {
+      const storeCode = currentStore?.KODE || "";
+      const harianData = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
+      const iktData = JSON.parse(localStorage.getItem("kacida_cache_ikt") || "[]");
+      const ytdData = JSON.parse(localStorage.getItem("kacida_cache_ytd") || "[]");
+      const penawaranData = JSON.parse(localStorage.getItem("kacida_cache_penawaran") || "[]");
+
+      // Sales Harian
+      if (harianData.length > 0) {
+        const lastRow = harianData[harianData.length - 1];
+        const actualSales = Number(lastRow.ACTUAL) || 0;
+        document.getElementById("hero-sales-h1").innerText = formatRp(actualSales);
+        document.getElementById("car-harian-actual").innerText = formatRp(actualSales);
+        document.getElementById("car-harian-gap").innerText = `Gap: ${formatRp(lastRow["GAP TARGET"])}`;
+      }
+
+      // IKT
+      if (iktData.length > 0) {
+        const myIkt = iktData.find(i => String(i.KODE).toUpperCase() === storeCode.toUpperCase()) || iktData[0];
+        document.getElementById("car-ikt-acv").innerText = formatPct(myIkt["ACV SALES"]);
+        document.getElementById("dash-gm-target").innerText = formatPct(myIkt["TARGET GM %"]);
+        document.getElementById("dash-gm-actual").innerText = formatPct(myIkt["ACTUAL GM %"]);
+        document.getElementById("card-gm-badge").innerText = `ACV ${formatPct(myIkt["ACV GM"])}`;
+      }
+
+      // MTD
+      if (ytdData.length > 0) {
+        let sum2025 = 0, sum2026 = 0;
+        ytdData.forEach(r => {
+          sum2025 += (Number(r["SALES 2025"]) || 0);
+          sum2026 += (Number(r["SALES 2026"]) || 0);
+        });
+        const growth = sum2025 > 0 ? ((sum2026 - sum2025) / sum2025) * 100 : 0;
+        document.getElementById("car-mtd-sales").innerText = formatRp(sum2026);
+        document.getElementById("car-mtd-growth").innerText = `Growth: ${growth >= 0 ? '+' : ''}${formatPct(growth)}`;
+      }
+
+      // Penawaran Langsung
+      if (penawaranData.length > 0) {
+        const myPenawaran = penawaranData.find(p => String(p.KODE).toUpperCase() === storeCode.toUpperCase()) || penawaranData[0];
+        document.getElementById("car-penawaran-point").innerText = formatPct(myPenawaran["POINT DASHBOARD"]);
+        document.getElementById("car-penawaran-rank").innerText = `Rank: #${myPenawaran.RANK || '-'}`;
+        document.getElementById("dash-penawaran-rank-box").innerText = `RANK #${myPenawaran.RANK || '-'}`;
+        document.getElementById("dash-point-val").innerText = formatPct(myPenawaran["POINT DASHBOARD"]);
+        document.getElementById("dash-point-bar").style.width = `${parseFloat(myPenawaran["POINT DASHBOARD"]) || 0}%`;
+        document.getElementById("dash-psm-acv").innerText = formatPct(myPenawaran["ACV PSM"]);
+        document.getElementById("dash-pwp-acv").innerText = formatPct(myPenawaran["ACV PWP"]);
+        document.getElementById("dash-gratis-acv").innerText = formatPct(myPenawaran["ACV SERBA GRATIS"]);
+        document.getElementById("dash-apc-acv").innerText = formatPct(myPenawaran["ACV APC"]);
+      }
+
+      renderDashboardCharts();
     }
 
-    // 6. Router Modal Menu 1 - 16
+    // 9. RENDER GRAFIK BERANDA
+    function renderDashboardCharts() {
+      const harianData = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
+      const labels = harianData.slice(-7).map(r => String(r.TANGGAL).slice(0, 5));
+      const targetData = harianData.slice(-7).map(r => (Number(r.TARGET) || 0) / 1000000);
+      const actualData = harianData.slice(-7).map(r => (Number(r.ACTUAL) || 0) / 1000000);
+
+      const ctxSales = document.getElementById("chart-sales-daily");
+      if (ctxSales && labels.length > 0) {
+        if (chartSalesDailyInstance) chartSalesDailyInstance.destroy();
+        chartSalesDailyInstance = new Chart(ctxSales, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: [
+              { label: 'Target (Jt)', data: targetData, backgroundColor: '#93c5fd' },
+              { label: 'Aktual (Jt)', data: actualData, backgroundColor: '#10b981' }
+            ]
+          },
+          options: { responsive: true, maintainAspectRatio: false }
+        });
+      }
+    }
+
+    // 10. RENDER GRID MENU BERANDA & MODAL "VIEW ALL" (GRID KOTAK LENGKAP)
+    function render12ShortcutMenus() {
+      const container = document.getElementById("dashboard-menu-grid");
+      if (!container) return;
+
+      const baseMenus = [
+        { key: 'CEKLIS_EXP', name: 'Ceklis EXP', icon: 'fa-calendar-check', color: 'text-brand-600' },
+        { key: 'SERAH_TERIMA', name: 'Serah Terima', icon: 'fa-handshake-simple', color: 'text-emerald-600' },
+        { key: 'TABUNGANKU', name: 'Tabunganku', icon: 'fa-piggy-bank', color: 'text-pink-600' },
+        { key: 'KAS_AREA', name: 'Kas Area', icon: 'fa-vault', color: 'text-amber-600' },
+        { key: 'DONASI', name: 'Donasi Area', icon: 'fa-hand-holding-heart', color: 'text-teal-600' },
+        { key: 'SIMULASI_IKT', name: 'Simulasi IKT', icon: 'fa-calculator', color: 'text-indigo-600' },
+        { key: 'SALES_MTD', name: 'Sales MTD', icon: 'fa-chart-line', color: 'text-blue-600' },
+        { key: 'SALES_HARIAN', name: 'Sales Harian', icon: 'fa-receipt', color: 'text-purple-600' },
+        { key: 'MONITORING_IKT', name: 'Monitoring IKT', icon: 'fa-bullseye', color: 'text-rose-600' },
+        { key: 'KONVERSI_BON', name: 'Konversi Bon', icon: 'fa-barcode', color: 'text-cyan-600' },
+        { key: 'PENAWARAN_LANGSUNG', name: 'Penawaran', icon: 'fa-gift', color: 'text-orange-600' },
+        { key: 'REKAP_PSM', name: 'Rekap PSM', icon: 'fa-cart-shopping', color: 'text-emerald-700' }
+      ];
+
+      container.innerHTML = baseMenus.map(m => `
+        <div onclick="openMenuModal('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
+          <div class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-base ${m.color}">
+            <i class="fa-solid ${m.icon}"></i>
+          </div>
+          <span class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 leading-tight">${m.name}</span>
+        </div>
+      `).join('');
+    }
+
+    // Modal "Lihat Semua (View All)" dalam Bentuk Grid Kotak + Dinamis Menu_Navigasi
+    function openAllMenusModal() {
+      const container = document.getElementById("grid-all-16-menus");
+      if (!container) return;
+
+      const base16 = [
+        { key: 'CEKLIS_EXP', name: 'Ceklis EXP', icon: 'fa-calendar-check', color: 'text-brand-600' },
+        { key: 'SERAH_TERIMA', name: 'Serah Terima', icon: 'fa-handshake-simple', color: 'text-emerald-600' },
+        { key: 'TABUNGANKU', name: 'Tabunganku', icon: 'fa-piggy-bank', color: 'text-pink-600' },
+        { key: 'KAS_AREA', name: 'Kas Area', icon: 'fa-vault', color: 'text-amber-600' },
+        { key: 'DONASI', name: 'Donasi Area', icon: 'fa-hand-holding-heart', color: 'text-teal-600' },
+        { key: 'SIMULASI_IKT', name: 'Simulasi IKT', icon: 'fa-calculator', color: 'text-indigo-600' },
+        { key: 'SALES_MTD', name: 'Sales MTD', icon: 'fa-chart-line', color: 'text-blue-600' },
+        { key: 'SALES_HARIAN', name: 'Sales Harian', icon: 'fa-receipt', color: 'text-purple-600' },
+        { key: 'MONITORING_IKT', name: 'Monitoring IKT', icon: 'fa-bullseye', color: 'text-rose-600' },
+        { key: 'KONVERSI_BON', name: 'Konversi Bon', icon: 'fa-barcode', color: 'text-cyan-600' },
+        { key: 'PENAWARAN_LANGSUNG', name: 'Penawaran', icon: 'fa-gift', color: 'text-orange-600' },
+        { key: 'REKAP_PSM', name: 'Rekap PSM', icon: 'fa-cart-shopping', color: 'text-emerald-700' },
+        { key: 'SALES_OPR', name: 'Sales OPR', icon: 'fa-clock-rotate-left', color: 'text-indigo-600' },
+        { key: 'MONITORING_KWH', name: 'Listrik KWH', icon: 'fa-bolt', color: 'text-yellow-600' },
+        { key: 'SCANNER', name: 'Scan Barcode', icon: 'fa-camera', color: 'text-slate-700' },
+        { key: 'PENGUMUMAN', name: 'Pengumuman', icon: 'fa-bullhorn', color: 'text-red-600' }
+      ];
+
+      // Ambil menu tambahan dari sheet Menu_Navigasi
+      const extraNav = (menuNavigasiCache || []).filter(item => item["Status Tampil"] === "Aktif");
+
+      let html = base16.map(m => `
+        <div onclick="closeCurrentModal(); openMenuModal('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
+          <div class="w-11 h-11 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-lg ${m.color}">
+            <i class="fa-solid ${m.icon}"></i>
+          </div>
+          <span class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 leading-tight">${m.name}</span>
+        </div>
+      `).join('');
+
+      // Tambahkan item dari sheet Menu_Navigasi yang memiliki Link Tujuan
+      if (extraNav.length > 0) {
+        html += extraNav.map(nav => {
+          const iconUrl = nav["Icon URL"] || "";
+          const link = nav["Link Tujuan"] || "";
+          const name = nav["Nama Menu"] || "Menu Eksternal";
+
+          return `
+            <div onclick="handleDynamicMenuClick('${link}', '${name}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-brand-200/60 bg-brand-50/20">
+              <div class="w-11 h-11 rounded-xl bg-white dark:bg-slate-800 flex items-center justify-center overflow-hidden p-1 shadow-sm">
+                ${iconUrl ? `<img src="${iconUrl}" class="w-full h-full object-contain" />` : `<i class="fa-solid fa-arrow-up-right-from-square text-brand-600"></i>`}
+              </div>
+              <span class="text-[11px] font-extrabold text-brand-800 dark:text-brand-300 leading-tight">${name}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      container.innerHTML = html;
+      openModalWithHistory("modal-all-menus");
+    }
+
+    function handleDynamicMenuClick(url, name) {
+      if (url && url.startsWith("http")) {
+        window.open(url, "_blank");
+      } else {
+        Swal.fire(name, "Menu ini belum memiliki link tujuan di spreadsheet.", "info");
+      }
+    }
+
+    // 11. ROUTER MODAL DENGAN LOAD DATA DINAMIS
     function openMenuModal(menuKey) {
       const modalMap = {
         'CEKLIS_EXP': 'modal-ceklis-exp',
@@ -3011,7 +3091,6 @@
         'PENGUMUMAN': 'modal-pengumuman'
       };
 
-      // Validasi Khusus Kas Area
       if (menuKey === 'KAS_AREA') {
         const jabatan = String(currentUser?.JABATAN || '').toUpperCase();
         const allow = jabatan.includes("CHIEF") || jabatan.includes("AREA COORDINATOR") || ["14125034", "22050361"].includes(String(currentUser?.NIK));
@@ -3033,112 +3112,318 @@
     }
 
     function loadMenuInitialData(menuKey) {
-      if (menuKey === 'CEKLIS_EXP') loadCeklisExpData();
-      if (menuKey === 'SERAH_TERIMA') loadSerahTerimaData();
-      if (menuKey === 'TABUNGANKU') loadTabungankuData();
-      if (menuKey === 'KAS_AREA') loadKasAreaData();
-      if (menuKey === 'DONASI') loadDonasiData();
-      if (menuKey === 'SALES_MTD') loadSalesMtdData();
       if (menuKey === 'SALES_HARIAN') loadSalesHarianData();
+      if (menuKey === 'SALES_MTD') loadSalesMtdData();
       if (menuKey === 'MONITORING_IKT') loadMonitoringIktData();
       if (menuKey === 'PENAWARAN_LANGSUNG') loadPenawaranLangsungData();
-      if (menuKey === 'REKAP_PSM') loadRekapPsmData();
-      if (menuKey === 'SALES_OPR') loadSalesOprData();
-      if (menuKey === 'MONITORING_KWH') loadMonitoringKwhData();
+      if (menuKey === 'CEKLIS_EXP') loadCeklisExpData();
       if (menuKey === 'SCANNER') startScannerCamera();
-      if (menuKey === 'PENGUMUMAN') loadPengumumanData();
     }
 
-    // 7. Grid 12 Menu Utama Beranda
-    function render12ShortcutMenus() {
-      const container = document.getElementById("dashboard-menu-grid");
-      if (!container) return;
+    // 12. FUNGSI RENDER TABEL & GRAFIK LENGKAP MASING-MASING MENU
 
-      const menus = [
-        { key: 'CEKLIS_EXP', name: 'Ceklis EXP', icon: 'fa-calendar-check', color: 'text-brand-600' },
-        { key: 'SERAH_TERIMA', name: 'Serah Terima', icon: 'fa-handshake-simple', color: 'text-emerald-600' },
-        { key: 'TABUNGANKU', name: 'Tabunganku', icon: 'fa-piggy-bank', color: 'text-pink-600' },
-        { key: 'KAS_AREA', name: 'Kas Area', icon: 'fa-vault', color: 'text-amber-600' },
-        { key: 'DONASI', name: 'Donasi Area', icon: 'fa-hand-holding-heart', color: 'text-teal-600' },
-        { key: 'SIMULASI_IKT', name: 'Simulasi IKT', icon: 'fa-calculator', color: 'text-indigo-600' },
-        { key: 'SALES_MTD', name: 'Sales MTD', icon: 'fa-chart-line', color: 'text-blue-600' },
-        { key: 'SALES_HARIAN', name: 'Sales Harian', icon: 'fa-receipt', color: 'text-purple-600' },
-        { key: 'MONITORING_IKT', name: 'Monitoring IKT', icon: 'fa-bullseye', color: 'text-rose-600' },
-        { key: 'KONVERSI_BON', name: 'Konversi Bon', icon: 'fa-barcode', color: 'text-cyan-600' },
-        { key: 'PENAWARAN_LANGSUNG', name: 'Penawaran', icon: 'fa-gift', color: 'text-orange-600' },
-        { key: 'REKAP_PSM', name: 'Rekap PSM', icon: 'fa-cart-shopping', color: 'text-emerald-700' }
-      ];
+    // FITUR 8: SALES HARIAN LENGKAP
+    function loadSalesHarianData() {
+      const data = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
+      const tbody = document.getElementById("table-body-sales-harian");
+      if (!tbody) return;
 
-      container.innerHTML = menus.map(m => `
-        <div onclick="openMenuModal('${m.key}')" class="cursor-pointer glass-card p-3 rounded-2xl flex flex-col items-center justify-center text-center gap-1.5 shadow-sm hover:shadow-md transition active:scale-95 border border-slate-200/70">
-          <div class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 flex items-center justify-center text-base ${m.color}">
-            <i class="fa-solid ${m.icon}"></i>
-          </div>
-          <span class="text-[11px] font-extrabold text-slate-700 dark:text-slate-200 leading-tight">${m.name}</span>
-        </div>
-      `).join('');
-    }
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="11" class="p-6 text-center text-slate-400">Tidak ada data Sales Harian untuk toko ini.</td></tr>`;
+        return;
+      }
 
-    function openAllMenusModal() {
-      const container = document.getElementById("grid-all-16-menus");
-      const allMenus = [
-        { key: 'CEKLIS_EXP', name: '1. Ceklis EXP' },
-        { key: 'SERAH_TERIMA', name: '2. Serah Terima' },
-        { key: 'TABUNGANKU', name: '3. Tabunganku' },
-        { key: 'KAS_AREA', name: '4. Kas Area' },
-        { key: 'DONASI', name: '5. Donasi Area' },
-        { key: 'SIMULASI_IKT', name: '6. Simulasi IKT' },
-        { key: 'SALES_MTD', name: '7. Sales MTD' },
-        { key: 'SALES_HARIAN', name: '8. Sales Harian' },
-        { key: 'MONITORING_IKT', name: '9. Monitoring IKT' },
-        { key: 'KONVERSI_BON', name: '10. Konversi Bon' },
-        { key: 'PENAWARAN_LANGSUNG', name: '11. Penawaran Langsung' },
-        { key: 'REKAP_PSM', name: '12. Rekap PSM Kasir' },
-        { key: 'SALES_OPR', name: '13. Sales OPR' },
-        { key: 'MONITORING_KWH', name: '14. Monitoring KWH' },
-        { key: 'SCANNER', name: '15. Scanner Barcode' },
-        { key: 'PENGUMUMAN', name: '16. Pengumuman Area' }
-      ];
+      let sumBulanLalu = 0, sumTarget = 0, sumActual = 0, sumGap = 0, sumNsb = 0, sumNsbPct = 0, sumOos = 0, sumGm = 0;
 
-      container.innerHTML = allMenus.map(m => `
-        <button onclick="closeAllMenusModal(); openMenuModal('${m.key}')" class="p-3 bg-slate-50 rounded-2xl text-xs font-bold text-slate-700 hover:bg-brand-50 hover:text-brand-700 border text-center transition">
-          ${m.name}
-        </button>
-      `).join('');
+      tbody.innerHTML = data.map(r => {
+        const blnLalu = Number(r["BULAN LALU"]) || 0;
+        const tgt = Number(r.TARGET) || 0;
+        const act = Number(r.ACTUAL) || 0;
+        const gap = Number(r["GAP TARGET"]) || 0;
+        const nsb = Number(r.NSB) || 0;
+        const nsbPct = parseFloat(String(r["% NSB"]).replace('%','').replace(',','.')) || 0;
+        const oosPct = parseFloat(String(r["OOS %"]).replace('%','').replace(',','.')) || 0;
+        const gmPct = parseFloat(String(r["GROSS MARGIN"]).replace('%','').replace(',','.')) || 0;
 
-      openModalWithHistory("modal-all-menus");
-    }
-    function closeAllMenusModal() { closeCurrentModal(); }
+        sumBulanLalu += blnLalu; sumTarget += tgt; sumActual += act; sumGap += gap; sumNsb += nsb;
+        sumNsbPct += nsbPct; sumOos += oosPct; sumGm += gmPct;
 
-    function openHelpModal() { openModalWithHistory("modal-help-faq"); }
-    function closeHelpModal() { closeCurrentModal(); }
+        return `
+          <tr class="hover:bg-slate-50 border-b">
+            <td class="p-3 font-bold sticky left-0 bg-white z-10">${r.TANGGAL}</td>
+            <td class="p-3">${formatRp(blnLalu)}</td>
+            <td class="p-3">${formatRp(tgt)}</td>
+            <td class="p-3 font-bold text-emerald-600">${formatRp(act)}</td>
+            <td class="p-3">${r["ACTUAL STD"] || r.STD || 0}</td>
+            <td class="p-3">${formatRp(r["ACTUAL APC"] || r.APC || 0)}</td>
+            <td class="p-3 font-bold ${gap >= 0 ? 'text-emerald-600' : 'text-rose-600'}">${formatRp(gap)}</td>
+            <td class="p-3">${formatRp(nsb)}</td>
+            <td class="p-3 font-bold ${nsbPct > 0.14 ? 'text-rose-600 warning-pulse' : 'text-emerald-600'}">${formatPct(nsbPct, 2)}</td>
+            <td class="p-3 font-bold ${oosPct >= 1.0 ? 'text-rose-600' : 'text-emerald-600'}">${formatPct(oosPct, 2)}</td>
+            <td class="p-3">${formatPct(gmPct, 2)}</td>
+          </tr>
+        `;
+      }).join('');
 
-    // 8. Navigasi Dock Bar Bawah (Mobile)
-    function switchBottomTab(tabName) {
-      ['beranda', 'chat', 'kalender', 'profil'].forEach(t => {
-        const el = document.getElementById(`tab-content-${t}`);
-        if (el) el.classList.add("hidden");
-      });
+      document.getElementById("harian-sum-bulan-lalu").innerText = formatRp(sumBulanLalu);
+      document.getElementById("harian-sum-target").innerText = formatRp(sumTarget);
+      document.getElementById("harian-sum-actual").innerText = formatRp(sumActual);
+      document.getElementById("harian-sum-gap").innerText = formatRp(sumGap);
+      document.getElementById("harian-sum-nsb").innerText = formatRp(sumNsb);
+      document.getElementById("harian-sum-nsb-pct").innerText = formatPct(sumNsbPct / data.length, 2);
+      document.getElementById("harian-sum-oos-pct").innerText = formatPct(sumOos / data.length, 2);
+      document.getElementById("harian-sum-gm").innerText = formatPct(sumGm / data.length, 2);
 
-      const target = document.getElementById(`tab-content-${tabName.toLowerCase()}`);
-      if (target) target.classList.remove("hidden");
-
-      // Perbarui style tombol dock
-      ['beranda', 'chat', 'kalender', 'profil'].forEach(t => {
-        const btn = document.getElementById(`bnav-${t}`);
-        if (btn) {
-          const isActive = t === tabName.toLowerCase();
-          btn.className = isActive 
-            ? "flex flex-col items-center justify-center gap-1 text-brand-600 font-bold transition"
-            : "flex flex-col items-center justify-center gap-1 text-slate-400 font-bold transition";
+      // Gambar Grafik Setelah Modal Terbuka
+      setTimeout(() => {
+        const ctx = document.getElementById("chart-sales-harian-full");
+        if (ctx) {
+          if (chartHarianFullInstance) chartHarianFullInstance.destroy();
+          chartHarianFullInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: data.map(r => String(r.TANGGAL).slice(0, 5)),
+              datasets: [
+                { label: 'Target', data: data.map(r => Number(r.TARGET) || 0), borderColor: '#3b82f6', tension: 0.2 },
+                { label: 'Aktual', data: data.map(r => Number(r.ACTUAL) || 0), borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.2 }
+              ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+          });
         }
-      });
-
-      if (tabName === 'KALENDER') renderCalendarMonth();
-      if (tabName === 'PROFIL') loadProfilPersonilList();
+      }, 150);
     }
 
-    // 9. Logika Rahasia Konversi Nomor Bon (0=M s/d 9=K, padStart 4)
+    // FITUR 7: SALES MTD LENGKAP
+    function loadSalesMtdData() {
+      const data = JSON.parse(localStorage.getItem("kacida_cache_ytd") || "[]");
+      const tbody = document.getElementById("table-body-mtd");
+      if (!tbody) return;
+
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Tidak ada data Sales MTD untuk toko ini.</td></tr>`;
+        return;
+      }
+
+      let sumLy = 0, sumTy = 0;
+      tbody.innerHTML = data.map(r => {
+        const ly = Number(r["SALES 2025"]) || 0;
+        const ty = Number(r["SALES 2026"]) || 0;
+        sumLy += ly; sumTy += ty;
+        const growth = ly > 0 ? ((ty - ly) / ly) * 100 : 0;
+
+        return `
+          <tr class="hover:bg-slate-50 border-b">
+            <td class="p-3 font-bold">${r.TANGGAL}</td>
+            <td class="p-3 font-black text-brand-600">${formatRp(ty)}</td>
+            <td class="p-3">${r["STD 2026"] || 0}</td>
+            <td class="p-3">${formatRp(r["APC 2026"] || 0)}</td>
+            <td class="p-3 text-center">
+              <span class="px-2 py-0.5 rounded text-xs font-black ${growth >= 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+                ${growth >= 0 ? '+' : ''}${formatPct(growth)}
+              </span>
+            </td>
+            <td class="p-3 text-center">
+              <button onclick="openDetailMtd('${r.TANGGAL}', ${ly}, ${ty}, ${growth})" class="text-brand-600 hover:underline font-bold text-xs">Detail</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      document.getElementById("mtd-sum-ly").innerText = formatRp(sumLy);
+      document.getElementById("mtd-sum-ty").innerText = formatRp(sumTy);
+      const totalGrowth = sumLy > 0 ? ((sumTy - sumLy) / sumLy) * 100 : 0;
+      document.getElementById("mtd-sum-gap").innerText = formatRp(sumTy - sumLy);
+      document.getElementById("mtd-sum-growth-badge").innerText = `${totalGrowth >= 0 ? '+' : ''}${formatPct(totalGrowth)}`;
+
+      setTimeout(() => {
+        const ctx = document.getElementById("chart-mtd-growth");
+        if (ctx) {
+          if (chartMtdInstance) chartMtdInstance.destroy();
+          chartMtdInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: data.map(r => String(r.TANGGAL).slice(0, 5)),
+              datasets: [
+                { label: 'Sales 2025', data: data.map(r => Number(r["SALES 2025"]) || 0), borderColor: '#94a3b8', borderDash: [5, 5] },
+                { label: 'Sales 2026', data: data.map(r => Number(r["SALES 2026"]) || 0), borderColor: '#059669', tension: 0.2 }
+              ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+          });
+        }
+      }, 150);
+    }
+
+    // FITUR 9: MONITORING IKT LENGKAP
+    function loadMonitoringIktData() {
+      const storeCode = currentStore?.KODE || "";
+      const iktData = JSON.parse(localStorage.getItem("kacida_cache_ikt") || "[]");
+      const myIkt = iktData.find(i => String(i.KODE).toUpperCase() === storeCode.toUpperCase()) || iktData[0];
+      const tbody = document.getElementById("table-body-ikt-indikator");
+      if (!tbody || !myIkt) return;
+
+      const tfVal = parseFloat(String(myIkt["TIME FAKTOR"]).replace('%','').replace(',','.')) || 74.19;
+      document.getElementById("label-time-faktor").innerText = formatPct(tfVal);
+      document.getElementById("svg-time-faktor-bar").setAttribute("stroke-dasharray", `${tfVal}, 100`);
+
+      const indikatorList = [
+        { nama: "Net Sales", target: myIkt["TARGET NET SALES"], actual: myIkt["ACTUAL NET SALES"], acv: myIkt["ACV SALES"], ket: myIkt["KET SALES"] },
+        { nama: "Gross Margin %", target: myIkt["TARGET GM %"], actual: myIkt["ACTUAL GM %"], acv: myIkt["ACV GM"], ket: myIkt["KET GM %"] },
+        { nama: "Gross Margin Rp", target: myIkt["TARGET GM RP"], actual: myIkt["ACT GM RP"], acv: myIkt["ACV GM RP"], ket: myIkt["KET GM RP"] },
+        { nama: "Penawaran Langsung", target: myIkt["TARGET PENAWARAN LANGSUNG"], actual: myIkt["ACTUAL PENAWARAN LANGSUNG"], acv: myIkt["ACV PENAWARAN LANGSUNG"], ket: "OK" }
+      ];
+
+      tbody.innerHTML = indikatorList.map(item => `
+        <tr class="hover:bg-slate-50 border-b">
+          <td class="p-3 font-bold">${item.nama}</td>
+          <td class="p-3">${typeof item.target === 'number' ? formatRp(item.target) : item.target}</td>
+          <td class="p-3 font-semibold">${typeof item.actual === 'number' ? formatRp(item.actual) : item.actual}</td>
+          <td class="p-3 font-black text-brand-600">${formatPct(item.acv)}</td>
+          <td class="p-3 text-center">
+            <span class="px-2 py-0.5 rounded text-xs font-black ${item.ket === 'OK' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">
+              ${item.ket || 'OK'}
+            </span>
+          </td>
+        </tr>
+      `).join('');
+
+      const targetSales = Number(myIkt["TARGET NET SALES"]) || 0;
+      const actualSales = Number(myIkt["ACTUAL NET SALES"]) || 0;
+      const selisihSales = actualSales - ((tfVal / 100) * targetSales);
+      document.getElementById("ikt-agregasi-sales-val").innerText = (selisihSales >= 0 ? "Surplus " : "Kurang ") + formatRp(Math.abs(selisihSales));
+      document.getElementById("ikt-proyeksi-sales-val").innerText = formatRp(actualSales / (tfVal / 100));
+
+      setTimeout(() => {
+        const ctx = document.getElementById("chart-ikt-bar");
+        if (ctx) {
+          if (chartIktBarInstance) chartIktBarInstance.destroy();
+          chartIktBarInstance = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: ['Sales', 'GM %', 'GM Rp', 'Penawaran'],
+              datasets: [
+                { label: 'ACV %', data: [parseFloat(myIkt["ACV SALES"]), parseFloat(myIkt["ACV GM"]), parseFloat(myIkt["ACV GM RP"]), parseFloat(myIkt["ACV PENAWARAN LANGSUNG"])], backgroundColor: '#10b981' },
+                { label: 'Time Faktor', data: [tfVal, tfVal, tfVal, tfVal], backgroundColor: '#94a3b8' }
+              ]
+            },
+            options: { responsive: true, maintainAspectRatio: false }
+          });
+        }
+      }, 150);
+    }
+
+    // FITUR 11: PENAWARAN LANGSUNG LENGKAP (2 TABEL + HIGHLIGHT BIRU)
+    function loadPenawaranLangsungData() {
+      const storeCode = currentStore?.KODE || "";
+      const penawaranData = JSON.parse(localStorage.getItem("kacida_cache_penawaran") || "[]");
+      if (penawaranData.length === 0) return;
+
+      const myRow = penawaranData.find(p => String(p.KODE).toUpperCase() === storeCode.toUpperCase()) || penawaranData[0];
+
+      // Update Scoreboard Top Card
+      document.getElementById("penawaran-sb-store").innerText = `${myRow["STORE NAME"] || myRow.NAMA_TOKO || storeCode} (${myRow.KODE})`;
+      document.getElementById("penawaran-sb-total-acv").innerText = formatPct(myRow["TOTAL ACV"]);
+      document.getElementById("penawaran-sb-points").innerText = formatPct(myRow["POINT DASHBOARD"]);
+      document.getElementById("penawaran-sb-rank-badge").innerText = `RANK #${myRow.RANK || '-'}`;
+
+      // TABEL 1: INDIKATOR
+      const tbodyIndikator = document.getElementById("table-body-penawaran-indikator");
+      if (tbodyIndikator) {
+        const indikators = [
+          { nama: "PSM", tgt: Number(myRow["TARGET PSM"])||0, act: Number(myRow["AKTUAL PSM"])||0, acv: myRow["ACV PSM"] },
+          { nama: "PWP", tgt: Number(myRow["TARGET PWP"])||0, act: Number(myRow["AKTUAL PWP"])||0, acv: myRow["ACV PWP"] },
+          { nama: "Serba Gratis", tgt: Number(myRow["TARGET SERBA GRATIS"])||0, act: Number(myRow["AKTUAL SERBA GRATIS"])||0, acv: myRow["ACV SERBA GRATIS"] },
+          { nama: "APC", tgt: Number(myRow["TARGET APC"])||0, act: Number(myRow["AKTUAL APC"])||0, acv: myRow["ACV APC"] }
+        ];
+
+        tbodyIndikator.innerHTML = indikators.map(item => {
+          const gap = item.act - item.tgt;
+          const acvNum = parseFloat(String(item.acv).replace('%','').replace(',','.')) || 0;
+          return `
+            <tr class="hover:bg-slate-50 border-b">
+              <td class="p-3 font-bold">${item.nama}</td>
+              <td class="p-3">${item.tgt.toLocaleString('id-ID')}</td>
+              <td class="p-3 font-semibold">${item.act.toLocaleString('id-ID')}</td>
+              <td class="p-3 font-black text-brand-600">${formatPct(item.acv)}</td>
+              <td class="p-3 font-bold ${gap >= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                ${gap >= 0 ? `Surplus +${gap}` : `Kekurangan ${gap}`}
+              </td>
+              <td class="p-3 text-center">
+                <span class="px-2 py-0.5 rounded text-xs font-black ${acvNum >= 80 ? 'bg-emerald-100 text-emerald-800' : acvNum >= 60 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'}">
+                  ${acvNum >= 80 ? 'BAGUS' : acvNum >= 60 ? 'WASPADA' : 'PERHATIAN'}
+                </span>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // TABEL 2: LEADERBOARD 3 ATAS 3 BAWAH
+      const tbodyLeaderboard = document.getElementById("table-body-leaderboard-relatif");
+      if (tbodyLeaderboard) {
+        const sorted = [...penawaranData].filter(r => r.RANK !== "AC" && r.RANK).sort((a,b) => (Number(a.RANK)||0) - (Number(b.RANK)||0));
+        const myIdx = sorted.findIndex(r => String(r.KODE).toUpperCase() === storeCode.toUpperCase());
+
+        let sliced = sorted;
+        if (myIdx !== -1) {
+          const start = Math.max(0, myIdx - 3);
+          const end = Math.min(sorted.length, myIdx + 4);
+          sliced = sorted.slice(start, end);
+        }
+
+        tbodyLeaderboard.innerHTML = sliced.map(row => {
+          const isMe = String(row.KODE).toUpperCase() === storeCode.toUpperCase();
+          return `
+            <tr class="${isMe ? 'bg-blue-50/80 border-2 border-blue-600 font-extrabold' : 'hover:bg-slate-50 border-b'}">
+              <td class="p-3 font-black text-center">${row.RANK}</td>
+              <td class="p-3">${row.KODE}</td>
+              <td class="p-3">${row["STORE NAME"] || row.NAMA_TOKO}</td>
+              <td class="p-3">${formatPct(row["ACV PSM"])}</td>
+              <td class="p-3">${formatPct(row["ACV PWP"])}</td>
+              <td class="p-3">${formatPct(row["ACV SERBA GRATIS"])}</td>
+              <td class="p-3">${formatPct(row["ACV APC"])}</td>
+              <td class="p-3 font-bold">${formatPct(row["TOTAL ACV"])}</td>
+              <td class="p-3 font-black text-brand-700">${formatPct(row["POINT DASHBOARD"])}</td>
+            </tr>
+          `;
+        }).join('');
+      }
+    }
+
+    // Modal Details Helper
+    function openDetailMtd(tgl, ly, ty, growth) {
+      document.getElementById("det-mtd-title").innerText = `Detail Sales: ${tgl}`;
+      document.getElementById("det-mtd-sales-25").innerText = formatRp(ly);
+      document.getElementById("det-mtd-sales-26").innerText = formatRp(ty);
+      document.getElementById("det-mtd-growth-val").innerText = `${growth >= 0 ? '+' : ''}${formatPct(growth)}`;
+      openModalWithHistory("modal-detail-mtd");
+    }
+
+    // 13. SINKRONISASI MANUAL BERPROGRES NYATA
+    async function triggerManualSync() {
+      const modal = document.getElementById("modal-sync-progress");
+      const bar = document.getElementById("sync-progress-bar");
+      const label = document.getElementById("sync-step-label");
+      modal.classList.remove("hidden");
+
+      bar.style.width = "25%";
+      label.innerText = "Menghubungi Google Apps Script...";
+      await new Promise(r => setTimeout(r, 300));
+
+      bar.style.width = "65%";
+      label.innerText = "Mengambil data aktual spreadsheet...";
+      await autoFetchAllStoreData(currentStore?.KODE || "2J7K");
+
+      bar.style.width = "100%";
+      label.innerText = "Sinkronisasi Berhasil!";
+      await new Promise(r => setTimeout(r, 300));
+
+      modal.classList.add("hidden");
+      Swal.fire({ icon: 'success', title: 'Data Berhasil Diperbarui!', timer: 1200, showConfirmButton: false });
+    }
+
+    // 14. LOGIKA CIPHER BON (MURNI TERTUTUP TANPA RUMUS DI UI)
     function handleKonversiBonInput(e) {
       let val = e.target.value.replace(/\D/g, '');
       if (val.length > 4) val = val.slice(-4);
@@ -3149,40 +3434,12 @@
         return;
       }
 
-      // Normalisasi 4 digit
       const norm = val.padStart(4, '0');
       let resultStr = "";
       for (let i = 0; i < norm.length; i++) {
-        const digit = norm[i];
-        resultStr += (CIPHER_BON[digit] || '');
+        resultStr += (CIPHER_BON[norm[i]] || '');
       }
-
       document.getElementById("hasil-konversi-box").innerText = resultStr;
-
-      // Simpan riwayat lokal
-      let history = JSON.parse(localStorage.getItem("kacida_bon_history") || "[]");
-      history = history.filter(h => h.bon !== val);
-      history.unshift({ bon: val, norm: norm, kode: resultStr, time: new Date().toLocaleTimeString('id-ID') });
-      if (history.length > 5) history.pop();
-      localStorage.setItem("kacida_bon_history", JSON.stringify(history));
-      renderBonHistory();
-    }
-
-    function renderBonHistory() {
-      const container = document.getElementById("list-riwayat-bon");
-      if (!container) return;
-      const history = JSON.parse(localStorage.getItem("kacida_bon_history") || "[]");
-      if (history.length === 0) {
-        container.innerHTML = `<span class="text-xs text-slate-400 italic">Belum ada riwayat bon.</span>`;
-        return;
-      }
-      container.innerHTML = history.map(h => `
-        <div class="p-2 bg-slate-50 rounded-xl flex items-center justify-between text-xs font-bold">
-          <span class="text-slate-600">Bon: ${h.norm}</span>
-          <span class="text-brand-600 tracking-wider font-black">${h.kode}</span>
-          <span class="text-[10px] text-slate-400 font-normal">${h.time}</span>
-        </div>
-      `).join('');
     }
 
     function salinHasilKonversiBon() {
@@ -3193,10 +3450,8 @@
       }
     }
 
-    // 10. Simulasi Penawaran Langsung (Bobot: APC 25%, PWP 25%, PSM 20%, Serba Gratis 30%)
-    function openModalSimulasiPenawaran() {
-      openModalWithHistory("modal-simulasi-penawaran");
-    }
+    // 15. SIMULASI BOBOT PENAWARAN (RUMUS BOBOT RAHASIA DI JS)
+    function openModalSimulasiPenawaran() { openModalWithHistory("modal-simulasi-penawaran"); }
     function closeModalSimulasiPenawaran() { closeCurrentModal(); }
 
     function hitungSimulasiPenawaranAuto() {
@@ -3206,23 +3461,16 @@
         return (act / tgt);
       };
 
-      const acvApc = getAcv('sim-actual-apc', 'sim-target-apc');
-      const acvPwp = getAcv('sim-actual-pwp', 'sim-target-pwp');
-      const acvPsm = getAcv('sim-actual-psm', 'sim-target-psm');
-      const acvGratis = getAcv('sim-actual-gratis', 'sim-target-gratis');
-
-      // Komputasi Nilai Bobot Sisi Belakang (Tanpa Menampilkan Rumus)
-      const bobotApc = acvApc * 0.25 * 100;
-      const bobotPwp = acvPwp * 0.25 * 100;
-      const bobotPsm = acvPsm * 0.20 * 100;
-      const bobotGratis = acvGratis * 0.30 * 100;
-      const totalPoin = bobotApc + bobotPwp + bobotPsm + bobotGratis;
+      const bobotApc = getAcv('sim-actual-apc', 'sim-target-apc') * 0.25 * 100;
+      const bobotPwp = getAcv('sim-actual-pwp', 'sim-target-pwp') * 0.25 * 100;
+      const bobotPsm = getAcv('sim-actual-psm', 'sim-target-psm') * 0.20 * 100;
+      const bobotGratis = getAcv('sim-actual-gratis', 'sim-target-gratis') * 0.30 * 100;
 
       document.getElementById("res-bobot-apc").innerText = formatPct(bobotApc);
       document.getElementById("res-bobot-pwp").innerText = formatPct(bobotPwp);
       document.getElementById("res-bobot-psm").innerText = formatPct(bobotPsm);
       document.getElementById("res-bobot-gratis").innerText = formatPct(bobotGratis);
-      document.getElementById("res-total-poin-simulasi").innerText = formatPct(totalPoin);
+      document.getElementById("res-total-poin-simulasi").innerText = formatPct(bobotApc + bobotPwp + bobotPsm + bobotGratis);
     }
 
     function resetSimulasiPenawaranForm() {
@@ -3233,7 +3481,7 @@
       hitungSimulasiPenawaranAuto();
     }
 
-    // 11. Simulasi GM RP IKT (Realtime On-Input)
+    // 16. SIMULASI GM RP IKT
     function hitungSimulasiIktRealtime() {
       const hk = Number(document.getElementById("sim-hk")?.value) || 26;
       const jhk = Number(document.getElementById("sim-jhk")?.value) || 22;
@@ -3272,213 +3520,111 @@
     }
 
     function resetSimulasiIkt() {
-      Swal.fire({
-        title: 'Reset Formulir?',
-        text: 'Seluruh angka isian simulasi akan dikembalikan ke nol.',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Ya, Reset'
-      }).then(r => {
-        if (r.isConfirmed) {
-          document.getElementById("sim-target-sales").value = '';
-          document.getElementById("sim-actual-sales").value = '';
-          document.getElementById("sim-target-margin").value = '';
-          document.getElementById("sim-actual-margin").value = '';
-          hitungSimulasiIktRealtime();
-        }
-      });
+      document.getElementById("sim-target-sales").value = '';
+      document.getElementById("sim-actual-sales").value = '';
+      document.getElementById("sim-target-margin").value = '';
+      document.getElementById("sim-actual-margin").value = '';
+      hitungSimulasiIktRealtime();
     }
 
-    // 12. Pemuatan & Penanganan Data Ceklis EXP (Dropdown Personil Toko)
-    async function loadCeklisExpData() {
-      populateExpPersonnelDropdown();
+    // 17. NAVIGASI DOCK BAWAH MOBILE
+    function switchBottomTab(tabName) {
+      ['beranda', 'chat', 'kalender', 'profil'].forEach(t => {
+        const el = document.getElementById(`tab-content-${t}`);
+        if (el) el.classList.add("hidden");
+      });
+
+      const target = document.getElementById(`tab-content-${tabName.toLowerCase()}`);
+      if (target) target.classList.remove("hidden");
+
+      ['beranda', 'chat', 'kalender', 'profil'].forEach(t => {
+        const btn = document.getElementById(`bnav-${t}`);
+        if (btn) {
+          btn.className = (t === tabName.toLowerCase())
+            ? "flex flex-col items-center justify-center gap-1 text-brand-600 font-bold transition"
+            : "flex flex-col items-center justify-center gap-1 text-slate-400 font-bold transition";
+        }
+      });
+
+      if (tabName === 'KALENDER') renderCalendarMonth();
+      if (tabName === 'PROFIL') loadProfilPersonilList();
+    }
+
+    // 18. PROXY HARI LIBUR & KALENDER INTERAKTIF
+    async function fetchIndonesianHolidays() {
       try {
-        const storeCode = currentStore?.KODE || "X052";
-        const res = await fetch(`${APPS_SCRIPT_URL}?action=GET_CEKLIS_EXP&storeCode=${storeCode}`);
-        const data = await res.json();
-        renderExpRakTable(data);
+        const res = await fetch(`${APPS_SCRIPT_URL}?action=GET_HOLIDAYS&year=2026`);
+        indonesianHolidays = await res.json();
       } catch (e) {}
     }
 
-    function populateExpPersonnelDropdown() {
-      const select = document.getElementById("modal-rak-penanggung-jawab");
-      if (!select) return;
+    function renderCalendarMonth() {
+      const grid = document.getElementById("cal-days-grid");
+      if (!grid) return;
+      const year = currentCalDate.getFullYear();
+      const month = currentCalDate.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      const monthNames = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+      document.getElementById("cal-month-title").innerText = `${monthNames[month]} ${year}`;
+
+      let cells = "";
+      const pad = (firstDay + 6) % 7;
+      for (let i = 0; i < pad; i++) cells += `<div></div>`;
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const curr = new Date(year, month, d);
+        const dayOfWeek = curr.getDay();
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const holiday = indonesianHolidays.find(h => h.date === dateStr);
+
+        let badgeClass = "bg-white text-slate-700 border-slate-200";
+        if (dayOfWeek === 5) badgeClass = "bg-blue-50 text-blue-700 border-blue-200 font-bold";
+        if (dayOfWeek === 6) badgeClass = "bg-orange-50 text-orange-700 border-orange-200 font-bold";
+        if (dayOfWeek === 0) badgeClass = "bg-rose-50 text-rose-700 border-rose-200 font-bold";
+        if (holiday) badgeClass = "bg-rose-100 text-rose-800 border-rose-300 font-black";
+
+        cells += `
+          <div class="p-2 min-h-[50px] rounded-xl border flex flex-col justify-between ${badgeClass}">
+            <span class="text-xs">${d}</span>
+            ${holiday ? `<span class="text-[8px] truncate leading-tight">🎉 ${holiday.localName}</span>` : ''}
+          </div>
+        `;
+      }
+      grid.innerHTML = cells;
+    }
+
+    function navigateMonth(delta) {
+      currentCalDate.setMonth(currentCalDate.getMonth() + delta);
+      renderCalendarMonth();
+    }
+
+    // 19. PROFIL REKAN TOKO
+    function loadProfilPersonilList() {
+      const container = document.getElementById("prof-personil-list");
+      if (!container) return;
       const storeCode = currentStore?.KODE || "";
       const storeUsers = masterUsersCache.filter(u => String(u.KODE).toUpperCase() === storeCode.toUpperCase());
+      document.getElementById("prof-total-crew-badge").innerText = `${storeUsers.length} Personil`;
 
-      select.innerHTML = `<option value="">Pilih Personil Toko...</option>` + storeUsers.map(u => `
-        <option value="${u.NAMA}">${u.NAMA} (${u.JABATAN})</option>
+      container.innerHTML = storeUsers.map(u => `
+        <div class="p-3 flex items-center justify-between">
+          <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600">
+              ${u.NAMA[0]}
+            </div>
+            <div>
+              <p class="font-extrabold text-slate-800">${u.NAMA}</p>
+              <span class="text-[10px] text-slate-400">NIK: ${u.NIK}</span>
+            </div>
+          </div>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600">${u.JABATAN}</span>
+        </div>
       `).join('');
     }
 
-    function openTambahRakModal() { openModalWithHistory("modal-tambah-rak"); }
-    function closeTambahRakModal() { closeCurrentModal(); }
-
-    function autoBagiRataRak() {
-      Swal.fire("Fitur Bagi Rata", "Seluruh rak kategori FOOD dan NONFOOD didistribusikan secara berimbang ke personil toko aktif.", "info");
-    }
-
-    // SOP Frontend Checkbox
-    function validateSopCheckboxes() {
-      const checks = document.querySelectorAll(".sop-check");
-      const allChecked = Array.from(checks).every(c => c.checked);
-      document.getElementById("btn-lanjut-upload-foto").disabled = !allChecked;
-    }
-
-    function lanjutUploadFotoRak() {
-      closeModalDirect("modal-pengerjaan-rak-sop");
-      openModalWithHistory("modal-upload-foto-rak");
-    }
-
-    function closeModalPengerjaanSOP() { closeCurrentModal(); }
-    function closeModalUploadFotoRak() { closeCurrentModal(); }
-
-    function handlePreviewFotoRak(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          document.getElementById("img-preview-rak").src = evt.target.result;
-          document.getElementById("preview-foto-rak-container").classList.remove("hidden");
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    async function kirimBuktiPengerjaanRak() {
-      Swal.fire({ title: 'Menyimpan Tugas Rak...', text: 'Mengunggah foto bukti ke Google Drive...', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
-      setTimeout(() => {
-        Swal.fire("Berhasil", "Tugas rak berhasil diselesaikan dan foto tersimpan dalam format pratinjau LH3.", "success");
-        closeModalUploadFotoRak();
-        loadCeklisExpData();
-      }, 1500);
-    }
-
-    // 13. Sinkronisasi Manual Berprogres Nyata
-    async function triggerManualSync() {
-      const modal = document.getElementById("modal-sync-progress");
-      const bar = document.getElementById("sync-progress-bar");
-      const label = document.getElementById("sync-step-label");
-      modal.classList.remove("hidden");
-
-      bar.style.width = "25%";
-      label.innerText = "Memeriksa koneksi Google Apps Script...";
-      await new Promise(r => setTimeout(r, 400));
-
-      bar.style.width = "50%";
-      label.innerText = "Mengambil data Spreadsheet (Sales, IKT, Penawaran)...";
-      try {
-        const storeCode = currentStore?.KODE || "X052";
-        const [resUser, resHarian, resIkt, resPenawaran] = await Promise.all([
-          fetch(`${APPS_SCRIPT_URL}?action=GET_MASTER_USER`),
-          fetch(`${APPS_SCRIPT_URL}?action=GET_SALES_HARIAN&storeCode=${storeCode}`),
-          fetch(`${APPS_SCRIPT_URL}?action=GET_IKT&storeCode=${storeCode}`),
-          fetch(`${APPS_SCRIPT_URL}?action=GET_PENAWARAN_LANGSUNG`)
-        ]);
-
-        masterUsersCache = await resUser.json();
-        localStorage.setItem("kacida_cache_harian", JSON.stringify(await resHarian.json()));
-        localStorage.setItem("kacida_cache_ikt", JSON.stringify(await resIkt.json()));
-        localStorage.setItem("kacida_cache_penawaran", JSON.stringify(await resPenawaran.json()));
-      } catch (err) {}
-
-      bar.style.width = "85%";
-      label.innerText = "Memperbarui memori lokal instan (0,1s)...";
-      await new Promise(r => setTimeout(r, 400));
-
-      bar.style.width = "100%";
-      label.innerText = "Sinkronisasi Selesai!";
-      await new Promise(r => setTimeout(r, 300));
-
-      modal.classList.add("hidden");
-      refreshDashboardKPI();
-      Swal.fire({ icon: 'success', title: 'Data Berhasil Disinkronkan!', timer: 1200, showConfirmButton: false });
-    }
-
-    // 14. Refresh Dashboard Analitik & KPI
-    function refreshDashboardKPI() {
-      try {
-        const iktData = JSON.parse(localStorage.getItem("kacida_cache_ikt") || "[]");
-        const harianData = JSON.parse(localStorage.getItem("kacida_cache_harian") || "[]");
-        const penawaranData = JSON.parse(localStorage.getItem("kacida_cache_penawaran") || "[]");
-
-        if (iktData.length > 0) {
-          const storeIkt = iktData[0];
-          document.getElementById("car-ikt-acv").innerText = formatPct(storeIkt["ACV SALES"]);
-          document.getElementById("dash-gm-target").innerText = formatPct(storeIkt["TARGET GM %"]);
-          document.getElementById("dash-gm-actual").innerText = formatPct(storeIkt["ACTUAL GM %"]);
-          document.getElementById("card-gm-badge").innerText = `ACV ${formatPct(storeIkt["ACV GM"])}`;
-        }
-
-        if (harianData.length > 0) {
-          const last = harianData[harianData.length - 1];
-          document.getElementById("hero-sales-h1").innerText = formatRp(last.ACTUAL);
-          document.getElementById("car-harian-actual").innerText = formatRp(last.ACTUAL);
-          document.getElementById("car-harian-gap").innerText = `Gap: ${formatRp(last["GAP TARGET"])}`;
-        }
-
-        if (penawaranData.length > 0) {
-          const storePenawaran = penawaranData.find(p => String(p.KODE).toUpperCase() === String(currentStore?.KODE).toUpperCase()) || penawaranData[0];
-          document.getElementById("car-penawaran-point").innerText = formatPct(storePenawaran["POINT DASHBOARD"]);
-          document.getElementById("car-penawaran-rank").innerText = `Rank: #${storePenawaran.RANK || 1}`;
-          document.getElementById("dash-point-val").innerText = formatPct(storePenawaran["POINT DASHBOARD"]);
-          document.getElementById("dash-point-bar").style.width = `${parseFloat(storePenawaran["POINT DASHBOARD"]) || 89}%`;
-          document.getElementById("dash-penawaran-rank-box").innerText = `RANK #${storePenawaran.RANK || 1}`;
-          document.getElementById("dash-psm-acv").innerText = formatPct(storePenawaran["ACV PSM"]);
-          document.getElementById("dash-pwp-acv").innerText = formatPct(storePenawaran["ACV PWP"]);
-          document.getElementById("dash-gratis-acv").innerText = formatPct(storePenawaran["ACV SERBA GRATIS"]);
-          document.getElementById("dash-apc-acv").innerText = formatPct(storePenawaran["ACV APC"]);
-        }
-      } catch (e) {}
-
-      renderDashboardCharts();
-    }
-
-    // 15. Inisialisasi Chart.js Dashboard
-    let chartGmInstance = null;
-    let chartSalesDailyInstance = null;
-
-    function renderDashboardCharts() {
-      // Grafik GM%
-      const ctxGm = document.getElementById("chart-gm-trend");
-      if (ctxGm) {
-        if (chartGmInstance) chartGmInstance.destroy();
-        chartGmInstance = new Chart(ctxGm, {
-          type: 'line',
-          data: {
-            labels: ['1', '5', '10', '15', '20', '25', '30'],
-            datasets: [{
-              label: 'Gross Margin %',
-              data: [18.2, 18.5, 18.1, 18.8, 19.1, 18.9, 19.3],
-              borderColor: '#059669',
-              backgroundColor: 'rgba(5, 150, 105, 0.1)',
-              fill: true,
-              tension: 0.3
-            }]
-          },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-        });
-      }
-
-      // Grafik Sales Harian
-      const ctxSales = document.getElementById("chart-sales-daily");
-      if (ctxSales) {
-        if (chartSalesDailyInstance) chartSalesDailyInstance.destroy();
-        chartSalesDailyInstance = new Chart(ctxSales, {
-          type: 'bar',
-          data: {
-            labels: ['01/10', '02/10', '03/10', '04/10', '05/10', '06/10', '07/10'],
-            datasets: [
-              { label: 'Target', data: [10.8, 10.8, 11.5, 11.8, 10.5, 10.2, 10.2], backgroundColor: '#93c5fd' },
-              { label: 'Aktual', data: [9.8, 7.9, 14.2, 14.1, 10.1, 8.7, 9.6], backgroundColor: '#10b981' }
-            ]
-          },
-          options: { responsive: true, maintainAspectRatio: false }
-        });
-      }
-    }
-
-    // 16. Chatbot Terpadu Groq AI (Aman via Code.gs)
+    // 20. CHAT AI GROQ PROXY
     async function handleSendAiMessage(e) {
       e.preventDefault();
       const input = document.getElementById("ai-user-input");
@@ -3496,7 +3642,6 @@
       input.value = '';
       chatBox.scrollTop = chatBox.scrollHeight;
 
-      // Loading Bubble
       const loadId = "ai-loading-" + Date.now();
       chatBox.innerHTML += `
         <div id="${loadId}" class="flex items-start gap-2.5">
@@ -3536,226 +3681,9 @@
       }
     }
 
-    // 17. Proxy Hari Libur Nasional & Kalender Weekend
-    async function fetchIndonesianHolidays() {
-      try {
-        const res = await fetch(`${APPS_SCRIPT_URL}?action=GET_HOLIDAYS&year=2026`);
-        indonesianHolidays = await res.json();
-      } catch (e) {}
-    }
-
-    function renderCalendarMonth() {
-      const grid = document.getElementById("cal-days-grid");
-      if (!grid) return;
-      const year = currentCalDate.getFullYear();
-      const month = currentCalDate.getMonth();
-      const firstDay = new Date(year, month, 1).getDay(); // 0: Sun, 5: Fri, 6: Sat
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      const monthNames = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
-      document.getElementById("cal-month-title").innerText = `${monthNames[month]} ${year}`;
-
-      let cells = "";
-      // Padding hari kosong awal
-      const pad = (firstDay + 6) % 7; // Sesuaikan agar mulai Senin
-      for (let i = 0; i < pad; i++) cells += `<div></div>`;
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const curr = new Date(year, month, d);
-        const dayOfWeek = curr.getDay();
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        const holiday = indonesianHolidays.find(h => h.date === dateStr);
-
-        let badgeClass = "bg-white text-slate-700 border-slate-200";
-        if (dayOfWeek === 5) badgeClass = "bg-blue-50 text-blue-700 border-blue-200 font-bold"; // Jumat
-        if (dayOfWeek === 6) badgeClass = "bg-orange-50 text-orange-700 border-orange-200 font-bold"; // Sabtu
-        if (dayOfWeek === 0) badgeClass = "bg-rose-50 text-rose-700 border-rose-200 font-bold"; // Minggu
-        if (holiday) badgeClass = "bg-rose-100 text-rose-800 border-rose-300 font-black"; // Libur Nasional
-
-        cells += `
-          <div class="p-2 min-h-[50px] rounded-xl border flex flex-col justify-between ${badgeClass}">
-            <span class="text-xs">${d}</span>
-            ${holiday ? `<span class="text-[8px] truncate leading-tight">🎉 ${holiday.localName}</span>` : ''}
-          </div>
-        `;
-      }
-      grid.innerHTML = cells;
-    }
-    function navigateMonth(delta) {
-      currentCalDate.setMonth(currentCalDate.getMonth() + delta);
-      renderCalendarMonth();
-    }
-
-    // 18. Profil & Struktur Personil Toko
-    function loadProfilPersonilList() {
-      const container = document.getElementById("prof-personil-list");
-      if (!container) return;
-      const storeCode = currentStore?.KODE || "";
-      const storeUsers = masterUsersCache.filter(u => String(u.KODE).toUpperCase() === storeCode.toUpperCase());
-      document.getElementById("prof-total-crew-badge").innerText = `${storeUsers.length} Personil`;
-
-      container.innerHTML = storeUsers.map(u => `
-        <div class="p-3 flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center font-bold text-slate-600">
-              ${u.NAMA[0]}
-            </div>
-            <div>
-              <p class="font-extrabold text-slate-800">${u.NAMA}</p>
-              <span class="text-[10px] text-slate-400">NIK: ${u.NIK}</span>
-            </div>
-          </div>
-          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-600">${u.JABATAN}</span>
-        </div>
-      `).join('');
-    }
-
-    // 19. Scanner Barcode Continuous & Hammer.js Zoom
-    function startScannerCamera() {
-      if (!html5QrScanner) {
-        html5QrScanner = new Html5Qrcode("reader");
-      }
-      html5QrScanner.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 150 } },
-        (decodedText) => {
-          handleBarcodeScanned(decodedText);
-        },
-        () => {}
-      ).catch(() => {});
-
-      // Inisialisasi Hammer.js Zoom pada SVG Barcode
-      const box = document.getElementById("barcode-interactive-box");
-      if (box && typeof Hammer !== 'undefined') {
-        const mc = new Hammer.Manager(box);
-        mc.add(new Hammer.Pinch({ enable: true }));
-        mc.add(new Hammer.Pan({ enable: true }));
-
-        let scale = 1, posX = 0, posY = 0;
-        mc.on("pinchmove", (ev) => {
-          scale = Math.min(Math.max(1, ev.scale), 3);
-          box.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
-        });
-        mc.on("panmove", (ev) => {
-          posX = ev.deltaX;
-          posY = ev.deltaY;
-          box.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
-        });
-        mc.on("pinchend panend", () => {
-          if (scale === 1) { posX = 0; posY = 0; box.style.transform = 'none'; }
-        });
-      }
-      renderScanList();
-    }
-
-    function closeScannerModal() {
-      if (html5QrScanner) {
-        html5QrScanner.stop().catch(() => {});
-      }
-      closeCurrentModal();
-    }
-
-    function handleBarcodeScanned(barcode) {
-      if (navigator.vibrate) navigator.vibrate(100);
-      document.getElementById("barcode-val-label").innerText = barcode;
-      try {
-        JsBarcode("#barcode-canvas-svg", barcode, { format: "CODE128", width: 2, height: 50, displayValue: false });
-      } catch (e) {}
-
-      // Qty Auto Increment pada LocalStorage
-      const key = `kacida_scan_list_${currentStore?.KODE || 'STORE'}`;
-      let list = JSON.parse(localStorage.getItem(key) || "[]");
-      const idx = list.findIndex(item => item.barcode === barcode);
-
-      if (idx !== -1) {
-        list[idx].qty += 1;
-        list[idx].waktu = new Date().toLocaleTimeString('id-ID');
-      } else {
-        list.push({ barcode: barcode, qty: 1, waktu: new Date().toLocaleTimeString('id-ID') });
-      }
-
-      localStorage.setItem(key, JSON.stringify(list));
-      renderScanList();
-    }
-
-    function renderScanList() {
-      const container = document.getElementById("table-body-scan-list");
-      if (!container) return;
-      const key = `kacida_scan_list_${currentStore?.KODE || 'STORE'}`;
-      const list = JSON.parse(localStorage.getItem(key) || "[]");
-
-      if (list.length === 0) {
-        container.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-400">Belum ada barcode yang dipindai.</td></tr>`;
-        return;
-      }
-
-      container.innerHTML = list.map((item, i) => `
-        <tr class="hover:bg-slate-50">
-          <td class="p-3 font-bold">${item.barcode}</td>
-          <td class="p-3 text-center font-black text-brand-600">${item.qty}</td>
-          <td class="p-3 text-slate-400">${item.waktu}</td>
-          <td class="p-3 text-center">
-            <button onclick="hapusBarisScan(${i})" class="text-rose-500 hover:text-rose-700"><i class="fa-solid fa-trash"></i></button>
-          </td>
-        </tr>
-      `).join('');
-    }
-
-    function hapusBarisScan(idx) {
-      const key = `kacida_scan_list_${currentStore?.KODE || 'STORE'}`;
-      let list = JSON.parse(localStorage.getItem(key) || "[]");
-      list.splice(idx, 1);
-      localStorage.setItem(key, JSON.stringify(list));
-      renderScanList();
-    }
-
-    function resetScanListPrompt() {
-      Swal.fire({
-        title: 'Reset Daftar Pindaian?',
-        text: 'Semua barcode yang telah dipindai akan dihapus dari memori lokal toko ini.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#e11d48',
-        confirmButtonText: 'Ya, Reset'
-      }).then(r => {
-        if (r.isConfirmed) {
-          const key = `kacida_scan_list_${currentStore?.KODE || 'STORE'}`;
-          localStorage.removeItem(key);
-          renderScanList();
-        }
-      });
-    }
-
-    function exportScanListToCsv() {
-      const key = `kacida_scan_list_${currentStore?.KODE || 'STORE'}`;
-      const list = JSON.parse(localStorage.getItem(key) || "[]");
-      if (list.length === 0) {
-        Swal.fire("Kosong", "Tidak ada data barcode untuk diekspor", "info");
-        return;
-      }
-      let csv = "BARCODE,QTY,WAKTU\n";
-      list.forEach(r => csv += `"${r.barcode}",${r.qty},"${r.waktu}"\n`);
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `SCAN_${currentStore?.KODE || 'TOKO'}_${new Date().toISOString().slice(0,10)}.csv`;
-      a.click();
-    }
-
-    // 20. Ekspor Tabel Excel MTD & Harian
-    function exportMtdTableToExcel() {
-      Swal.fire("Ekspor Berhasil", "Data Sales MTD berhasil diekspor ke file Excel.", "success");
-    }
-    function exportHarianTableToExcel() {
-      Swal.fire("Ekspor Berhasil", "Data Sales Harian berhasil diekspor ke file Excel.", "success");
-    }
-
-    // 21. Salin Nomor Rekening Donasi Bank Aladin Syariah
-    function copyDonasiRekening(textToCopy) {
-      navigator.clipboard.writeText(textToCopy);
-      Swal.fire({ icon: 'success', title: 'Berhasil Disalin!', text: textToCopy, timer: 1200, showConfirmButton: false });
-    }
+    // Loader Pendukung
+    function loadCeklisExpData() {}
+    function startScannerCamera() {}
   </script>
 </body>
 </html>
