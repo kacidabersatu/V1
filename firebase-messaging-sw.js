@@ -2,13 +2,13 @@ importScripts('https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js'
 importScripts('https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js');
 
 firebase.initializeApp({
-  apiKey: "AIzaSyBceAg0_W6NPMG8KPIGp0zf2qUnUE7Ypj8",
-  authDomain: "kacida-bersatu.firebaseapp.com",
-  databaseURL: "https://kacida-bersatu-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "kacida-bersatu",
-  storageBucket: "kacida-bersatu.firebasestorage.app",
-  messagingSenderId: "135044863376",
-  appId: "1:135044863376:web:0791a1c161b80287958f15"
+  apiKey: "AIzaSyD9ckmJ-6ONWFHoMu55tw-BQcqjXrDNOgY",
+  authDomain: "kacidabersatu-e787a.firebaseapp.com",
+  databaseURL: "https://kacidabersatu-e787a-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "kacidabersatu-e787a",
+  storageBucket: "kacidabersatu-e787a.firebasestorage.app",
+  messagingSenderId: "306706403263",
+  appId: "1:306706403263:web:bc7d5687e550be67b55b0a"
 });
 
 const messaging = firebase.messaging();
