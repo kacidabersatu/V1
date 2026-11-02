@@ -799,6 +799,181 @@
             });
         }
 
+        // =================================================================
+        // TEMPELKAN KODE INI TEPAT DI ATAS bootApplication:
+        // =================================================================
+        function renderAppDashboard() {
+            if (!dashboardData || !dashboardData.user) return;
+            const u = dashboardData.user;
+            const sheets = dashboardData.sheets || {};
+
+            // 1. Data User & Foto Profil
+            const avatarUrl = u["FOTO PROFIL (Url)"] || u["FOTO PROFIL"] || u.foto || "https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-";
+            ["mobileUserAvatar", "desktopUserAvatar", "heroUserAvatar", "profilBigAvatar"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.src = avatarUrl;
+            });
+
+            const storeName = u.namaToko || u["NAMA TOKO"] || "TOKO";
+            if (document.getElementById("mobileHdrStoreName")) document.getElementById("mobileHdrStoreName").innerText = storeName;
+            if (document.getElementById("desktopHdrStoreName")) document.getElementById("desktopHdrStoreName").innerText = storeName;
+            if (document.getElementById("desktopWelcomeText")) document.getElementById("desktopWelcomeText").innerText = `Selamat Datang, ${u.NAMA || 'User'}!`;
+            if (document.getElementById("desktopLastSyncTime")) document.getElementById("desktopLastSyncTime").innerText = sheets.last_sync || "-";
+
+            // 2. Tombol Super Admin Khusus NIK 14125034
+            const isSuperAdmin = String(u.NIK).trim() === "14125034";
+            const saBtn = document.getElementById("superAdminDesktopBtn");
+            if (saBtn) {
+                if (isSuperAdmin) saBtn.classList.remove("hidden");
+                else saBtn.classList.add("hidden");
+            }
+
+            // 3. Hero Card
+            if (document.getElementById("lblHeroGreeting")) document.getElementById("lblHeroGreeting").innerText = getTimeGreeting() + ",";
+            if (document.getElementById("lblHeroUserName")) document.getElementById("lblHeroUserName").innerText = `${u.NAMA || 'USER'} 👋`;
+            if (document.getElementById("lblHeroJabatanToko")) document.getElementById("lblHeroJabatanToko").innerText = `${u.JABATAN || 'Staff'} • ${storeName}`;
+            if (document.getElementById("lblHeroLastSync")) document.getElementById("lblHeroLastSync").innerText = sheets.last_sync || "-";
+
+            // 4. Hitung Sales H-1 & MTD Toko dari sheet YTD_Sales
+            const allYtd = sheets.ytd_sales || [];
+            const storeRows = allYtd.filter(r => {
+                const kandidat = [r["NAMA TOKO"], r["Nama Toko"], r["KODE"], r["KODE TOKO"], r["STORE NAME"]].filter(Boolean);
+                return kandidat.some(k => String(k).toUpperCase().includes(String(u.kodeToko).toUpperCase()));
+            });
+
+            let h1Sales26 = 0, h1Sales25 = 0, mtd26 = 0;
+            storeRows.forEach(r => {
+                const s26 = cleanNum(r["SALES 2026"] || r["SALES"] || r["NET SALES"]);
+                const s25 = cleanNum(r["SALES 2025"]);
+                mtd26 += s26;
+                if (s26 > 0) { h1Sales26 = s26; h1Sales25 = s25; }
+            });
+            const growthH1 = h1Sales25 > 0 ? ((h1Sales26 - h1Sales25) / h1Sales25) * 100 : 0;
+
+            if (document.getElementById("lblHeroSalesH1")) document.getElementById("lblHeroSalesH1").innerText = `Rp ${Math.round(h1Sales26).toLocaleString('id-ID')}`;
+            if (document.getElementById("lblHeroGrowthH1")) {
+                const el = document.getElementById("lblHeroGrowthH1");
+                el.innerText = `Growth: ${growthH1 >= 0 ? '+' : ''}${growthH1.toFixed(1)}%`;
+                el.style.color = growthH1 >= 0 ? '#a7f3d0' : '#fca5a5';
+            }
+
+            // 5. Kartu KPI
+            const allIkt = sheets.ikt || [];
+            const iktRow = allIkt.find(r => String(r.KODE || r["KODE TOKO"]).toUpperCase().includes(String(u.kodeToko).toUpperCase())) || {};
+            const allPenawaran = sheets.penawaran || [];
+            const penawaranRow = allPenawaran.find(r => String(r.KODE || r["KODE TOKO"]).toUpperCase().includes(String(u.kodeToko).toUpperCase())) || {};
+
+            if (document.getElementById("kpiValIKT")) document.getElementById("kpiValIKT").innerText = toPct(iktRow["ACV SALES"]);
+            if (document.getElementById("kpiValPenawaran")) document.getElementById("kpiValPenawaran").innerText = toPct(penawaranRow["POINT DASHBOARD"]);
+            if (document.getElementById("kpiValRankBadge")) document.getElementById("kpiValRankBadge").innerText = `Rank #${penawaranRow["RANK"] || '-'}`;
+            if (document.getElementById("kpiValSalesH1")) document.getElementById("kpiValSalesH1").innerText = `Rp ${Math.round(h1Sales26).toLocaleString('id-ID')}`;
+            if (document.getElementById("kpiValSalesMTD")) document.getElementById("kpiValSalesMTD").innerText = `Rp ${Math.round(mtd26).toLocaleString('id-ID')}`;
+
+            // 6. Render 18 Menu Operasional
+            renderMainMenuGrid();
+
+            // 7. Kartu Profil Toko Fisik
+            const masterUsers = sheets.master_user || [];
+            const personilCount = masterUsers.filter(mu => String(mu["NAMA TOKO"] || mu.KODE || "").toUpperCase().includes(String(u.kodeToko).toUpperCase())).length;
+            if (document.getElementById("cardStoreName")) document.getElementById("cardStoreName").innerText = storeName;
+            if (document.getElementById("cardStorePersonnel")) document.getElementById("cardStorePersonnel").innerText = `${personilCount || 6} Orang`;
+            if (document.getElementById("cardStoreHours")) document.getElementById("cardStoreHours").innerText = "06:00 - 23:00 WIB";
+            if (document.getElementById("cardStoreType")) document.getElementById("cardStoreType").innerText = "Reguler";
+            if (document.getElementById("cardStoreArea")) document.getElementById("cardStoreArea").innerText = "Kacida Bersatu";
+
+            // 8. Tab Profil
+            if (document.getElementById("profilBigName")) document.getElementById("profilBigName").innerText = u.NAMA || "-";
+            if (document.getElementById("profilBigJabatan")) document.getElementById("profilBigJabatan").innerText = u.JABATAN || "-";
+            if (document.getElementById("profilBigToko")) document.getElementById("profilBigToko").innerText = storeName;
+            if (document.getElementById("profilBigNik")) document.getElementById("profilBigNik").innerText = `NIK: ${u.NIK}`;
+
+            renderStoreTeamList(masterUsers, u.kodeToko);
+            renderChartsGMAndSales(iktRow, storeRows);
+        }
+
+        function renderMainMenuGrid() {
+            const container = document.getElementById("mainMenuGrid");
+            if (!container) return;
+
+            const menuList = [
+                { title: "Jobdesk Harian", icon: "fa-clipboard-check", action: "openJobdeskHarianModal()" },
+                { title: "Master Shift", icon: "fa-calendar-week", action: "openPlanMasterShiftModal()" },
+                { title: "Ceklis Expired", icon: "fa-triangle-exclamation", action: "openCeklisExpiredModal()" },
+                { title: "Serah Terima", icon: "fa-handshake", action: "openSerahTerimaModal()" },
+                { title: "Belanja Karyawan", icon: "fa-cart-shopping", action: "openBelanjaKaryawanModal()" },
+                { title: "Tabunganku", icon: "fa-wallet", action: "openTabungankuModal()" },
+                { title: "Kas Area", icon: "fa-vault", action: "openKasAreaModal()" },
+                { title: "Donasi Area", icon: "fa-hand-holding-heart", action: "openDonasiAreaModal()" },
+                { title: "Simulasi IKT", icon: "fa-calculator", action: "openSimulasiIKTModal()" },
+                { title: "Sales MTD", icon: "fa-chart-pie", action: "openSalesMTDModal()" },
+                { title: "Sales Harian", icon: "fa-chart-line", action: "openSalesHarianModal()" },
+                { title: "Monitoring IKT", icon: "fa-bullseye", action: "openMonitoringIKTModal()" },
+                { title: "Konversi Bon", icon: "fa-receipt", action: "openKonversiBonModal()" },
+                { title: "Penawaran", icon: "fa-fire", action: "openPenawaranLangsungModal()" },
+                { title: "Rekap PSM", icon: "fa-list-check", action: "openRekapPSMModal()" },
+                { title: "Sales OPR", icon: "fa-clock", action: "openSalesOPRModal()" },
+                { title: "Monitoring KWH", icon: "fa-bolt", action: "openMonitoringKWHModal()" },
+                { title: "Catatan Return", icon: "fa-truck-ramp-box", action: "openCatatanReturnModal()" }
+            ];
+
+            container.innerHTML = menuList.map(m => `
+                <div class="menu-item-btn" onclick="${m.action}">
+                    <div class="menu-icon-box"><i class="fa-solid ${m.icon}"></i></div>
+                    <span style="font-size:0.68rem; font-weight:800; line-height:1.2;">${m.title}</span>
+                </div>
+            `).join("");
+        }
+
+        function renderStoreTeamList(masterUsers, kodeToko) {
+            const box = document.getElementById("storeTeamListContainer");
+            if (!box) return;
+            const team = masterUsers.filter(mu => String(mu["NAMA TOKO"] || mu.KODE || "").toUpperCase().includes(String(kodeToko).toUpperCase()));
+            box.innerHTML = team.map(t => `
+                <div style="background:var(--input-bg); border:1px solid var(--card-border); padding:8px 12px; border-radius:10px; display:flex; justify-content:space-between; align-items:center;">
+                    <div style="display:flex; align-items:center; gap:8px;">
+                        <img src="${t["FOTO PROFIL (Url)"] || t["FOTO PROFIL"] || 'https://lh3.googleusercontent.com/d/1gLnfmRQsyrHAmuo1xiyulHEKfg1iYk0-'}" style="width:34px; height:34px; border-radius:50%; object-fit:cover;">
+                        <div><b>${t.NAMA}</b><p style="font-size:0.62rem; color:var(--text-sub);">${t.JABATAN || '-'}</p></div>
+                    </div>
+                    <span style="font-size:0.6rem; color:var(--text-sub);">${t.NIK}</span>
+                </div>
+            `).join('') || '<p style="text-align:center; color:var(--text-sub);">Belum ada data personil toko.</p>';
+        }
+
+        let chartGMInstance = null, chartSalesInstance = null;
+        function renderChartsGMAndSales(iktRow, storeRows) {
+            try {
+                const gmCtx = document.getElementById("chartPieGM");
+                if (gmCtx) {
+                    if (chartGMInstance) chartGMInstance.destroy();
+                    const acvGM = cleanNum(iktRow["ACV GM"]) || 85;
+                    chartGMInstance = new Chart(gmCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: ['Pencapaian GM%', 'Gap'],
+                            datasets: [{ data: [acvGM, Math.max(0, 100 - acvGM)], backgroundColor: ['#059669', '#e2e8f0'] }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                    });
+                }
+
+                const sCtx = document.getElementById("chartTrenSales7Hari");
+                if (sCtx) {
+                    if (chartSalesInstance) chartSalesInstance.destroy();
+                    const last7 = storeRows.slice(-7);
+                    const labels = last7.map(r => String(r.TANGGAL || "").substring(0, 5)) || ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7'];
+                    const dataSales = last7.map(r => cleanNum(r["SALES 2026"] || r.SALES)) || [0,0,0,0,0,0,0];
+                    chartSalesInstance = new Chart(sCtx, {
+                        type: 'line',
+                        data: {
+                            labels: labels.length ? labels : ['1','2','3','4','5','6','7'],
+                            datasets: [{ label: 'Sales 2026', data: dataSales.length ? dataSales : [1,2,3,4,5,6,7], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,0.1)', fill: true, tension: 0.3 }]
+                        },
+                        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                    });
+                }
+            } catch(e) {}
+        }
+
         function bootApplication(syncedData, user) {
             document.getElementById("loginSection").classList.add("hidden");
             document.getElementById("appSection").classList.remove("hidden");
