@@ -794,7 +794,8 @@
                 bootApplication(d, user);
             }).catch(err => {
                 Swal.close();
-                Swal.fire('Koneksi Gagal', 'Pastikan koneksi internet aktif.', 'error');
+                console.error("DEBUG ERROR HANDLE_LOGIN:", err);
+                Swal.fire('Error Sistem', err.message || err.toString(), 'error');
             });
         }
 
